@@ -27,10 +27,10 @@ export async function runPrompt(prompt: string, model: string = DEFAULT_MODEL): 
     message = await anthropic.messages.create({
       model,
       max_tokens: 4096,
-      // temperature 0 keeps eval runs as reproducible as the model allows --
-      // both the prompt output and the judge below. Without it, the same case
-      // flips between pass and fail across runs.
-      temperature: 0,
+      // Note: newer Claude models (claude-sonnet-5) reject the `temperature`
+      // parameter -- it is deprecated for them and returns a 400. Determinism
+      // instead comes from robust eval assertions and the tolerant judge
+      // parsing below, not from forcing temperature 0.
       messages: [{ role: "user", content: prompt }],
     });
   } catch (err) {
