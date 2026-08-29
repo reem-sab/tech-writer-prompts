@@ -11,17 +11,36 @@ function getClient(): Anthropic {
         "  export ANTHROPIC_API_KEY=sk-ant-..."
     );
   }
-  client ??= new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  // Identity-linked API keys must send the workspace they act in on every
+  // request. Set ANTHROPIC_WORKSPACE_ID for those; a standard workspace key
+  // doesn't need it, and the header is omitted when the var is absent.
+  const workspaceId = process.env.ANTHROPIC_WORKSPACE_ID;
+  const defaultHeaders = workspaceId ? { "anthropic-workspace-id": workspaceId } : undefined;
+  client ??= new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY, defaultHeaders });
   return client;
 }
 
 export async function runPrompt(prompt: string, model: string = DEFAULT_MODEL): Promise<string> {
   const anthropic = getClient();
-  const message = await anthropic.messages.create({
-    model,
-    max_tokens: 4096,
-    messages: [{ role: "user", content: prompt }],
-  });
+  let message;
+  try {
+    message = await anthropic.messages.create({
+      model,
+      max_tokens: 4096,
+      messages: [{ role: "user", content: prompt }],
+    });
+  } catch (err) {
+    const msg = (err as Error).message ?? "";
+    if (/anthropic-workspace-id/.test(msg) && !process.env.ANTHROPIC_WORKSPACE_ID) {
+      throw new Error(
+        "Your API key is identity-linked and requires a workspace id. Set ANTHROPIC_WORKSPACE_ID\n" +
+          "(find it in the Anthropic Console under Settings -> Workspaces; it looks like wrkspc_...):\n" +
+          "  export ANTHROPIC_WORKSPACE_ID=wrkspc_...\n" +
+          "Or use a standard (non-identity-linked) workspace API key instead."
+      );
+    }
+    throw err;
+  }
   return message.content
     .filter((block): block is Anthropic.TextBlock => block.type === "text")
     .map((block) => block.text)

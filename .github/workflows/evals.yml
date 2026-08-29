@@ -35,6 +35,8 @@ jobs:
       - name: Run evals for every prompt (including judge_rubric cases)
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Only needed for identity-linked API keys; harmless when empty.
+          ANTHROPIC_WORKSPACE_ID: ${{ secrets.ANTHROPIC_WORKSPACE_ID }}
         run: node runner/dist/cli.js eval --all --judge
 
       - name: Generate per-prompt SKILL.md files
