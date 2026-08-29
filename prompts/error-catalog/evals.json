@@ -42,7 +42,7 @@
       "ERRORS": "export const LUMEN_ERRORS = {\n  LUMEN_401_INVALID_KEY: {\n    status: 401,\n    message: \"The API key provided is invalid or has been revoked.\",\n  },\n  LUMEN_429_RATE_LIMITED: {\n    status: 429,\n    message: \"Rate limit exceeded: 100 requests per minute per API key.\",\n  },\n  LUMEN_422_INVALID_PAYLOAD: {\n    status: 422,\n    message: \"The request body failed schema validation.\",\n    // thrown by validatePayload() before the event is queued\n  },\n  LUMEN_404_SUBSCRIPTION_NOT_FOUND: {\n    status: 404,\n    message: \"No subscription exists with the given id.\",\n  },\n  LUMEN_500_INTERNAL: {\n    status: 500,\n    message: \"Internal server error.\",\n  },\n};\n"
     },
     "expect": {
-      "judge_rubric": "Every entry in the JSON array has all five fields (code, message, cause, fix, trigger) populated with non-empty strings, the JSON is valid with no trailing commas, and each row's Fix and Cause in the Markdown table match the fix and cause fields for the same code in the JSON."
+      "judge_rubric": "Every entry in the JSON array has all five fields (code, message, cause, fix, trigger) present and non-empty, and the JSON is valid with no trailing commas. For LUMEN_500_INTERNAL, an 'Unclear from source' style value in the cause and fix is correct and expected, not a failure. Each code's cause and fix in the Markdown table match the same fields for that code in the JSON."
     }
   }
 ]

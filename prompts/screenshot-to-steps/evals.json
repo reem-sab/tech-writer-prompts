@@ -15,7 +15,7 @@
     },
     "expect": {
       "contains": ["Fragile references"],
-      "regex": ["(icon|gear|settings|account|function)"]
+      "judge_rubric": "The Fragile references section is non-empty and flags the step involving the icon-only control that has no visible text label (the gear or settings control), because the procedure had to describe it by its function instead of by a label."
     }
   },
   {

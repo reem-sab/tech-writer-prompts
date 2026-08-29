@@ -1,7 +1,7 @@
 ---
 name: skill-file-draft
 description: >
-  Turns a docs section describing a capability or workflow into a SKILL.md draft in the Agent Skills format, with two starter eval cases so the skill ships testable from day one. Use this skill when the task is: Turns a docs section describing a capability or workflow into a SKILL.md draft in the Agent Skills format — frontmatter `name` and a trigger-aware `description`, plus an instructions body operationalized from the source section — along with two starter eval cases so the skill isn't shipped untested.
+  Turns a docs section describing a capability or workflow into a SKILL.md draft in the Agent Skills format, with two starter eval cases so the skill ships testable from day one. Use this skill when the task is: Turns a docs section describing a capability or workflow into a SKILL.md draft in the Agent Skills format. The draft has a frontmatter `name` and a trigger-aware `description`, plus an instructions body operationalized from the source section, along with two starter eval cases so the skill is not shipped untested.
 version: 1.0.0
 author:
   name: Reem Sabawi
@@ -12,7 +12,7 @@ author:
 
 # Skill File Draft
 
-Turns a docs section describing a capability or workflow into a SKILL.md draft in the Agent Skills format — frontmatter `name` and a trigger-aware `description`, plus an instructions body operationalized from the source section — along with two starter eval cases so the skill isn't shipped untested.
+Turns a docs section describing a capability or workflow into a SKILL.md draft in the Agent Skills format. The draft has a frontmatter `name` and a trigger-aware `description`, plus an instructions body operationalized from the source section, along with two starter eval cases so the skill is not shipped untested.
 
 ## Inputs
 

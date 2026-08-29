@@ -1,7 +1,7 @@
 ---
 name: release-notes
 description: >
-  Turns a commit list or internal changelog into customer-facing release notes grouped by impact (breaking / new / fixed), with a one-line summary a support team could paste straight into a ticket. Use this skill when the task is: Turns a raw commit list or internal changelog into customer-facing release notes grouped into Breaking Changes, New, and Fixed — plus a one-line support-team summary you can paste straight into a ticket reply.
+  Turns a commit list or internal changelog into customer-facing release notes grouped by impact (breaking, new, and fixed), with a one-line summary a support team could paste straight into a ticket. Use this skill when the task is: Turns a raw commit list or internal changelog into customer-facing release notes grouped into Breaking Changes, New, and Fixed, plus a one-line support-team summary you can paste straight into a ticket reply.
 version: 1.0.0
 author:
   name: Reem Sabawi
@@ -12,7 +12,7 @@ author:
 
 # Release Notes
 
-Turns a raw commit list or internal changelog into customer-facing release notes grouped into Breaking Changes, New, and Fixed — plus a one-line support-team summary you can paste straight into a ticket reply.
+Turns a raw commit list or internal changelog into customer-facing release notes grouped into Breaking Changes, New, and Fixed, plus a one-line support-team summary you can paste straight into a ticket reply.
 
 ## Inputs
 

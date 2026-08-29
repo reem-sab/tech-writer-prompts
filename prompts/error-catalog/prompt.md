@@ -3,8 +3,8 @@ name: Error Catalog
 version: 1.0.0
 description: >
   Turns raw error codes and strings pulled from source into a troubleshooting
-  table with cause, fix, and "how you got here" for each one, plus a JSON
-  version meant for agents to consume directly.
+  table giving the cause, the fix, and how the reader got there for each one,
+  plus a JSON version meant for agents to consume directly.
 inputs:
   ERRORS:
     description: >

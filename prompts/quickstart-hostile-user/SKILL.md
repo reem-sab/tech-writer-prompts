@@ -1,7 +1,7 @@
 ---
 name: quickstart-hostile-user
 description: >
-  Walks a quickstart as a first-time user on a clean machine, interpreting every instruction as literally and narrowly as possible. Flags every unstated prerequisite, ambiguous step, and missing verification checkpoint. Use this skill when the task is: Walks a quickstart the way a real first-time user does: with zero assumed context, on a clean machine, interpreting every instruction as narrowly as possible. Produces a step-by-step log of where a literal reading breaks, plus summary lists of unstated prerequisites, ambiguous steps, and missing verification checkpoints.
+  Walks a quickstart as a first-time user on a clean machine, interpreting every instruction as literally and narrowly as possible. Flags every unstated prerequisite, ambiguous step, and missing verification checkpoint. Use this skill when the task is: Walks a quickstart the way a real first-time user does: with zero assumed context, on a clean machine, interpreting every instruction as narrowly as possible. It produces a step-by-step log of where a literal reading breaks, plus summary lists of unstated prerequisites, ambiguous steps, and missing verification checkpoints.
 version: 1.0.0
 author:
   name: Reem Sabawi
@@ -12,7 +12,7 @@ author:
 
 # Quickstart Hostile User
 
-Walks a quickstart the way a real first-time user does: with zero assumed context, on a clean machine, interpreting every instruction as narrowly as possible. Produces a step-by-step log of where a literal reading breaks, plus summary lists of unstated prerequisites, ambiguous steps, and missing verification checkpoints.
+Walks a quickstart the way a real first-time user does: with zero assumed context, on a clean machine, interpreting every instruction as narrowly as possible. It produces a step-by-step log of where a literal reading breaks, plus summary lists of unstated prerequisites, ambiguous steps, and missing verification checkpoints.
 
 ## Inputs
 

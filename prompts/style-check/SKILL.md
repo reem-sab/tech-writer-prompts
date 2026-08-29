@@ -1,7 +1,7 @@
 ---
 name: style-check
 description: >
-  Applies a style guide to a draft without flattening the author's voice. Outputs a diff-style list of specific violations with minimal targeted fixes -- never a full rewrite. Use this skill when the task is: Checks a draft against a style guide and reports violations as a numbered, diff-style list — quoted span, rule violated, minimal fix — without rewriting the piece. Built to be run before a human edit, not instead of one: the output is something an author reviews and applies themselves, which keeps their voice intact.
+  Applies a style guide to a draft without flattening the author's voice. Outputs a diff-style list of specific violations with minimal targeted fixes -- never a full rewrite. Use this skill when the task is: Checks a draft against a style guide and reports violations as a numbered, diff-style list, giving the quoted span, the rule violated, and a minimal fix, without rewriting the piece. Run it before a human edit, not instead of one: the output is something an author reviews and applies themselves, which keeps their voice intact.
 version: 1.0.0
 author:
   name: Reem Sabawi
@@ -12,7 +12,7 @@ author:
 
 # Style Check
 
-Checks a draft against a style guide and reports violations as a numbered, diff-style list — quoted span, rule violated, minimal fix — without rewriting the piece. Built to be run before a human edit, not instead of one: the output is something an author reviews and applies themselves, which keeps their voice intact.
+Checks a draft against a style guide and reports violations as a numbered, diff-style list, giving the quoted span, the rule violated, and a minimal fix, without rewriting the piece. Run it before a human edit, not instead of one: the output is something an author reviews and applies themselves, which keeps their voice intact.
 
 ## Inputs
 

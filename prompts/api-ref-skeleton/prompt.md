@@ -2,9 +2,9 @@
 name: API Reference Skeleton
 version: 1.0.0
 description: >
-  Turns an OpenAPI spec into a reference page draft — per-endpoint
-  descriptions, parameter tables, and request/response examples — with
-  explicit TODO markers wherever the spec doesn't say enough to write from.
+  Turns an OpenAPI spec into a reference page draft with per-endpoint
+  descriptions, parameter tables, and request and response examples, adding
+  explicit TODO markers wherever the spec does not say enough to write from.
 inputs:
   SPEC:
     description: An OpenAPI spec (JSON or YAML), complete or partial.

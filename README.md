@@ -2,7 +2,7 @@
 
 **Prompts are documentation. Documentation gets tested.**
 
-A small, opinionated library of prompts for technical writers — each one
+A small, opinionated library of prompts for technical writers. Each one is
 versioned, documented, and shipped with eval cases that run in CI. Nothing
 here merges until its tests pass. By [Reem Sabawi](https://github.com/reem-sab).
 MIT licensed.
@@ -29,7 +29,7 @@ node runner/dist/cli.js eval audit-page
 `--input NAME=value` takes either a literal string or a path to a file,
 whose contents are read in. Set `ANTHROPIC_API_KEY` before `run` or `eval`.
 
-> If a prompt here saves you an hour, [star the repo](https://github.com/reem-sab/tech-writer-prompts) — stars are the signal that decides what gets tested next.
+> If a prompt here saves you an hour, [star the repo](https://github.com/reem-sab/tech-writer-prompts). Stars are the signal that decides what gets tested next.
 
 ---
 
@@ -90,8 +90,8 @@ absence that justifies it.
 ### 2. `quickstart-hostile-user`
 
 Walks a quickstart as a literal first-time user on a clean machine, with
-zero assumed context — the fastest way to find the prerequisite you forgot
-you knew.
+zero assumed context. This is the fastest way to find the prerequisite you
+forgot you knew.
 
 ```text
 You are simulating a first-time user following this quickstart on a clean
@@ -122,7 +122,7 @@ Then produce three lists (reference step numbers; "None found" if empty):
 
 ### 3. `error-catalog`
 
-Turns raw error codes from source into a troubleshooting table — plus a
+Turns raw error codes from source into a troubleshooting table, plus a
 matching JSON array for agents to consume directly.
 
 ```text
@@ -149,8 +149,8 @@ Output two sections:
 
 ### 4. `agent-readiness`
 
-Rates a page for how safely an autonomous agent could act on it directly —
-the check for the moment your docs stop being read only by humans.
+Rates a page for how safely an autonomous agent could act on it directly.
+It is the check for the moment your docs stop being read only by humans.
 
 ```text
 You are rating how safely an autonomous agent (not a human) could read this
@@ -180,26 +180,26 @@ blast radius — most dangerous first.
 ## The full library
 
 All 15 prompts. Every example input uses a shared fictional product, the
-**Lumen API** (event notifications + webhooks), so the library reads as one
-coherent set. Badges reflect the most recent CI eval run, not a claim.
+**Lumen API** (event notifications and webhooks), so the library reads as
+one coherent set. Badges reflect the most recent CI eval run, not a claim.
 
 | Prompt | What it does | Tags | Evals |
 |---|---|---|---|
-| [audit-page](prompts/audit-page/) | Review a page against a 10-point rubric → scored table + fix list. | `docs-review` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/audit-page/badge.json) |
+| [audit-page](prompts/audit-page/) | Review a page against a 10-point rubric, returning a scored table and a fix list. | `docs-review` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/audit-page/badge.json) |
 | [quickstart-hostile-user](prompts/quickstart-hostile-user/) | Walk a quickstart as a literal first-time user; flag every gap. | `docs-review` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/quickstart-hostile-user/badge.json) |
-| [error-catalog](prompts/error-catalog/) | Raw error codes → troubleshooting table + agent-readable JSON. | `api` `agents` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/error-catalog/badge.json) |
-| [api-ref-skeleton](prompts/api-ref-skeleton/) | OpenAPI spec → reference draft with TODOs where the spec is silent. | `api` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/api-ref-skeleton/badge.json) |
-| [release-notes](prompts/release-notes/) | Commit list → customer notes grouped breaking/new/fixed. | `release` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/release-notes/badge.json) |
-| [glossary-extract](prompts/glossary-extract/) | Pages → terms used but never defined, ranked, with draft definitions. | `docs-review` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/glossary-extract/badge.json) |
+| [error-catalog](prompts/error-catalog/) | Turn raw error codes into a troubleshooting table plus agent-readable JSON. | `api` `agents` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/error-catalog/badge.json) |
+| [api-ref-skeleton](prompts/api-ref-skeleton/) | Turn an OpenAPI spec into a reference draft with TODOs where the spec is silent. | `api` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/api-ref-skeleton/badge.json) |
+| [release-notes](prompts/release-notes/) | Turn a commit list into customer notes grouped as breaking, new, and fixed. | `release` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/release-notes/badge.json) |
+| [glossary-extract](prompts/glossary-extract/) | Find terms used across pages but never defined, ranked, with draft definitions. | `docs-review` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/glossary-extract/badge.json) |
 | [style-check](prompts/style-check/) | Apply a style guide as a violation list, without flattening voice. | `style` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/style-check/badge.json) |
-| [agent-readiness](prompts/agent-readiness/) | Rate a page for machine readers → score + fixes. | `agents` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/agent-readiness/badge.json) |
+| [agent-readiness](prompts/agent-readiness/) | Rate a page for machine readers, returning a score and fixes. | `agents` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/agent-readiness/badge.json) |
 | [diataxis-classify](prompts/diataxis-classify/) | Identify a page's Diataxis mode, where it mixes, how to split. | `ia` `docs-review` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/diataxis-classify/badge.json) |
-| [ia-review](prompts/ia-review/) | Nav structure → orphans, duplicate scopes, missing landing pages. | `ia` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/ia-review/badge.json) |
-| [doc-from-transcript](prompts/doc-from-transcript/) | Transcript → draft doc with a verify-against-source checklist. | `docs-review` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/doc-from-transcript/badge.json) |
-| [screenshot-to-steps](prompts/screenshot-to-steps/) | Screenshot descriptions → a redesign-proof written procedure. | `docs-review` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/screenshot-to-steps/badge.json) |
+| [ia-review](prompts/ia-review/) | Review a nav structure for orphans, duplicate scopes, and missing landing pages. | `ia` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/ia-review/badge.json) |
+| [doc-from-transcript](prompts/doc-from-transcript/) | Turn a transcript into a draft doc with a verify-against-source checklist. | `docs-review` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/doc-from-transcript/badge.json) |
+| [screenshot-to-steps](prompts/screenshot-to-steps/) | Turn screenshot descriptions into a redesign-proof written procedure. | `docs-review` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/screenshot-to-steps/badge.json) |
 | [localization-prep](prompts/localization-prep/) | Flag idioms and ambiguities that break in translation; suggest rewrites. | `localization` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/localization-prep/badge.json) |
-| [skill-file-draft](prompts/skill-file-draft/) | Docs section → SKILL.md draft with two starter eval cases. | `agents` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/skill-file-draft/badge.json) |
-| [freshness-triage](prompts/freshness-triage/) | Page + git log + source → which claims are most likely stale, ranked. | `docs-review` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/freshness-triage/badge.json) |
+| [skill-file-draft](prompts/skill-file-draft/) | Turn a docs section into a SKILL.md draft with two starter eval cases. | `agents` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/skill-file-draft/badge.json) |
+| [freshness-triage](prompts/freshness-triage/) | Rank which claims on a page are most likely stale, from its git log and source. | `docs-review` | ![evals](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/freshness-triage/badge.json) |
 
 > The badges above render from each prompt's `badge.json`, a
 > [shields.io endpoint](https://shields.io/endpoint) file the CI eval run
@@ -213,7 +213,7 @@ generated from this repo on every push.
 
 ## How the evals work
 
-Every prompt ships 3–5 cases in `evals.json`. A case is an input plus an
+Every prompt ships 3 to 5 cases in `evals.json`. A case is an input plus an
 expectation:
 
 ```json
@@ -229,12 +229,12 @@ expectation:
 
 Three matcher types:
 
-- **`contains`** — every listed substring must appear in the output. Runs
+- **`contains`**: every listed substring must appear in the output. Runs
   offline.
-- **`regex`** — every pattern must match (compiled case-insensitively). Runs
+- **`regex`**: every pattern must match (compiled case-insensitively). Runs
   offline.
-- **`judge_rubric`** — a natural-language rubric graded by a second model
-  call. Runs only under `--judge`; skipped otherwise.
+- **`judge_rubric`**: a natural-language rubric graded by a second model
+  call. Runs only under `--judge`, and is skipped otherwise.
 
 ```bash
 node runner/dist/cli.js eval agent-readiness            # offline matchers only
@@ -245,29 +245,29 @@ node runner/dist/cli.js eval --all --judge              # the whole library
 `eval` writes `evals/results.json` and a shields.io `badge.json` per prompt.
 The [evals workflow](.github/workflows/evals.yml) runs `eval --all --judge`
 on every push and PR, then commits the results, the badges, and the
-dashboard's `prompts.json` — so the numbers on the dashboard and in this
+dashboard's `prompts.json`, so the numbers on the dashboard and in this
 README can never drift from a real run. See
 [CONTRIBUTING.md](CONTRIBUTING.md): **no prompt merges without passing
 evals.**
 
 ---
 
-## Use with Claude Code / Cursor
+## Use with Claude Code and Cursor
 
 The whole library loads as a skill. In a coding agent, point it at
-[`SKILL.md`](SKILL.md) — it indexes which prompt fits which task and how to
+[`SKILL.md`](SKILL.md). It indexes which prompt fits which task and how to
 apply one.
 
 You can also install a single prompt as a skill. Each prompt folder has a
 generated `SKILL.md`:
 
 ```bash
-# Claude Code — installs the prompt as a skill it picks up automatically
+# Claude Code: installs the prompt as a skill it picks up automatically
 mkdir -p .claude/skills/audit-page && \
   curl -sL https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/audit-page/SKILL.md \
   -o .claude/skills/audit-page/SKILL.md
 
-# Cursor — drops the prompt into Cursor rules
+# Cursor: drops the prompt into Cursor rules
 mkdir -p .cursor/rules && \
   curl -sL https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/audit-page/SKILL.md \
   -o .cursor/rules/audit-page.mdc
@@ -283,9 +283,9 @@ For agents working *inside* this repo, see [AGENTS.md](AGENTS.md).
 prompts/<slug>/
   prompt.md      the prompt, with YAML frontmatter (see prompts/SCHEMA.md)
   README.md      what it does, inputs, example, limitations
-  evals.json     3–5 test cases
-  SKILL.md       generated — installable single-prompt skill
-  badge.json     generated — shields.io eval badge
+  evals.json     3 to 5 test cases
+  SKILL.md       generated: installable single-prompt skill
+  badge.json     generated: shields.io eval badge
 runner/          the twp CLI (TypeScript)
 site/            static dashboard (build-data.mjs emits prompts.json)
 ```

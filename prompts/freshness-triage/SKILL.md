@@ -1,7 +1,7 @@
 ---
 name: freshness-triage
 description: >
-  Cross-references a documentation page against its git log and the source files it documents to rank which claims are most likely stale, with a specific check for each. Use this skill when the task is: Cross-references a documentation page against its git log and the current source it documents to rank which specific claims are most likely stale — confirmed contradictions first, then claims whose underlying source changed after the page was last touched — each with a concrete check to confirm it.
+  Cross-references a documentation page against its git log and the source files it documents to rank which claims are most likely stale, with a specific check for each. Use this skill when the task is: Cross-references a documentation page against its git log and the current source it documents to rank which specific claims are most likely stale. Confirmed contradictions come first, then claims whose underlying source changed after the page was last touched, each with a concrete check to confirm it.
 version: 1.0.1
 author:
   name: Reem Sabawi
@@ -12,7 +12,7 @@ author:
 
 # Freshness Triage
 
-Cross-references a documentation page against its git log and the current source it documents to rank which specific claims are most likely stale — confirmed contradictions first, then claims whose underlying source changed after the page was last touched — each with a concrete check to confirm it.
+Cross-references a documentation page against its git log and the current source it documents to rank which specific claims are most likely stale. Confirmed contradictions come first, then claims whose underlying source changed after the page was last touched, each with a concrete check to confirm it.
 
 ## Inputs
 

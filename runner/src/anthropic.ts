@@ -27,6 +27,10 @@ export async function runPrompt(prompt: string, model: string = DEFAULT_MODEL): 
     message = await anthropic.messages.create({
       model,
       max_tokens: 4096,
+      // temperature 0 keeps eval runs as reproducible as the model allows --
+      // both the prompt output and the judge below. Without it, the same case
+      // flips between pass and fail across runs.
+      temperature: 0,
       messages: [{ role: "user", content: prompt }],
     });
   } catch (err) {
@@ -57,7 +61,7 @@ export async function judgeOutput(
   output: string,
   model: string = DEFAULT_MODEL
 ): Promise<JudgeResult> {
-  const judgePrompt = `You are grading whether a piece of writing satisfies a rubric. Answer strictly.
+  const judgePrompt = `You are grading whether a piece of writing satisfies a rubric. Grade only against what the rubric asks for. Do not invent extra requirements, and do not penalize output for behavior the rubric does not mention.
 
 Rubric:
 ${rubric}
@@ -67,14 +71,34 @@ Writing to grade:
 ${output}
 """
 
-Respond with exactly one line starting with "PASS:" or "FAIL:", followed by a one-sentence reason. Do not add anything else.`;
+Your entire response must be a single line: the word PASS or the word FAIL, then a colon, then a one-sentence reason. The first word must be PASS or FAIL. Do not write anything before it.`;
 
   const result = await runPrompt(judgePrompt, model);
-  const trimmed = result.trim();
-  const pass = /^PASS:/i.test(trimmed);
-  const fail = /^FAIL:/i.test(trimmed);
-  if (!pass && !fail) {
-    return { pass: false, reason: `Judge gave an unparseable response: ${trimmed.slice(0, 200)}` };
+  const verdict = parseJudgeVerdict(result);
+  if (!verdict) {
+    return { pass: false, reason: `Judge gave an unparseable response: ${result.trim().slice(0, 200)}` };
   }
-  return { pass, reason: trimmed.replace(/^(PASS|FAIL):\s*/i, "") };
+  return verdict;
+}
+
+/**
+ * Reads a PASS/FAIL verdict from the judge's reply. Prefers a strict
+ * first-token match, but falls back to the last explicit PASS:/FAIL: marker
+ * anywhere in the reply so a judge that reasons before answering still
+ * grades correctly instead of scoring as unparseable.
+ */
+export function parseJudgeVerdict(raw: string): JudgeResult | undefined {
+  const trimmed = raw.trim();
+  const firstLine = trimmed.split("\n")[0].trim();
+  if (/^PASS\b/i.test(firstLine)) return { pass: true, reason: firstLine.replace(/^PASS[:\s-]*/i, "") };
+  if (/^FAIL\b/i.test(firstLine)) return { pass: false, reason: firstLine.replace(/^FAIL[:\s-]*/i, "") };
+
+  const markers = [...trimmed.matchAll(/\b(PASS|FAIL)\s*:/gi)];
+  if (markers.length > 0) {
+    const last = markers[markers.length - 1];
+    const pass = last[1].toUpperCase() === "PASS";
+    const reason = trimmed.slice(last.index! + last[0].length).trim().split("\n")[0];
+    return { pass, reason: reason || (pass ? "passed" : "failed") };
+  }
+  return undefined;
 }

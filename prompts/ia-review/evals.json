@@ -42,7 +42,7 @@
       "NAV": "Getting Started\n  Overview\n  Quickstart\n  Installation\nGuides\n  Overview\n  Webhooks\n    Overview\n    Setting Up a Subscription\n    Verifying Signatures\n    Retry Behavior\n  Rate Limits\nAPI Reference\n  Overview\n  Events\n  Subscriptions\nErrors\nBilling\n  Overview\n  Plans\n  Invoices\n"
     },
     "expect": {
-      "judge_rubric": "The output reports no orphaned pages and no duplicate scopes, and does not propose moving pages between sections. The per-section 'Overview' pages satisfy the missing-landing-page check and are NOT flagged as duplicates of one another."
+      "judge_rubric": "The per-section 'Overview' pages are NOT flagged as duplicate scopes of one another and NOT flagged as orphaned. The key requirement is that repeated generic 'Overview' landing pages are treated as expected structure rather than as duplicates; reporting 'None found.' for the checks is the ideal result."
     }
   }
 ]

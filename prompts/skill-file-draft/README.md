@@ -1,10 +1,10 @@
 # skill-file-draft
 
 Turns a docs section describing a capability or workflow into a SKILL.md
-draft in the Agent Skills format — frontmatter `name` and a trigger-aware
-`description`, plus an instructions body operationalized from the source
-section — along with two starter eval cases so the skill isn't shipped
-untested.
+draft in the Agent Skills format. The draft has a frontmatter `name` and a
+trigger-aware `description`, plus an instructions body operationalized from
+the source section, along with two starter eval cases so the skill is not
+shipped untested.
 
 ## Inputs
 
@@ -18,13 +18,13 @@ untested.
 twp run skill-file-draft --input SECTION=./docs/rotating-keys.md
 ```
 
-Given the Lumen key-rotation docs section in `evals.json`, the output
-drafts a `rotate-lumen-api-key` skill with a description stating both what
-it does ("rotates a Lumen API key without downtime") and when to trigger
-("when the user asks to rotate, replace, or roll a Lumen API key, or
-mentions a key may be compromised"), a body listing the actual dashboard
-and redeploy steps as agent instructions, and two eval cases exercising
-different rotation scenarios.
+Take the Lumen key-rotation docs section in `evals.json`. The output drafts
+a `rotate-lumen-api-key` skill with a description that states both what it
+does (it rotates a Lumen API key without downtime) and when to trigger
+(when the user asks to rotate, replace, or roll a Lumen API key, or
+mentions a key might be compromised), a body that lists the actual
+dashboard and redeploy steps as agent instructions, and two eval cases that
+exercise different rotation scenarios.
 
 ## Limitations
 
@@ -34,6 +34,6 @@ different rotation scenarios.
 - Operationalizes only what `SECTION` states. A docs section missing a
   step or edge case produces a skill draft with the same gap, marked with
   a `<!-- TODO -->` rather than a fabricated specific.
-- The two starter eval cases are a floor, not a full eval suite — treat
-  them the way this library's own `CONTRIBUTING.md` treats a new prompt's
-  evals: a starting 3–5, expanded as real usage surfaces edge cases.
+- The two starter eval cases are a floor, not a full eval suite. Treat them
+  the way the `CONTRIBUTING.md` of this library treats the evals of a new
+  prompt: a starting 3 to 5, expanded as real usage surfaces edge cases.

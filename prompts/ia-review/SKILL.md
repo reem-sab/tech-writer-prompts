@@ -1,7 +1,7 @@
 ---
 name: ia-review
 description: >
-  Reviews a sidebar/nav structure for orphaned pages, duplicate scopes, and missing landing pages, and proposes a reorganization with rationale for each change. Use this skill when the task is: Reviews a docs site's sidebar/nav outline for orphaned pages, duplicate topic scopes, and sections missing a landing page, then proposes a revised outline with a one-line rationale for each change.
+  Reviews a sidebar/nav structure for orphaned pages, duplicate scopes, and missing landing pages, and proposes a reorganization with rationale for each change. Use this skill when the task is: Reviews the sidebar or nav outline of a docs site for orphaned pages, duplicate topic scopes, and sections missing a landing page, then proposes a revised outline with a one-line rationale for each change.
 version: 1.0.1
 author:
   name: Reem Sabawi
@@ -12,7 +12,7 @@ author:
 
 # IA Review
 
-Reviews a docs site's sidebar/nav outline for orphaned pages, duplicate topic scopes, and sections missing a landing page, then proposes a revised outline with a one-line rationale for each change.
+Reviews the sidebar or nav outline of a docs site for orphaned pages, duplicate topic scopes, and sections missing a landing page, then proposes a revised outline with a one-line rationale for each change.
 
 ## Inputs
 

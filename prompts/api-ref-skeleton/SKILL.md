@@ -1,7 +1,7 @@
 ---
 name: api-ref-skeleton
 description: >
-  Turns an OpenAPI spec into a reference page draft — per-endpoint descriptions, parameter tables, and request/response examples — with explicit TODO markers wherever the spec doesn't say enough to write from. Use this skill when the task is: Turns an OpenAPI spec into a reference page draft — one section per operation, with a description, a parameter table, request body notes, and a response table — and marks every place the spec doesn't say enough to write from with an explicit `> TODO:` line instead of inventing content.
+  Turns an OpenAPI spec into a reference page draft with per-endpoint descriptions, parameter tables, and request and response examples, adding explicit TODO markers wherever the spec does not say enough to write from. Use this skill when the task is: Turns an OpenAPI spec into a reference page draft, one section per operation, with a description, a parameter table, request body notes, and a response table. It marks every place the spec does not say enough to write from with an explicit `> TODO:` line instead of inventing content.
 version: 1.0.0
 author:
   name: Reem Sabawi
@@ -12,7 +12,7 @@ author:
 
 # API Reference Skeleton
 
-Turns an OpenAPI spec into a reference page draft — one section per operation, with a description, a parameter table, request body notes, and a response table — and marks every place the spec doesn't say enough to write from with an explicit `> TODO:` line instead of inventing content.
+Turns an OpenAPI spec into a reference page draft, one section per operation, with a description, a parameter table, request body notes, and a response table. It marks every place the spec does not say enough to write from with an explicit `> TODO:` line instead of inventing content.
 
 ## Inputs
 

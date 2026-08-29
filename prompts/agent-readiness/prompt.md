@@ -2,9 +2,10 @@
 name: Agent Readiness
 version: 1.0.0
 description: >
-  Rates a documentation page for machine readers -- ambiguous pronouns,
-  steps that depend on unstated context, missing structure, and claims an
-  agent would execute wrongly -- with an overall score and specific fixes.
+  Rates a documentation page for machine readers, flagging ambiguous
+  pronouns, steps that depend on unstated context, missing structure, and
+  claims an agent would execute wrongly, then returns an overall score with
+  specific fixes.
 inputs:
   PAGE:
     description: The documentation page to rate for agent readiness.

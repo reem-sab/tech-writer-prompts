@@ -3,7 +3,7 @@ name: Release Notes
 version: 1.0.0
 description: >
   Turns a commit list or internal changelog into customer-facing release
-  notes grouped by impact (breaking / new / fixed), with a one-line summary
+  notes grouped by impact (breaking, new, and fixed), with a one-line summary
   a support team could paste straight into a ticket.
 inputs:
   CHANGES:

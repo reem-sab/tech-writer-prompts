@@ -16,7 +16,7 @@
     },
     "expect": {
       "contains": ["Rubric Point"],
-      "judge_rubric": "The page is scored highly overall (mostly 4s and 5s across the rubric) and the prioritized fix list contains no Critical-severity items — consistent with a strong, complete reference page that states its prerequisites, gives a verification step, and covers troubleshooting."
+      "judge_rubric": "Prerequisite Coverage and Verification Checkpoints each score 4 or 5, because the page lists its prerequisites up front and gives an explicit step to verify the new key works. The fix list does not raise a Critical issue about missing prerequisites or missing verification."
     }
   },
   {

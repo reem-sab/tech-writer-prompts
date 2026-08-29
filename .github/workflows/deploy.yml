@@ -5,6 +5,13 @@ on:
     branches: [main]
     paths:
       - "site/**"
+  # The evals workflow commits regenerated dashboard data using GITHUB_TOKEN,
+  # and a GITHUB_TOKEN push does not itself trigger other workflows. So also
+  # deploy whenever Evals finishes: this run checks out main (including that
+  # fresh commit) and republishes the real numbers.
+  workflow_run:
+    workflows: ["Evals"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:

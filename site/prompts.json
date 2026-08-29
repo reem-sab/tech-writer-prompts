@@ -3,8 +3,8 @@
     "slug": "agent-readiness",
     "name": "Agent Readiness",
     "version": "1.0.0",
-    "description": "Rates a documentation page for machine readers -- ambiguous pronouns, steps that depend on unstated context, missing structure, and claims an agent would execute wrongly -- with an overall score and specific fixes.",
-    "details": "Rates a page for how safely an autonomous agent could act on it directly — no human in the loop to catch a misreading. Flags ambiguous pronouns, steps that depend on context the page never states, prose that buries instructions instead of structuring them, underspecified actions with real blast radius, and genuinely non-deterministic steps. Outputs a score and a blast-radius-ordered fix list.",
+    "description": "Rates a documentation page for machine readers, flagging ambiguous pronouns, steps that depend on unstated context, missing structure, and claims an agent would execute wrongly, then returns an overall score with specific fixes.",
+    "details": "Rates a page for how safely an autonomous agent could act on it directly, with no human in the loop to catch a misreading. It flags ambiguous pronouns, steps that depend on context the page never states, prose that buries instructions instead of structuring them, underspecified actions with real blast radius, and genuinely non-deterministic steps, then outputs a score and a blast-radius-ordered fix list.",
     "tags": [
       "agents"
     ],
@@ -30,8 +30,8 @@
     "slug": "api-ref-skeleton",
     "name": "API Reference Skeleton",
     "version": "1.0.0",
-    "description": "Turns an OpenAPI spec into a reference page draft — per-endpoint descriptions, parameter tables, and request/response examples — with explicit TODO markers wherever the spec doesn't say enough to write from.",
-    "details": "Turns an OpenAPI spec into a reference page draft — one section per operation, with a description, a parameter table, request body notes, and a response table — and marks every place the spec doesn't say enough to write from with an explicit `> TODO:` line instead of inventing content.",
+    "description": "Turns an OpenAPI spec into a reference page draft with per-endpoint descriptions, parameter tables, and request and response examples, adding explicit TODO markers wherever the spec does not say enough to write from.",
+    "details": "Turns an OpenAPI spec into a reference page draft, one section per operation, with a description, a parameter table, request body notes, and a response table. It marks every place the spec does not say enough to write from with an explicit `> TODO:` line instead of inventing content.",
     "tags": [
       "api"
     ],
@@ -56,7 +56,7 @@
     "name": "Audit Page",
     "version": "1.0.0",
     "description": "Reviews a documentation page against a 10-point rubric covering accuracy signals, completeness, scannability, and prerequisite gaps. Outputs a scored table plus a prioritized fix list.",
-    "details": "Reviews a single documentation page against a fixed 10-point rubric — prerequisite coverage, accuracy signals, completeness, scannability, verification checkpoints, terminology consistency, code sample validity, error coverage, audience fit, and actionability — and returns a scored table plus a prioritized fix list. Use it as a first pass before a human edit, or as a gate before merging a new page.",
+    "details": "Reviews a single documentation page against a fixed 10-point rubric that covers prerequisite coverage, accuracy signals, completeness, scannability, verification checkpoints, terminology consistency, code sample validity, error coverage, audience fit, and actionability. It returns a scored table plus a prioritized fix list. Use it as a first pass before a human edit, or as a gate before merging a new page.",
     "tags": [
       "docs-review"
     ],
@@ -81,7 +81,7 @@
     "name": "Diataxis Classify",
     "version": "1.0.0",
     "description": "Identifies whether a page is trying to be a tutorial, how-to guide, reference, or explanation (per the Diataxis framework), flags where it mixes modes, and proposes how to split it into one page per mode.",
-    "details": "Classifies a page against the four [Diataxis](https://diataxis.fr) modes — tutorial, how-to guide, reference, explanation — identifies passages that belong to a different mode than the page's primary one, and proposes a concrete split when the mixing is bad enough to matter.",
+    "details": "Classifies a page against the four [Diataxis](https://diataxis.fr) modes, which are tutorial, how-to guide, reference, and explanation. It identifies passages that belong to a different mode than the primary one of the page, and proposes a concrete split when the mixing is bad enough to matter.",
     "tags": [
       "ia",
       "docs-review"
@@ -106,8 +106,8 @@
     "slug": "doc-from-transcript",
     "name": "Doc From Transcript",
     "version": "1.0.0",
-    "description": "Drafts documentation updates from an engineering meeting transcript or Slack thread, with a \"verify against source\" checklist attached to every factual claim so nothing informal ships as fact unreviewed.",
-    "details": "Drafts a documentation update from an engineering meeting transcript or Slack thread, tagging every factual claim with a numbered marker tied to a \"verify against source\" checklist — so nothing said informally in a meeting ships as documented fact without someone confirming it first.",
+    "description": "Drafts documentation updates from an engineering meeting transcript or Slack thread, with a verify-against-source checklist attached to every factual claim so nothing informal ships as fact unreviewed.",
+    "details": "Drafts a documentation update from an engineering meeting transcript or Slack thread, tagging every factual claim with a numbered marker tied to a verify-against-source checklist, so nothing said informally in a meeting ships as documented fact without someone confirming it first.",
     "tags": [
       "docs-review"
     ],
@@ -131,8 +131,8 @@
     "slug": "error-catalog",
     "name": "Error Catalog",
     "version": "1.0.0",
-    "description": "Turns raw error codes and strings pulled from source into a troubleshooting table with cause, fix, and \"how you got here\" for each one, plus a JSON version meant for agents to consume directly.",
-    "details": "Converts a raw list of error codes and strings — the kind pulled straight from an enum or error-constants file — into a troubleshooting table with cause, fix, and \"how you got here\" for each one, plus a machine-readable JSON array of the same data for agents to consume.",
+    "description": "Turns raw error codes and strings pulled from source into a troubleshooting table giving the cause, the fix, and how the reader got there for each one, plus a JSON version meant for agents to consume directly.",
+    "details": "Converts a raw list of error codes and strings, the kind pulled straight from an enum or error-constants file, into a troubleshooting table that gives the cause, the fix, and how the reader got there for each one, plus a machine-readable JSON array of the same data for agents to consume.",
     "tags": [
       "api",
       "agents"
@@ -158,7 +158,7 @@
     "name": "Freshness Triage",
     "version": "1.0.1",
     "description": "Cross-references a documentation page against its git log and the source files it documents to rank which claims are most likely stale, with a specific check for each.",
-    "details": "Cross-references a documentation page against its git log and the current source it documents to rank which specific claims are most likely stale — confirmed contradictions first, then claims whose underlying source changed after the page was last touched — each with a concrete check to confirm it.",
+    "details": "Cross-references a documentation page against its git log and the current source it documents to rank which specific claims are most likely stale. Confirmed contradictions come first, then claims whose underlying source changed after the page was last touched, each with a concrete check to confirm it.",
     "tags": [
       "docs-review"
     ],
@@ -191,7 +191,7 @@
     "name": "Glossary Extract",
     "version": "1.0.0",
     "description": "Scans a set of pages for domain-specific terms that are used but never defined anywhere in them, ranks them by frequency, and drafts a definition for each from context, to review before publishing.",
-    "details": "Scans a set of pages for domain-specific terms that are used repeatedly but never actually defined, ranks them by frequency, and drafts a definition for each from context — so you get a prioritized list of what to add to the glossary instead of starting from a blank page.",
+    "details": "Scans a set of pages for domain-specific terms that are used repeatedly but never actually defined, ranks them by frequency, and drafts a definition for each from context, so you get a prioritized list of what to add to the glossary instead of starting from a blank page.",
     "tags": [
       "docs-review"
     ],
@@ -216,7 +216,7 @@
     "name": "IA Review",
     "version": "1.0.1",
     "description": "Reviews a sidebar/nav structure for orphaned pages, duplicate scopes, and missing landing pages, and proposes a reorganization with rationale for each change.",
-    "details": "Reviews a docs site's sidebar/nav outline for orphaned pages, duplicate topic scopes, and sections missing a landing page, then proposes a revised outline with a one-line rationale for each change.",
+    "details": "Reviews the sidebar or nav outline of a docs site for orphaned pages, duplicate topic scopes, and sections missing a landing page, then proposes a revised outline with a one-line rationale for each change.",
     "tags": [
       "ia"
     ],
@@ -241,7 +241,7 @@
     "name": "Localization Prep",
     "version": "1.0.0",
     "description": "Flags idioms, cultural references, ambiguous antecedents, and merged sentences in a draft that will break or distort in translation, and suggests a neutral rewrite for each.",
-    "details": "Flags idioms, cultural references, ambiguous antecedents, and merged sentences that tend to break or distort in translation, and suggests a neutral, literal-translation-friendly rewrite for each — a pass to run before a page goes to a translation team or pipeline.",
+    "details": "Flags idioms, cultural references, ambiguous antecedents, and merged sentences that tend to break or distort in translation, and suggests a neutral, literal-translation-friendly rewrite for each. Run it before a page goes to a translation team or pipeline.",
     "tags": [
       "localization"
     ],
@@ -266,7 +266,7 @@
     "name": "Quickstart Hostile User",
     "version": "1.0.0",
     "description": "Walks a quickstart as a first-time user on a clean machine, interpreting every instruction as literally and narrowly as possible. Flags every unstated prerequisite, ambiguous step, and missing verification checkpoint.",
-    "details": "Walks a quickstart the way a real first-time user does: with zero assumed context, on a clean machine, interpreting every instruction as narrowly as possible. Produces a step-by-step log of where a literal reading breaks, plus summary lists of unstated prerequisites, ambiguous steps, and missing verification checkpoints.",
+    "details": "Walks a quickstart the way a real first-time user does: with zero assumed context, on a clean machine, interpreting every instruction as narrowly as possible. It produces a step-by-step log of where a literal reading breaks, plus summary lists of unstated prerequisites, ambiguous steps, and missing verification checkpoints.",
     "tags": [
       "docs-review"
     ],
@@ -290,8 +290,8 @@
     "slug": "release-notes",
     "name": "Release Notes",
     "version": "1.0.0",
-    "description": "Turns a commit list or internal changelog into customer-facing release notes grouped by impact (breaking / new / fixed), with a one-line summary a support team could paste straight into a ticket.",
-    "details": "Turns a raw commit list or internal changelog into customer-facing release notes grouped into Breaking Changes, New, and Fixed — plus a one-line support-team summary you can paste straight into a ticket reply.",
+    "description": "Turns a commit list or internal changelog into customer-facing release notes grouped by impact (breaking, new, and fixed), with a one-line summary a support team could paste straight into a ticket.",
+    "details": "Turns a raw commit list or internal changelog into customer-facing release notes grouped into Breaking Changes, New, and Fixed, plus a one-line support-team summary you can paste straight into a ticket reply.",
     "tags": [
       "release"
     ],
@@ -315,8 +315,8 @@
     "slug": "screenshot-to-steps",
     "name": "Screenshot to Steps",
     "version": "1.0.0",
-    "description": "Turns a screen recording description or a set of numbered screenshot descriptions into a written procedure phrased by what UI elements are named, not where they sit or what they look like -- so it survives a redesign.",
-    "details": "Turns a numbered sequence of screenshot or screen-recording frame descriptions into a written procedure phrased by what controls are *named*, not where they sit or what they look like — so the steps are still accurate after the next redesign moves the button.",
+    "description": "Turns a screen recording description or a set of numbered screenshot descriptions into a written procedure phrased by what UI elements are named, not where they sit or what they look like, so it survives a redesign.",
+    "details": "Turns a numbered sequence of screenshot or screen-recording frame descriptions into a written procedure phrased by what controls are *named*, not where they sit or what they look like, so the steps stay accurate after the next redesign moves the button.",
     "tags": [
       "docs-review"
     ],
@@ -341,7 +341,7 @@
     "name": "Skill File Draft",
     "version": "1.0.0",
     "description": "Turns a docs section describing a capability or workflow into a SKILL.md draft in the Agent Skills format, with two starter eval cases so the skill ships testable from day one.",
-    "details": "Turns a docs section describing a capability or workflow into a SKILL.md draft in the Agent Skills format — frontmatter `name` and a trigger-aware `description`, plus an instructions body operationalized from the source section — along with two starter eval cases so the skill isn't shipped untested.",
+    "details": "Turns a docs section describing a capability or workflow into a SKILL.md draft in the Agent Skills format. The draft has a frontmatter `name` and a trigger-aware `description`, plus an instructions body operationalized from the source section, along with two starter eval cases so the skill is not shipped untested.",
     "tags": [
       "agents"
     ],
@@ -366,7 +366,7 @@
     "name": "Style Check",
     "version": "1.0.0",
     "description": "Applies a style guide to a draft without flattening the author's voice. Outputs a diff-style list of specific violations with minimal targeted fixes -- never a full rewrite.",
-    "details": "Checks a draft against a style guide and reports violations as a numbered, diff-style list — quoted span, rule violated, minimal fix — without rewriting the piece. Built to be run before a human edit, not instead of one: the output is something an author reviews and applies themselves, which keeps their voice intact.",
+    "details": "Checks a draft against a style guide and reports violations as a numbered, diff-style list, giving the quoted span, the rule violated, and a minimal fix, without rewriting the piece. Run it before a human edit, not instead of one: the output is something an author reviews and applies themselves, which keeps their voice intact.",
     "tags": [
       "style"
     ],

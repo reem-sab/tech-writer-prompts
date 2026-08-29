@@ -1,7 +1,7 @@
 ---
 name: localization-prep
 description: >
-  Flags idioms, cultural references, ambiguous antecedents, and merged sentences in a draft that will break or distort in translation, and suggests a neutral rewrite for each. Use this skill when the task is: Flags idioms, cultural references, ambiguous antecedents, and merged sentences that tend to break or distort in translation, and suggests a neutral, literal-translation-friendly rewrite for each — a pass to run before a page goes to a translation team or pipeline.
+  Flags idioms, cultural references, ambiguous antecedents, and merged sentences in a draft that will break or distort in translation, and suggests a neutral rewrite for each. Use this skill when the task is: Flags idioms, cultural references, ambiguous antecedents, and merged sentences that tend to break or distort in translation, and suggests a neutral, literal-translation-friendly rewrite for each. Run it before a page goes to a translation team or pipeline.
 version: 1.0.0
 author:
   name: Reem Sabawi
@@ -12,7 +12,7 @@ author:
 
 # Localization Prep
 
-Flags idioms, cultural references, ambiguous antecedents, and merged sentences that tend to break or distort in translation, and suggests a neutral, literal-translation-friendly rewrite for each — a pass to run before a page goes to a translation team or pipeline.
+Flags idioms, cultural references, ambiguous antecedents, and merged sentences that tend to break or distort in translation, and suggests a neutral, literal-translation-friendly rewrite for each. Run it before a page goes to a translation team or pipeline.
 
 ## Inputs
 

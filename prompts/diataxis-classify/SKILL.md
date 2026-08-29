@@ -1,7 +1,7 @@
 ---
 name: diataxis-classify
 description: >
-  Identifies whether a page is trying to be a tutorial, how-to guide, reference, or explanation (per the Diataxis framework), flags where it mixes modes, and proposes how to split it into one page per mode. Use this skill when the task is: Classifies a page against the four [Diataxis](https://diataxis.fr) modes — tutorial, how-to guide, reference, explanation — identifies passages that belong to a different mode than the page's primary one, and proposes a concrete split when the mixing is bad enough to matter.
+  Identifies whether a page is trying to be a tutorial, how-to guide, reference, or explanation (per the Diataxis framework), flags where it mixes modes, and proposes how to split it into one page per mode. Use this skill when the task is: Classifies a page against the four [Diataxis](https://diataxis.fr) modes, which are tutorial, how-to guide, reference, and explanation. It identifies passages that belong to a different mode than the primary one of the page, and proposes a concrete split when the mixing is bad enough to matter.
 version: 1.0.0
 author:
   name: Reem Sabawi
@@ -12,7 +12,7 @@ author:
 
 # Diataxis Classify
 
-Classifies a page against the four [Diataxis](https://diataxis.fr) modes — tutorial, how-to guide, reference, explanation — identifies passages that belong to a different mode than the page's primary one, and proposes a concrete split when the mixing is bad enough to matter.
+Classifies a page against the four [Diataxis](https://diataxis.fr) modes, which are tutorial, how-to guide, reference, and explanation. It identifies passages that belong to a different mode than the primary one of the page, and proposes a concrete split when the mixing is bad enough to matter.
 
 ## Inputs
 

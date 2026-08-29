@@ -1,7 +1,7 @@
 ---
 name: screenshot-to-steps
 description: >
-  Turns a screen recording description or a set of numbered screenshot descriptions into a written procedure phrased by what UI elements are named, not where they sit or what they look like -- so it survives a redesign. Use this skill when the task is: Turns a numbered sequence of screenshot or screen-recording frame descriptions into a written procedure phrased by what controls are *named*, not where they sit or what they look like — so the steps are still accurate after the next redesign moves the button.
+  Turns a screen recording description or a set of numbered screenshot descriptions into a written procedure phrased by what UI elements are named, not where they sit or what they look like, so it survives a redesign. Use this skill when the task is: Turns a numbered sequence of screenshot or screen-recording frame descriptions into a written procedure phrased by what controls are *named*, not where they sit or what they look like, so the steps stay accurate after the next redesign moves the button.
 version: 1.0.0
 author:
   name: Reem Sabawi
@@ -12,7 +12,7 @@ author:
 
 # Screenshot to Steps
 
-Turns a numbered sequence of screenshot or screen-recording frame descriptions into a written procedure phrased by what controls are *named*, not where they sit or what they look like — so the steps are still accurate after the next redesign moves the button.
+Turns a numbered sequence of screenshot or screen-recording frame descriptions into a written procedure phrased by what controls are *named*, not where they sit or what they look like, so the steps stay accurate after the next redesign moves the button.
 
 ## Inputs
 

@@ -4,7 +4,7 @@ version: 1.0.0
 description: >
   Turns a screen recording description or a set of numbered screenshot
   descriptions into a written procedure phrased by what UI elements are
-  named, not where they sit or what they look like -- so it survives a
+  named, not where they sit or what they look like, so it survives a
   redesign.
 inputs:
   SCREENS:

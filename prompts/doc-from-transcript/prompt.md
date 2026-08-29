@@ -3,7 +3,7 @@ name: Doc From Transcript
 version: 1.0.0
 description: >
   Drafts documentation updates from an engineering meeting transcript or
-  Slack thread, with a "verify against source" checklist attached to every
+  Slack thread, with a verify-against-source checklist attached to every
   factual claim so nothing informal ships as fact unreviewed.
 inputs:
   TRANSCRIPT:

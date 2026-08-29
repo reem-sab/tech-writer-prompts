@@ -3,6 +3,17 @@ name: Evals
 on:
   push:
     branches: [main]
+    # Only re-run the (paid, ~90-call) eval suite when something that affects
+    # eval outcomes changes -- the prompts, their cases, or the runner. Prose
+    # edits to READMEs or the dashboard do not need a re-eval; deploy.yml
+    # handles publishing those.
+    paths:
+      - "prompts/**/prompt.md"
+      - "prompts/**/evals.json"
+      - "runner/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/evals.yml"
   pull_request:
     branches: [main]
   workflow_dispatch:

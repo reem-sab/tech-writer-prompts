@@ -1,7 +1,7 @@
 ---
 name: glossary-extract
 description: >
-  Scans a set of pages for domain-specific terms that are used but never defined anywhere in them, ranks them by frequency, and drafts a definition for each from context, to review before publishing. Use this skill when the task is: Scans a set of pages for domain-specific terms that are used repeatedly but never actually defined, ranks them by frequency, and drafts a definition for each from context — so you get a prioritized list of what to add to the glossary instead of starting from a blank page.
+  Scans a set of pages for domain-specific terms that are used but never defined anywhere in them, ranks them by frequency, and drafts a definition for each from context, to review before publishing. Use this skill when the task is: Scans a set of pages for domain-specific terms that are used repeatedly but never actually defined, ranks them by frequency, and drafts a definition for each from context, so you get a prioritized list of what to add to the glossary instead of starting from a blank page.
 version: 1.0.0
 author:
   name: Reem Sabawi
@@ -12,7 +12,7 @@ author:
 
 # Glossary Extract
 
-Scans a set of pages for domain-specific terms that are used repeatedly but never actually defined, ranks them by frequency, and drafts a definition for each from context — so you get a prioritized list of what to add to the glossary instead of starting from a blank page.
+Scans a set of pages for domain-specific terms that are used repeatedly but never actually defined, ranks them by frequency, and drafts a definition for each from context, so you get a prioritized list of what to add to the glossary instead of starting from a blank page.
 
 ## Inputs
 

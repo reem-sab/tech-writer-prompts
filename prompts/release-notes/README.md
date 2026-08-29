@@ -1,7 +1,7 @@
 # release-notes
 
 Turns a raw commit list or internal changelog into customer-facing release
-notes grouped into Breaking Changes, New, and Fixed — plus a one-line
+notes grouped into Breaking Changes, New, and Fixed, plus a one-line
 support-team summary you can paste straight into a ticket reply.
 
 ## Inputs
@@ -16,22 +16,22 @@ support-team summary you can paste straight into a ticket reply.
 twp run release-notes --input CHANGES=./CHANGELOG-internal.md
 ```
 
-Given the Lumen commit list in `evals.json` — which includes a commit
+Take the Lumen commit list in `evals.json`, which includes a commit
 renaming the `payload` field to `data` in the event schema, a new bulk
 `/v1/events/batch` endpoint, a fix for webhook signature verification, and
-a test-only refactor commit — the output puts the field rename under
-Breaking Changes, the batch endpoint under New, the signature fix under
-Fixed, and drops the test-only commit entirely since it has no
+a test-only refactor commit. The output puts the field rename under
+Breaking Changes, the batch endpoint under New, and the signature fix under
+Fixed, and it drops the test-only commit entirely because it has no
 customer-visible effect.
 
 ## Limitations
 
 - Works from the commit list or changelog text alone, not the actual diff.
   A commit message that undersells or mischaracterizes its own change
-  produces release notes with the same blind spot — have someone who
+  produces release notes with the same blind spot, so have someone who
   worked on the release review before publishing.
 - Ambiguous changes are deliberately over-classified as Breaking rather
   than New or Fixed. Expect to occasionally downgrade an item after human
   review, not the other way around.
-- Doesn't version the release itself or infer a release number/date from
+- Does not version the release itself or infer a release number or date from
   CHANGES unless that information is already in the input.

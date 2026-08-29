@@ -1,7 +1,7 @@
 ---
 name: doc-from-transcript
 description: >
-  Drafts documentation updates from an engineering meeting transcript or Slack thread, with a "verify against source" checklist attached to every factual claim so nothing informal ships as fact unreviewed. Use this skill when the task is: Drafts a documentation update from an engineering meeting transcript or Slack thread, tagging every factual claim with a numbered marker tied to a "verify against source" checklist — so nothing said informally in a meeting ships as documented fact without someone confirming it first.
+  Drafts documentation updates from an engineering meeting transcript or Slack thread, with a verify-against-source checklist attached to every factual claim so nothing informal ships as fact unreviewed. Use this skill when the task is: Drafts a documentation update from an engineering meeting transcript or Slack thread, tagging every factual claim with a numbered marker tied to a verify-against-source checklist, so nothing said informally in a meeting ships as documented fact without someone confirming it first.
 version: 1.0.0
 author:
   name: Reem Sabawi
@@ -12,7 +12,7 @@ author:
 
 # Doc From Transcript
 
-Drafts a documentation update from an engineering meeting transcript or Slack thread, tagging every factual claim with a numbered marker tied to a "verify against source" checklist — so nothing said informally in a meeting ships as documented fact without someone confirming it first.
+Drafts a documentation update from an engineering meeting transcript or Slack thread, tagging every factual claim with a numbered marker tied to a verify-against-source checklist, so nothing said informally in a meeting ships as documented fact without someone confirming it first.
 
 ## Inputs
 

@@ -1,7 +1,7 @@
 ---
 name: agent-readiness
 description: >
-  Rates a documentation page for machine readers -- ambiguous pronouns, steps that depend on unstated context, missing structure, and claims an agent would execute wrongly -- with an overall score and specific fixes. Use this skill when the task is: Rates a page for how safely an autonomous agent could act on it directly — no human in the loop to catch a misreading. Flags ambiguous pronouns, steps that depend on context the page never states, prose that buries instructions instead of structuring them, underspecified actions with real blast radius, and genuinely non-deterministic steps. Outputs a score and a blast-radius-ordered fix list.
+  Rates a documentation page for machine readers, flagging ambiguous pronouns, steps that depend on unstated context, missing structure, and claims an agent would execute wrongly, then returns an overall score with specific fixes. Use this skill when the task is: Rates a page for how safely an autonomous agent could act on it directly, with no human in the loop to catch a misreading. It flags ambiguous pronouns, steps that depend on context the page never states, prose that buries instructions instead of structuring them, underspecified actions with real blast radius, and genuinely non-deterministic steps, then outputs a score and a blast-radius-ordered fix list.
 version: 1.0.0
 author:
   name: Reem Sabawi
@@ -12,7 +12,7 @@ author:
 
 # Agent Readiness
 
-Rates a page for how safely an autonomous agent could act on it directly — no human in the loop to catch a misreading. Flags ambiguous pronouns, steps that depend on context the page never states, prose that buries instructions instead of structuring them, underspecified actions with real blast radius, and genuinely non-deterministic steps. Outputs a score and a blast-radius-ordered fix list.
+Rates a page for how safely an autonomous agent could act on it directly, with no human in the loop to catch a misreading. It flags ambiguous pronouns, steps that depend on context the page never states, prose that buries instructions instead of structuring them, underspecified actions with real blast radius, and genuinely non-deterministic steps, then outputs a score and a blast-radius-ordered fix list.
 
 ## Inputs
 

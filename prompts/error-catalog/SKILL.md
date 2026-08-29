@@ -1,7 +1,7 @@
 ---
 name: error-catalog
 description: >
-  Turns raw error codes and strings pulled from source into a troubleshooting table with cause, fix, and "how you got here" for each one, plus a JSON version meant for agents to consume directly. Use this skill when the task is: Converts a raw list of error codes and strings — the kind pulled straight from an enum or error-constants file — into a troubleshooting table with cause, fix, and "how you got here" for each one, plus a machine-readable JSON array of the same data for agents to consume.
+  Turns raw error codes and strings pulled from source into a troubleshooting table giving the cause, the fix, and how the reader got there for each one, plus a JSON version meant for agents to consume directly. Use this skill when the task is: Converts a raw list of error codes and strings, the kind pulled straight from an enum or error-constants file, into a troubleshooting table that gives the cause, the fix, and how the reader got there for each one, plus a machine-readable JSON array of the same data for agents to consume.
 version: 1.0.0
 author:
   name: Reem Sabawi
@@ -12,7 +12,7 @@ author:
 
 # Error Catalog
 
-Converts a raw list of error codes and strings — the kind pulled straight from an enum or error-constants file — into a troubleshooting table with cause, fix, and "how you got here" for each one, plus a machine-readable JSON array of the same data for agents to consume.
+Converts a raw list of error codes and strings, the kind pulled straight from an enum or error-constants file, into a troubleshooting table that gives the cause, the fix, and how the reader got there for each one, plus a machine-readable JSON array of the same data for agents to consume.
 
 ## Inputs
 

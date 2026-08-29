@@ -1,7 +1,7 @@
 ---
 name: audit-page
 description: >
-  Reviews a documentation page against a 10-point rubric covering accuracy signals, completeness, scannability, and prerequisite gaps. Outputs a scored table plus a prioritized fix list. Use this skill when the task is: Reviews a single documentation page against a fixed 10-point rubric — prerequisite coverage, accuracy signals, completeness, scannability, verification checkpoints, terminology consistency, code sample validity, error coverage, audience fit, and actionability — and returns a scored table plus a prioritized fix list. Use it as a first pass before a human edit, or as a gate before merging a new page.
+  Reviews a documentation page against a 10-point rubric covering accuracy signals, completeness, scannability, and prerequisite gaps. Outputs a scored table plus a prioritized fix list. Use this skill when the task is: Reviews a single documentation page against a fixed 10-point rubric that covers prerequisite coverage, accuracy signals, completeness, scannability, verification checkpoints, terminology consistency, code sample validity, error coverage, audience fit, and actionability. It returns a scored table plus a prioritized fix list. Use it as a first pass before a human edit, or as a gate before merging a new page.
 version: 1.0.0
 author:
   name: Reem Sabawi
@@ -12,7 +12,7 @@ author:
 
 # Audit Page
 
-Reviews a single documentation page against a fixed 10-point rubric — prerequisite coverage, accuracy signals, completeness, scannability, verification checkpoints, terminology consistency, code sample validity, error coverage, audience fit, and actionability — and returns a scored table plus a prioritized fix list. Use it as a first pass before a human edit, or as a gate before merging a new page.
+Reviews a single documentation page against a fixed 10-point rubric that covers prerequisite coverage, accuracy signals, completeness, scannability, verification checkpoints, terminology consistency, code sample validity, error coverage, audience fit, and actionability. It returns a scored table plus a prioritized fix list. Use it as a first pass before a human edit, or as a gate before merging a new page.
 
 ## Inputs
 
