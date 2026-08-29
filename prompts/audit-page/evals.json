@@ -1,0 +1,49 @@
+[
+  {
+    "id": "weak-quickstart-missing-prerequisite",
+    "input": {
+      "PAGE": "# Quickstart: Authenticate with the Lumen API\n\nThe Lumen API lets you send real-time event notifications to your users. This guide gets you sending your first event in a few minutes.\n\n## Step 1: Install the SDK\n\nRun the following in your project:\n\n```\nnpm install lumen-sdk\n```\n\n## Step 2: Add your key\n\nJust add your key to the header and you're good to go.\n\n```\nconst lumen = new Lumen({ key: \"YOUR_KEY\" });\n```\n\n## Step 3: Send an event\n\n```js\nlumen.events.send({\n  type: \"order.created\",\n  payload: { orderId: \"123\" }\n});\n```\n\nThat's it! You've sent your first event.\n"
+    },
+    "expect": {
+      "contains": ["Rubric Point", "Prerequisite Coverage", "Verification Checkpoints"],
+      "regex": ["\\[Severity: (Critical|High|Medium|Low)\\]"]
+    }
+  },
+  {
+    "id": "strong-page-scores-high",
+    "input": {
+      "PAGE": "# How to Rotate a Lumen API Key\n\n**Audience:** Developers with an existing Lumen account who need to rotate a compromised or expiring API key. Requires an active Lumen account with Owner or Admin role.\n\n## Prerequisites\n\n- A Lumen account with the Owner or Admin role (check your role under **Settings -> Team**)\n- Your current API key, to know which one you're rotating\n\n## Steps\n\n1. Sign in to the Lumen dashboard at https://dashboard.lumen.dev and go to **Settings -> API Keys**.\n2. Click **Generate new key**. Lumen creates a new key with the same scopes as the one you're rotating and shows it once - copy it now.\n3. Update your application's environment variable (`LUMEN_API_KEY`) with the new key and redeploy.\n4. Verify the new key works by sending a test event:\n\n   ```bash\n   curl -X POST https://api.lumen.dev/v1/events \\\n     -H \"Authorization: Bearer $LUMEN_API_KEY\" \\\n     -d '{\"type\": \"test.ping\"}'\n   ```\n\n   A successful response returns `202 Accepted` with an `event_id`. If you get `401 Unauthorized`, the new key hasn't propagated yet - wait 30 seconds and retry.\n5. Once the new key is confirmed working, return to **Settings -> API Keys** and click **Revoke** on the old key.\n\n## Troubleshooting\n\n- **401 Unauthorized after step 4:** the key can take up to a minute to activate. Retry before assuming it's broken.\n- **Revoke button is disabled:** you can't revoke the key currently in use by an active session - sign in with a different key first.\n"
+    },
+    "expect": {
+      "contains": ["Rubric Point"],
+      "regex": ["no (further |additional )?fixes"]
+    }
+  },
+  {
+    "id": "unlabeled-code-fence-and-no-verification",
+    "input": {
+      "PAGE": "# Create a Webhook Subscription\n\nTo get notified when events happen, create a subscription.\n\n```\nPOST /v1/subscriptions\n{\n  \"url\": \"https://yourapp.com/webhook\",\n  \"events\": [\"order.created\"]\n}\n```\n\nLumen will send a POST request to your URL whenever a matching event occurs. Make sure your endpoint returns a 200 status.\n"
+    },
+    "expect": {
+      "contains": ["Rubric Point", "Code Sample Validity"]
+    }
+  },
+  {
+    "id": "audience-mismatch-beginner-label",
+    "input": {
+      "PAGE": "# Advanced: Custom Retry Backoff for Webhook Delivery\n\nThis guide is for beginners just getting started with Lumen.\n\nLumen retries failed webhook deliveries using exponential backoff with jitter. To customize the backoff curve, override the `retryPolicy` field when creating a subscription:\n\n```js\nlumen.subscriptions.create({\n  url: \"https://yourapp.com/webhook\",\n  events: [\"order.created\"],\n  retryPolicy: {\n    baseDelayMs: 500,\n    maxRetries: 8,\n    jitter: 0.2\n  }\n});\n```\n\nTune `baseDelayMs` and `jitter` based on your endpoint's observed latency percentiles and your downstream queue's backpressure characteristics.\n"
+    },
+    "expect": {
+      "contains": ["Rubric Point", "Audience Fit"]
+    }
+  },
+  {
+    "id": "fix-list-prioritized-by-real-impact",
+    "input": {
+      "PAGE": "# Quickstart: Authenticate with the Lumen API\n\nThe Lumen API lets you send real-time event notifications to your users. This guide gets you sending your first event in a few minutes.\n\n## Step 1: Install the SDK\n\nRun the following in your project:\n\n```\nnpm install lumen-sdk\n```\n\n## Step 2: Add your key\n\nJust add your key to the header and you're good to go.\n\n```\nconst lumen = new Lumen({ key: \"YOUR_KEY\" });\n```\n\n## Step 3: Send an event\n\n```js\nlumen.events.send({\n  type: \"order.created\",\n  payload: { orderId: \"123\" }\n});\n```\n\nThat's it! You've sent your first event.\n"
+    },
+    "expect": {
+      "judge_rubric": "The prioritized fix list orders items by real impact on a first-time reader's ability to succeed (e.g. the missing API-key prerequisite and the ambiguous 'add your key to the header' instruction should outrank minor terminology nitpicks), gives each item a severity tag, and does not invent fixes for rubric points that scored 4 or 5."
+    }
+  }
+]

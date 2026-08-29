@@ -1,0 +1,50 @@
+[
+  {
+    "id": "flags-idiom-hits-the-ground-running",
+    "input": {
+      "DRAFT": "# Understanding Retry Behavior\n\nWhen a delivery fails, Lumen queues a retry, and it hits the ground running once the rate limit window resets, so you won't need to touch it again. Think of it like a Hail Mary pass on the last attempt -- if it doesn't land, the delivery is marked failed for good.\n"
+    },
+    "expect": {
+      "contains": ["hits the ground running"],
+      "regex": ["idiom"]
+    }
+  },
+  {
+    "id": "flags-cultural-reference-hail-mary",
+    "input": {
+      "DRAFT": "# Understanding Retry Behavior\n\nWhen a delivery fails, Lumen queues a retry, and it hits the ground running once the rate limit window resets, so you won't need to touch it again. Think of it like a Hail Mary pass on the last attempt -- if it doesn't land, the delivery is marked failed for good.\n"
+    },
+    "expect": {
+      "contains": ["Hail Mary"],
+      "regex": ["cultural reference"]
+    }
+  },
+  {
+    "id": "flags-ambiguous-touch-it-antecedent",
+    "input": {
+      "DRAFT": "# Understanding Retry Behavior\n\nWhen a delivery fails, Lumen queues a retry, and it hits the ground running once the rate limit window resets, so you won't need to touch it again. Think of it like a Hail Mary pass on the last attempt -- if it doesn't land, the delivery is marked failed for good.\n"
+    },
+    "expect": {
+      "contains": ["touch it again"],
+      "regex": ["ambiguous antecedent"]
+    }
+  },
+  {
+    "id": "flags-merged-sentence",
+    "input": {
+      "DRAFT": "# Understanding Retry Behavior\n\nWhen a delivery fails, Lumen queues a retry, and it hits the ground running once the rate limit window resets, so you won't need to touch it again. Think of it like a Hail Mary pass on the last attempt -- if it doesn't land, the delivery is marked failed for good.\n"
+    },
+    "expect": {
+      "regex": ["merged sentence"]
+    }
+  },
+  {
+    "id": "clean-draft-no-issues",
+    "input": {
+      "DRAFT": "# Understanding Retry Behavior\n\nWhen a delivery fails, Lumen schedules a retry. The retry runs automatically after the rate limit window resets. If the final retry also fails, Lumen marks the delivery as permanently failed.\n"
+    },
+    "expect": {
+      "contains": ["No localization issues found."]
+    }
+  }
+]

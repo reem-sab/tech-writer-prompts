@@ -1,0 +1,50 @@
+[
+  {
+    "id": "flags-underspecified-revoke",
+    "input": {
+      "PAGE": "# Runbook: Rotate a Compromised API Key\n\nIf a key is compromised, generate a new one in the dashboard. Once you've confirmed the new one works, revoke the old key. Then restart the service so it picks up the change. This should resolve the issue.\n"
+    },
+    "expect": {
+      "contains": ["revoke the old key"],
+      "regex": ["underspecified"]
+    }
+  },
+  {
+    "id": "flags-unnamed-service",
+    "input": {
+      "PAGE": "# Runbook: Rotate a Compromised API Key\n\nIf a key is compromised, generate a new one in the dashboard. Once you've confirmed the new one works, revoke the old key. Then restart the service so it picks up the change. This should resolve the issue.\n"
+    },
+    "expect": {
+      "contains": ["restart the service"],
+      "regex": ["(underspecified|which service|unnamed)"]
+    }
+  },
+  {
+    "id": "flags-missing-structure",
+    "input": {
+      "PAGE": "# Runbook: Rotate a Compromised API Key\n\nIf a key is compromised, generate a new one in the dashboard. Once you've confirmed the new one works, revoke the old key. Then restart the service so it picks up the change. This should resolve the issue.\n"
+    },
+    "expect": {
+      "regex": ["missing structure"]
+    }
+  },
+  {
+    "id": "score-line-present",
+    "input": {
+      "PAGE": "# Runbook: Rotate a Compromised API Key\n\nIf a key is compromised, generate a new one in the dashboard. Once you've confirmed the new one works, revoke the old key. Then restart the service so it picks up the change. This should resolve the issue.\n"
+    },
+    "expect": {
+      "contains": ["Agent Readiness:"],
+      "regex": ["\\d+/10"]
+    }
+  },
+  {
+    "id": "fixes-ordered-by-blast-radius",
+    "input": {
+      "PAGE": "# Runbook: Rotate a Compromised API Key\n\nIf a key is compromised, generate a new one in the dashboard. Once you've confirmed the new one works, revoke the old key. Then restart the service so it picks up the change. This should resolve the issue.\n"
+    },
+    "expect": {
+      "judge_rubric": "The Fixes list orders the two dangerous underspecified claims (revoking an unspecified key, restarting an unnamed service) ahead of the purely structural missing-numbered-steps finding, since acting on either underspecified claim literally has far greater blast radius than a formatting issue."
+    }
+  }
+]

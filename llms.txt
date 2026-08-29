@@ -1,0 +1,46 @@
+# tech-writer-prompts
+
+> An open-source, tested prompt library for technical writers, by Reem
+> Sabawi. Every prompt is versioned, documented, and tested with eval cases
+> that run in CI. Thesis: prompts are documentation, and documentation gets
+> tested.
+
+Each prompt lives in `prompts/<slug>/` with a `prompt.md` (the prompt, with
+YAML frontmatter: name, version, description, inputs, tags, tested_with,
+author), a `README.md` (what it does, inputs, example, limitations), and an
+`evals.json` (3–5 test cases). Prompts take named `{{PLACEHOLDER}}` inputs
+and produce structured output; every prompt states its own limits. All
+example inputs use a shared fictional product, the "Lumen API" (event
+notifications and webhooks), for coherence.
+
+## Prompts
+
+- [audit-page](prompts/audit-page/prompt.md): Review a docs page against a 10-point rubric; scored table + prioritized fix list.
+- [quickstart-hostile-user](prompts/quickstart-hostile-user/prompt.md): Walk a quickstart as a literal first-time user; flag unstated prerequisites, ambiguous steps, missing verification.
+- [error-catalog](prompts/error-catalog/prompt.md): Raw error codes → troubleshooting table with cause/fix/how-you-got-here, plus agent-readable JSON.
+- [api-ref-skeleton](prompts/api-ref-skeleton/prompt.md): OpenAPI spec → reference page draft with parameter tables and TODO markers where the spec is silent.
+- [release-notes](prompts/release-notes/prompt.md): Commit list → customer-facing notes grouped breaking/new/fixed, with a support-team summary line.
+- [glossary-extract](prompts/glossary-extract/prompt.md): A set of pages → domain terms used but never defined, ranked by frequency, with drafted definitions.
+- [style-check](prompts/style-check/prompt.md): Apply a style guide as a diff-style list of violations, without rewriting or flattening voice.
+- [agent-readiness](prompts/agent-readiness/prompt.md): Rate a page for machine readers; ambiguous pronouns, unstated context, underspecified actions; score + fixes.
+- [diataxis-classify](prompts/diataxis-classify/prompt.md): Identify a page's Diataxis mode, where it mixes modes, and how to split it.
+- [ia-review](prompts/ia-review/prompt.md): A nav structure → orphaned pages, duplicate scopes, missing landing pages, and a proposed reorganization.
+- [doc-from-transcript](prompts/doc-from-transcript/prompt.md): Meeting transcript → draft doc updates with a verify-against-source checklist on every claim.
+- [screenshot-to-steps](prompts/screenshot-to-steps/prompt.md): Screenshot descriptions → a written procedure phrased to survive UI redesigns.
+- [localization-prep](prompts/localization-prep/prompt.md): Flag idioms, cultural references, and ambiguous antecedents that break in translation; suggest neutral rewrites.
+- [skill-file-draft](prompts/skill-file-draft/prompt.md): A docs section → SKILL.md draft with two starter eval cases, in the Agent Skills format.
+- [freshness-triage](prompts/freshness-triage/prompt.md): A page + its git log + source → which claims are most likely stale, ranked, with what to check.
+
+## Using the library
+
+- [README.md](README.md): Quickstart, the four strongest prompts shown in full, the full index, how evals work.
+- [SKILL.md](SKILL.md): Load the library as a skill in a coding agent.
+- [CONTRIBUTING.md](CONTRIBUTING.md): How to add a prompt. No prompt merges without passing evals.
+- [prompts/SCHEMA.md](prompts/SCHEMA.md): Frontmatter schema and the controlled tag vocabulary.
+
+## Runner
+
+The `twp` CLI (`runner/`, TypeScript) runs any prompt and its evals:
+`twp list`, `twp run <slug> --input page=./draft.md`, `twp eval <slug>`,
+`twp eval --all`. The `--judge` flag evaluates rubric cases via the
+Anthropic API; `contains` and `regex` matchers run offline.

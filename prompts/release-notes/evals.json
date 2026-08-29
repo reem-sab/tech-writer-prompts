@@ -1,0 +1,48 @@
+[
+  {
+    "id": "breaking-field-rename-classified-correctly",
+    "input": {
+      "CHANGES": "- fix(webhooks): correct HMAC signature verification that rejected valid signatures with URL-encoded payloads\n- feat(events): add POST /v1/events/batch for sending up to 100 events in one request\n- BREAKING: rename `payload` field to `data` in event schema across all endpoints\n- chore: bump internal test fixtures to new Lumen SDK mock version\n- fix(subscriptions): DELETE /v1/subscriptions/{id} now returns 404 instead of 500 when the id doesn't exist\n- refactor: extract shared retry logic into internal utils (no behavior change)"
+    },
+    "expect": {
+      "contains": ["Breaking Changes", "payload", "data"]
+    }
+  },
+  {
+    "id": "new-batch-endpoint-under-new",
+    "input": {
+      "CHANGES": "- fix(webhooks): correct HMAC signature verification that rejected valid signatures with URL-encoded payloads\n- feat(events): add POST /v1/events/batch for sending up to 100 events in one request\n- BREAKING: rename `payload` field to `data` in event schema across all endpoints\n- chore: bump internal test fixtures to new Lumen SDK mock version\n- fix(subscriptions): DELETE /v1/subscriptions/{id} now returns 404 instead of 500 when the id doesn't exist\n- refactor: extract shared retry logic into internal utils (no behavior change)"
+    },
+    "expect": {
+      "contains": ["New", "batch"]
+    }
+  },
+  {
+    "id": "fixed-signature-bug-under-fixed",
+    "input": {
+      "CHANGES": "- fix(webhooks): correct HMAC signature verification that rejected valid signatures with URL-encoded payloads\n- feat(events): add POST /v1/events/batch for sending up to 100 events in one request\n- BREAKING: rename `payload` field to `data` in event schema across all endpoints\n- chore: bump internal test fixtures to new Lumen SDK mock version\n- fix(subscriptions): DELETE /v1/subscriptions/{id} now returns 404 instead of 500 when the id doesn't exist\n- refactor: extract shared retry logic into internal utils (no behavior change)"
+    },
+    "expect": {
+      "contains": ["Fixed"],
+      "regex": ["signature"]
+    }
+  },
+  {
+    "id": "support-summary-present",
+    "input": {
+      "CHANGES": "- fix(webhooks): correct HMAC signature verification that rejected valid signatures with URL-encoded payloads\n- feat(events): add POST /v1/events/batch for sending up to 100 events in one request\n- BREAKING: rename `payload` field to `data` in event schema across all endpoints\n- chore: bump internal test fixtures to new Lumen SDK mock version\n- fix(subscriptions): DELETE /v1/subscriptions/{id} now returns 404 instead of 500 when the id doesn't exist\n- refactor: extract shared retry logic into internal utils (no behavior change)"
+    },
+    "expect": {
+      "contains": ["Support summary"]
+    }
+  },
+  {
+    "id": "internal-only-commits-omitted",
+    "input": {
+      "CHANGES": "- fix(webhooks): correct HMAC signature verification that rejected valid signatures with URL-encoded payloads\n- feat(events): add POST /v1/events/batch for sending up to 100 events in one request\n- BREAKING: rename `payload` field to `data` in event schema across all endpoints\n- chore: bump internal test fixtures to new Lumen SDK mock version\n- fix(subscriptions): DELETE /v1/subscriptions/{id} now returns 404 instead of 500 when the id doesn't exist\n- refactor: extract shared retry logic into internal utils (no behavior change)"
+    },
+    "expect": {
+      "judge_rubric": "The output does not mention the test-fixture version bump or the internal retry-logic refactor anywhere, since neither has any customer-visible effect -- only the four user-visible changes appear."
+    }
+  }
+]

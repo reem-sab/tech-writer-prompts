@@ -1,0 +1,57 @@
+[
+  {
+    "id": "flags-rate-limit-as-confirmed-stale",
+    "input": {
+      "PAGE": "# Rate Limits\n\nThe Lumen API allows 100 requests per minute per API key. Requests beyond this limit receive a 429 response with a Retry-After header.\n\nWebhook subscriptions are limited to 50 per account.\n",
+      "GIT_LOG": "2026-07-01 docs: initial rate limits page\n2026-08-15 fix: raise RATE_LIMIT_PER_MINUTE from 100 to 150 to reduce support tickets\n",
+      "SOURCE": "export const RATE_LIMIT_PER_MINUTE = 150;\nexport const MAX_SUBSCRIPTIONS_PER_ACCOUNT = 50;\n\nexport function checkRateLimit(key) {\n  // returns 429 with Retry-After if over RATE_LIMIT_PER_MINUTE\n}\n"
+    },
+    "expect": {
+      "contains": ["100 requests per minute", "Confirmed stale"]
+    }
+  },
+  {
+    "id": "cites-current-source-value",
+    "input": {
+      "PAGE": "# Rate Limits\n\nThe Lumen API allows 100 requests per minute per API key. Requests beyond this limit receive a 429 response with a Retry-After header.\n\nWebhook subscriptions are limited to 50 per account.\n",
+      "GIT_LOG": "2026-07-01 docs: initial rate limits page\n2026-08-15 fix: raise RATE_LIMIT_PER_MINUTE from 100 to 150 to reduce support tickets\n",
+      "SOURCE": "export const RATE_LIMIT_PER_MINUTE = 150;\nexport const MAX_SUBSCRIPTIONS_PER_ACCOUNT = 50;\n\nexport function checkRateLimit(key) {\n  // returns 429 with Retry-After if over RATE_LIMIT_PER_MINUTE\n}\n"
+    },
+    "expect": {
+      "contains": ["150"]
+    }
+  },
+  {
+    "id": "subscriptions-claim-not-flagged-high-risk",
+    "input": {
+      "PAGE": "# Rate Limits\n\nThe Lumen API allows 100 requests per minute per API key. Requests beyond this limit receive a 429 response with a Retry-After header.\n\nWebhook subscriptions are limited to 50 per account.\n",
+      "GIT_LOG": "2026-07-01 docs: initial rate limits page\n2026-08-15 fix: raise RATE_LIMIT_PER_MINUTE from 100 to 150 to reduce support tickets\n",
+      "SOURCE": "export const RATE_LIMIT_PER_MINUTE = 150;\nexport const MAX_SUBSCRIPTIONS_PER_ACCOUNT = 50;\n\nexport function checkRateLimit(key) {\n  // returns 429 with Retry-After if over RATE_LIMIT_PER_MINUTE\n}\n"
+    },
+    "expect": {
+      "judge_rubric": "The '50 webhook subscriptions per account' claim is ranked Low risk (or omitted from a list that only shows elevated/confirmed items), since SOURCE confirms MAX_SUBSCRIPTIONS_PER_ACCOUNT = 50 and GIT_LOG shows no later change touching it, unlike the rate limit claim."
+    }
+  },
+  {
+    "id": "what-to-check-is-actionable",
+    "input": {
+      "PAGE": "# Rate Limits\n\nThe Lumen API allows 100 requests per minute per API key. Requests beyond this limit receive a 429 response with a Retry-After header.\n\nWebhook subscriptions are limited to 50 per account.\n",
+      "GIT_LOG": "2026-07-01 docs: initial rate limits page\n2026-08-15 fix: raise RATE_LIMIT_PER_MINUTE from 100 to 150 to reduce support tickets\n",
+      "SOURCE": "export const RATE_LIMIT_PER_MINUTE = 150;\nexport const MAX_SUBSCRIPTIONS_PER_ACCOUNT = 50;\n\nexport function checkRateLimit(key) {\n  // returns 429 with Retry-After if over RATE_LIMIT_PER_MINUTE\n}\n"
+    },
+    "expect": {
+      "contains": ["What to check"]
+    }
+  },
+  {
+    "id": "no-staleness-evidence-clean-case",
+    "input": {
+      "PAGE": "# Webhook Subscription Limits\n\nEach Lumen account may have up to 50 webhook subscriptions.\n",
+      "GIT_LOG": "2026-08-01 docs: document subscription limit\n2026-08-01 feat: add MAX_SUBSCRIPTIONS_PER_ACCOUNT = 50\n",
+      "SOURCE": "export const MAX_SUBSCRIPTIONS_PER_ACCOUNT = 50;\n"
+    },
+    "expect": {
+      "contains": ["No claims found with evidence of staleness."]
+    }
+  }
+]

@@ -1,0 +1,48 @@
+[
+  {
+    "id": "draft-uses-corrected-retry-count",
+    "input": {
+      "TRANSCRIPT": "[10:02] Priya: Heads up, I'm shipping the new retry logic for webhook deliveries today. We retry failed deliveries 5 times with exponential backoff.\n[10:15] Priya: Actually wait, I just checked the code -- it's 3 attempts, not 5. We changed it last sprint and I forgot.\n[10:20] Dev: Are we retrying on all non-2xx, or just 5xx?\n[10:22] Priya: All non-2xx except 400, since a 400 means the payload itself is malformed and retrying won't help.\n[10:25] Dev: Hmm, I thought we also excluded 401 since that means the endpoint's auth is broken and won't fix itself either.\n[10:26] Priya: Good point, not sure actually -- let's check with the backend team.\n[10:30] Dev: Also can we sync next week about the dashboard redesign?\n[10:31] Priya: sure\n"
+    },
+    "expect": {
+      "judge_rubric": "The Drafted doc update section states that Lumen retries failed webhook deliveries 3 times (the corrected value stated later in the thread), not 5 (the original, later-retracted value)."
+    }
+  },
+  {
+    "id": "checklist-structure-present",
+    "input": {
+      "TRANSCRIPT": "[10:02] Priya: Heads up, I'm shipping the new retry logic for webhook deliveries today. We retry failed deliveries 5 times with exponential backoff.\n[10:15] Priya: Actually wait, I just checked the code -- it's 3 attempts, not 5. We changed it last sprint and I forgot.\n[10:20] Dev: Are we retrying on all non-2xx, or just 5xx?\n[10:22] Priya: All non-2xx except 400, since a 400 means the payload itself is malformed and retrying won't help.\n[10:25] Dev: Hmm, I thought we also excluded 401 since that means the endpoint's auth is broken and won't fix itself either.\n[10:26] Priya: Good point, not sure actually -- let's check with the backend team.\n[10:30] Dev: Also can we sync next week about the dashboard redesign?\n[10:31] Priya: sure\n"
+    },
+    "expect": {
+      "contains": ["Verify against source", "Said By"]
+    }
+  },
+  {
+    "id": "flags-401-disagreement-as-unresolved",
+    "input": {
+      "TRANSCRIPT": "[10:02] Priya: Heads up, I'm shipping the new retry logic for webhook deliveries today. We retry failed deliveries 5 times with exponential backoff.\n[10:15] Priya: Actually wait, I just checked the code -- it's 3 attempts, not 5. We changed it last sprint and I forgot.\n[10:20] Dev: Are we retrying on all non-2xx, or just 5xx?\n[10:22] Priya: All non-2xx except 400, since a 400 means the payload itself is malformed and retrying won't help.\n[10:25] Dev: Hmm, I thought we also excluded 401 since that means the endpoint's auth is broken and won't fix itself either.\n[10:26] Priya: Good point, not sure actually -- let's check with the backend team.\n[10:30] Dev: Also can we sync next week about the dashboard redesign?\n[10:31] Priya: sure\n"
+    },
+    "expect": {
+      "contains": ["401"],
+      "regex": ["(disagree|unresolved|not sure|never resolved)"]
+    }
+  },
+  {
+    "id": "excludes-non-documentation-chatter",
+    "input": {
+      "TRANSCRIPT": "[10:02] Priya: Heads up, I'm shipping the new retry logic for webhook deliveries today. We retry failed deliveries 5 times with exponential backoff.\n[10:15] Priya: Actually wait, I just checked the code -- it's 3 attempts, not 5. We changed it last sprint and I forgot.\n[10:20] Dev: Are we retrying on all non-2xx, or just 5xx?\n[10:22] Priya: All non-2xx except 400, since a 400 means the payload itself is malformed and retrying won't help.\n[10:25] Dev: Hmm, I thought we also excluded 401 since that means the endpoint's auth is broken and won't fix itself either.\n[10:26] Priya: Good point, not sure actually -- let's check with the backend team.\n[10:30] Dev: Also can we sync next week about the dashboard redesign?\n[10:31] Priya: sure\n"
+    },
+    "expect": {
+      "judge_rubric": "The Drafted doc update section does not mention syncing next week about the dashboard redesign, since that is process/scheduling discussion, not a claim about system behavior."
+    }
+  },
+  {
+    "id": "numbered-markers-link-draft-to-checklist",
+    "input": {
+      "TRANSCRIPT": "[10:02] Priya: Heads up, I'm shipping the new retry logic for webhook deliveries today. We retry failed deliveries 5 times with exponential backoff.\n[10:15] Priya: Actually wait, I just checked the code -- it's 3 attempts, not 5. We changed it last sprint and I forgot.\n[10:20] Dev: Are we retrying on all non-2xx, or just 5xx?\n[10:22] Priya: All non-2xx except 400, since a 400 means the payload itself is malformed and retrying won't help.\n[10:25] Dev: Hmm, I thought we also excluded 401 since that means the endpoint's auth is broken and won't fix itself either.\n[10:26] Priya: Good point, not sure actually -- let's check with the backend team.\n[10:30] Dev: Also can we sync next week about the dashboard redesign?\n[10:31] Priya: sure\n"
+    },
+    "expect": {
+      "regex": ["\\[1\\]"]
+    }
+  }
+]

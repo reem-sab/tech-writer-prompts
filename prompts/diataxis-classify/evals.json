@@ -1,0 +1,48 @@
+[
+  {
+    "id": "classifies-mixed-page-as-how-to",
+    "input": {
+      "PAGE": "# Set Up a Webhook Subscription\n\n1. In the dashboard, go to **Settings -> Webhooks** and click **Add subscription**.\n2. Enter the URL you want Lumen to send events to.\n3. Select which event types you want to receive.\n4. Click **Save**.\n\nLumen uses at-least-once delivery semantics rather than exactly-once. This is a deliberate tradeoff: guaranteeing exactly-once delivery across a distributed queue requires either a global lock (which limits throughput) or idempotency tracking on our side that most integrations don't actually need. We decided the operational cost wasn't worth it for the common case, and instead expose an `event_id` so your handler can de-duplicate if it needs to.\n\n5. Click **Test delivery** to confirm your endpoint receives a sample event.\n"
+    },
+    "expect": {
+      "contains": ["Primary mode", "How-to guide"]
+    }
+  },
+  {
+    "id": "flags-explanation-mixed-in",
+    "input": {
+      "PAGE": "# Set Up a Webhook Subscription\n\n1. In the dashboard, go to **Settings -> Webhooks** and click **Add subscription**.\n2. Enter the URL you want Lumen to send events to.\n3. Select which event types you want to receive.\n4. Click **Save**.\n\nLumen uses at-least-once delivery semantics rather than exactly-once. This is a deliberate tradeoff: guaranteeing exactly-once delivery across a distributed queue requires either a global lock (which limits throughput) or idempotency tracking on our side that most integrations don't actually need. We decided the operational cost wasn't worth it for the common case, and instead expose an `event_id` so your handler can de-duplicate if it needs to.\n\n5. Click **Test delivery** to confirm your endpoint receives a sample event.\n"
+    },
+    "expect": {
+      "contains": ["Mixed-in passages", "at-least-once"],
+      "regex": ["explanation"]
+    }
+  },
+  {
+    "id": "proposes-two-page-split",
+    "input": {
+      "PAGE": "# Set Up a Webhook Subscription\n\n1. In the dashboard, go to **Settings -> Webhooks** and click **Add subscription**.\n2. Enter the URL you want Lumen to send events to.\n3. Select which event types you want to receive.\n4. Click **Save**.\n\nLumen uses at-least-once delivery semantics rather than exactly-once. This is a deliberate tradeoff: guaranteeing exactly-once delivery across a distributed queue requires either a global lock (which limits throughput) or idempotency tracking on our side that most integrations don't actually need. We decided the operational cost wasn't worth it for the common case, and instead expose an `event_id` so your handler can de-duplicate if it needs to.\n\n5. Click **Test delivery** to confirm your endpoint receives a sample event.\n"
+    },
+    "expect": {
+      "judge_rubric": "The proposed split creates two separate pages: a how-to guide covering the numbered webhook setup steps, and an explanation page covering the at-least-once delivery rationale, each with its own title and one-sentence purpose."
+    }
+  },
+  {
+    "id": "pure-reference-page-classified-correctly",
+    "input": {
+      "PAGE": "# Subscription Object Reference\n\n| Field | Type | Description |\n|---|---|---|\n| id | string | Unique identifier for the subscription. |\n| url | string | The endpoint Lumen sends events to. |\n| event_types | array of string | The event types this subscription receives. |\n| status | string | One of `active`, `paused`, or `degraded`. |\n| created_at | string | ISO 8601 timestamp of when the subscription was created. |\n"
+    },
+    "expect": {
+      "contains": ["Primary mode", "Reference"]
+    }
+  },
+  {
+    "id": "pure-reference-page-no-split-needed",
+    "input": {
+      "PAGE": "# Subscription Object Reference\n\n| Field | Type | Description |\n|---|---|---|\n| id | string | Unique identifier for the subscription. |\n| url | string | The endpoint Lumen sends events to. |\n| event_types | array of string | The event types this subscription receives. |\n| status | string | One of `active`, `paused`, or `degraded`. |\n| created_at | string | ISO 8601 timestamp of when the subscription was created. |\n"
+    },
+    "expect": {
+      "contains": ["No split needed."]
+    }
+  }
+]

@@ -1,0 +1,48 @@
+[
+  {
+    "id": "flags-orphaned-webhooks-troubleshooting",
+    "input": {
+      "NAV": "Getting Started\n  Quickstart\n  Installation\nGuides\n  Webhooks\n    Setting Up a Subscription\n    Verifying Signatures\n    Retry Behavior\n  Rate Limits\nAPI Reference\n  Events\n  Subscriptions\nErrors\nBilling\n  Plans\n  Invoices\nWebhooks Troubleshooting\n"
+    },
+    "expect": {
+      "contains": ["Orphaned pages", "Webhooks Troubleshooting"]
+    }
+  },
+  {
+    "id": "flags-duplicate-webhooks-scope",
+    "input": {
+      "NAV": "Getting Started\n  Quickstart\n  Installation\nGuides\n  Webhooks\n    Setting Up a Subscription\n    Verifying Signatures\n    Retry Behavior\n  Rate Limits\nAPI Reference\n  Events\n  Subscriptions\nErrors\nBilling\n  Plans\n  Invoices\nWebhooks Troubleshooting\n"
+    },
+    "expect": {
+      "contains": ["Duplicate scopes"],
+      "regex": ["webhooks"]
+    }
+  },
+  {
+    "id": "flags-missing-landing-pages",
+    "input": {
+      "NAV": "Getting Started\n  Quickstart\n  Installation\nGuides\n  Webhooks\n    Setting Up a Subscription\n    Verifying Signatures\n    Retry Behavior\n  Rate Limits\nAPI Reference\n  Events\n  Subscriptions\nErrors\nBilling\n  Plans\n  Invoices\nWebhooks Troubleshooting\n"
+    },
+    "expect": {
+      "contains": ["Missing landing pages", "Guides", "API Reference"]
+    }
+  },
+  {
+    "id": "proposes-reorganization-outline",
+    "input": {
+      "NAV": "Getting Started\n  Quickstart\n  Installation\nGuides\n  Webhooks\n    Setting Up a Subscription\n    Verifying Signatures\n    Retry Behavior\n  Rate Limits\nAPI Reference\n  Events\n  Subscriptions\nErrors\nBilling\n  Plans\n  Invoices\nWebhooks Troubleshooting\n"
+    },
+    "expect": {
+      "contains": ["Proposed reorganization"]
+    }
+  },
+  {
+    "id": "clean-nav-no-false-positives",
+    "input": {
+      "NAV": "Getting Started\n  Overview\n  Quickstart\n  Installation\nGuides\n  Overview\n  Webhooks\n    Overview\n    Setting Up a Subscription\n    Verifying Signatures\n    Retry Behavior\n  Rate Limits\nAPI Reference\n  Overview\n  Events\n  Subscriptions\nErrors\nBilling\n  Overview\n  Plans\n  Invoices\n"
+    },
+    "expect": {
+      "judge_rubric": "The output reports 'None found.' for all three checks (orphaned pages, duplicate scopes, missing landing pages) and 'No reorganization needed.', since every section with children has an Overview page and there is no topic duplication or misplaced page in this nav."
+    }
+  }
+]

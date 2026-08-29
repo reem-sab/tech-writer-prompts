@@ -1,0 +1,47 @@
+[
+  {
+    "id": "events-endpoint-flags-missing-param-description",
+    "input": {
+      "SPEC": "openapi: 3.0.3\ninfo:\n  title: Lumen API\n  version: '1.0'\npaths:\n  /v1/events:\n    post:\n      summary: Send an event\n      operationId: sendEvent\n      requestBody:\n        required: true\n        content:\n          application/json:\n            schema:\n              type: object\n              required: [type, payload]\n              properties:\n                type:\n                  type: string\n                  description: The event type, e.g. order.created\n                payload:\n                  type: object\n      responses:\n        '202':\n          description: Event accepted for delivery\n          content:\n            application/json:\n              schema:\n                type: object\n                properties:\n                  event_id:\n                    type: string\n                  status:\n                    type: string\n  /v1/subscriptions/{id}:\n    get:\n      operationId: getSubscription\n      parameters:\n        - name: id\n          in: path\n          required: true\n          schema:\n            type: string\n      responses:\n        '200':\n          description: Subscription found\n        '404':\n          description: No subscription exists with the given id\n"
+    },
+    "expect": {
+      "contains": ["POST /v1/events", "TODO: no description in spec"]
+    }
+  },
+  {
+    "id": "events-endpoint-flags-missing-error-responses",
+    "input": {
+      "SPEC": "openapi: 3.0.3\ninfo:\n  title: Lumen API\n  version: '1.0'\npaths:\n  /v1/events:\n    post:\n      summary: Send an event\n      operationId: sendEvent\n      requestBody:\n        required: true\n        content:\n          application/json:\n            schema:\n              type: object\n              required: [type, payload]\n              properties:\n                type:\n                  type: string\n                  description: The event type, e.g. order.created\n                payload:\n                  type: object\n      responses:\n        '202':\n          description: Event accepted for delivery\n          content:\n            application/json:\n              schema:\n                type: object\n                properties:\n                  event_id:\n                    type: string\n                  status:\n                    type: string\n"
+    },
+    "expect": {
+      "contains": ["TODO: spec defines no error responses for this operation."]
+    }
+  },
+  {
+    "id": "subscriptions-get-flags-missing-summary",
+    "input": {
+      "SPEC": "openapi: 3.0.3\ninfo:\n  title: Lumen API\n  version: '1.0'\npaths:\n  /v1/subscriptions/{id}:\n    get:\n      operationId: getSubscription\n      parameters:\n        - name: id\n          in: path\n          required: true\n          schema:\n            type: string\n      responses:\n        '200':\n          description: Subscription found\n        '404':\n          description: No subscription exists with the given id\n"
+    },
+    "expect": {
+      "contains": ["GET /v1/subscriptions/{id}", "TODO: spec has no summary or description for this operation."]
+    }
+  },
+  {
+    "id": "missing-info-title-fallback",
+    "input": {
+      "SPEC": "openapi: 3.0.3\ninfo:\n  version: '1.0'\npaths:\n  /v1/ping:\n    get:\n      responses:\n        '200':\n          description: pong\n"
+    },
+    "expect": {
+      "contains": ["TODO: spec has no info.title"]
+    }
+  },
+  {
+    "id": "no-fabricated-content-on-thin-spec",
+    "input": {
+      "SPEC": "openapi: 3.0.3\ninfo:\n  version: '1.0'\npaths:\n  /v1/ping:\n    get:\n      responses:\n        '200':\n          description: pong\n"
+    },
+    "expect": {
+      "judge_rubric": "The draft does not invent a description, parameter, constraint, or example anywhere the spec is silent; every such gap is marked with an explicit TODO line instead of plausible-sounding invented content."
+    }
+  }
+]

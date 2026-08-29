@@ -1,0 +1,48 @@
+[
+  {
+    "id": "full-catalog-invalid-key-row",
+    "input": {
+      "ERRORS": "export const LUMEN_ERRORS = {\n  LUMEN_401_INVALID_KEY: {\n    status: 401,\n    message: \"The API key provided is invalid or has been revoked.\",\n  },\n  LUMEN_429_RATE_LIMITED: {\n    status: 429,\n    message: \"Rate limit exceeded: 100 requests per minute per API key.\",\n  },\n  LUMEN_422_INVALID_PAYLOAD: {\n    status: 422,\n    message: \"The request body failed schema validation.\",\n    // thrown by validatePayload() before the event is queued\n  },\n  LUMEN_404_SUBSCRIPTION_NOT_FOUND: {\n    status: 404,\n    message: \"No subscription exists with the given id.\",\n  },\n  LUMEN_500_INTERNAL: {\n    status: 500,\n    message: \"Internal server error.\",\n  },\n};\n"
+    },
+    "expect": {
+      "contains": ["LUMEN_401_INVALID_KEY", "```json"]
+    }
+  },
+  {
+    "id": "full-catalog-rate-limit-actionable-fix",
+    "input": {
+      "ERRORS": "export const LUMEN_ERRORS = {\n  LUMEN_401_INVALID_KEY: {\n    status: 401,\n    message: \"The API key provided is invalid or has been revoked.\",\n  },\n  LUMEN_429_RATE_LIMITED: {\n    status: 429,\n    message: \"Rate limit exceeded: 100 requests per minute per API key.\",\n  },\n  LUMEN_422_INVALID_PAYLOAD: {\n    status: 422,\n    message: \"The request body failed schema validation.\",\n    // thrown by validatePayload() before the event is queued\n  },\n  LUMEN_404_SUBSCRIPTION_NOT_FOUND: {\n    status: 404,\n    message: \"No subscription exists with the given id.\",\n  },\n  LUMEN_500_INTERNAL: {\n    status: 500,\n    message: \"Internal server error.\",\n  },\n};\n"
+    },
+    "expect": {
+      "contains": ["LUMEN_429_RATE_LIMITED"],
+      "regex": ["retry"]
+    }
+  },
+  {
+    "id": "full-catalog-flags-unclear-cause",
+    "input": {
+      "ERRORS": "export const LUMEN_ERRORS = {\n  LUMEN_401_INVALID_KEY: {\n    status: 401,\n    message: \"The API key provided is invalid or has been revoked.\",\n  },\n  LUMEN_429_RATE_LIMITED: {\n    status: 429,\n    message: \"Rate limit exceeded: 100 requests per minute per API key.\",\n  },\n  LUMEN_422_INVALID_PAYLOAD: {\n    status: 422,\n    message: \"The request body failed schema validation.\",\n    // thrown by validatePayload() before the event is queued\n  },\n  LUMEN_404_SUBSCRIPTION_NOT_FOUND: {\n    status: 404,\n    message: \"No subscription exists with the given id.\",\n  },\n  LUMEN_500_INTERNAL: {\n    status: 500,\n    message: \"Internal server error.\",\n  },\n};\n"
+    },
+    "expect": {
+      "contains": ["LUMEN_500_INTERNAL", "Unclear from source"]
+    }
+  },
+  {
+    "id": "bare-token-no-context",
+    "input": {
+      "ERRORS": "LUMEN_ERR_UNKNOWN"
+    },
+    "expect": {
+      "contains": ["Unclear from source"]
+    }
+  },
+  {
+    "id": "json-and-table-agree",
+    "input": {
+      "ERRORS": "export const LUMEN_ERRORS = {\n  LUMEN_401_INVALID_KEY: {\n    status: 401,\n    message: \"The API key provided is invalid or has been revoked.\",\n  },\n  LUMEN_429_RATE_LIMITED: {\n    status: 429,\n    message: \"Rate limit exceeded: 100 requests per minute per API key.\",\n  },\n  LUMEN_422_INVALID_PAYLOAD: {\n    status: 422,\n    message: \"The request body failed schema validation.\",\n    // thrown by validatePayload() before the event is queued\n  },\n  LUMEN_404_SUBSCRIPTION_NOT_FOUND: {\n    status: 404,\n    message: \"No subscription exists with the given id.\",\n  },\n  LUMEN_500_INTERNAL: {\n    status: 500,\n    message: \"Internal server error.\",\n  },\n};\n"
+    },
+    "expect": {
+      "judge_rubric": "Every entry in the JSON array has all five fields (code, message, cause, fix, trigger) populated with non-empty strings, the JSON is valid with no trailing commas, and each row's Fix and Cause in the Markdown table match the fix and cause fields for the same code in the JSON."
+    }
+  }
+]

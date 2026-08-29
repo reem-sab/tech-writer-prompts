@@ -1,0 +1,48 @@
+[
+  {
+    "id": "drafts-skill-with-name-and-frontmatter",
+    "input": {
+      "SECTION": "# How to Rotate a Lumen API Key\n\n**Audience:** Developers with an existing Lumen account who need to rotate a compromised or expiring API key. Requires an active Lumen account with Owner or Admin role.\n\n## Prerequisites\n\n- A Lumen account with the Owner or Admin role (check your role under Settings -> Team)\n- Your current API key, to know which one you're rotating\n\n## Steps\n\n1. Sign in to the Lumen dashboard at https://dashboard.lumen.dev and go to Settings -> API Keys.\n2. Click Generate new key. Lumen creates a new key with the same scopes as the one you're rotating and shows it once - copy it now.\n3. Update your application's environment variable (LUMEN_API_KEY) with the new key and redeploy.\n4. Verify the new key works by sending a test event to POST /v1/events with the new key in the Authorization header. A successful response returns 202 Accepted.\n5. Once confirmed working, return to Settings -> API Keys and click Revoke on the old key.\n\n## Troubleshooting\n\n- 401 Unauthorized after step 4: the key can take up to a minute to activate. Retry before assuming it's broken.\n- Revoke button is disabled: you can't revoke the key currently in use by an active session - sign in with a different key first.\n"
+    },
+    "expect": {
+      "contains": ["name:", "description:"],
+      "regex": ["rotat"]
+    }
+  },
+  {
+    "id": "description-states-trigger-condition",
+    "input": {
+      "SECTION": "# How to Rotate a Lumen API Key\n\n**Audience:** Developers with an existing Lumen account who need to rotate a compromised or expiring API key. Requires an active Lumen account with Owner or Admin role.\n\n## Prerequisites\n\n- A Lumen account with the Owner or Admin role (check your role under Settings -> Team)\n- Your current API key, to know which one you're rotating\n\n## Steps\n\n1. Sign in to the Lumen dashboard at https://dashboard.lumen.dev and go to Settings -> API Keys.\n2. Click Generate new key. Lumen creates a new key with the same scopes as the one you're rotating and shows it once - copy it now.\n3. Update your application's environment variable (LUMEN_API_KEY) with the new key and redeploy.\n4. Verify the new key works by sending a test event to POST /v1/events with the new key in the Authorization header. A successful response returns 202 Accepted.\n5. Once confirmed working, return to Settings -> API Keys and click Revoke on the old key.\n\n## Troubleshooting\n\n- 401 Unauthorized after step 4: the key can take up to a minute to activate. Retry before assuming it's broken.\n- Revoke button is disabled: you can't revoke the key currently in use by an active session - sign in with a different key first.\n"
+    },
+    "expect": {
+      "regex": ["(when the user|use this skill when|use when|trigger)"]
+    }
+  },
+  {
+    "id": "body-operationalizes-dashboard-steps",
+    "input": {
+      "SECTION": "# How to Rotate a Lumen API Key\n\n**Audience:** Developers with an existing Lumen account who need to rotate a compromised or expiring API key. Requires an active Lumen account with Owner or Admin role.\n\n## Prerequisites\n\n- A Lumen account with the Owner or Admin role (check your role under Settings -> Team)\n- Your current API key, to know which one you're rotating\n\n## Steps\n\n1. Sign in to the Lumen dashboard at https://dashboard.lumen.dev and go to Settings -> API Keys.\n2. Click Generate new key. Lumen creates a new key with the same scopes as the one you're rotating and shows it once - copy it now.\n3. Update your application's environment variable (LUMEN_API_KEY) with the new key and redeploy.\n4. Verify the new key works by sending a test event to POST /v1/events with the new key in the Authorization header. A successful response returns 202 Accepted.\n5. Once confirmed working, return to Settings -> API Keys and click Revoke on the old key.\n\n## Troubleshooting\n\n- 401 Unauthorized after step 4: the key can take up to a minute to activate. Retry before assuming it's broken.\n- Revoke button is disabled: you can't revoke the key currently in use by an active session - sign in with a different key first.\n"
+    },
+    "expect": {
+      "contains": ["Settings", "API Keys"]
+    }
+  },
+  {
+    "id": "includes-two-starter-eval-cases",
+    "input": {
+      "SECTION": "# How to Rotate a Lumen API Key\n\n**Audience:** Developers with an existing Lumen account who need to rotate a compromised or expiring API key. Requires an active Lumen account with Owner or Admin role.\n\n## Prerequisites\n\n- A Lumen account with the Owner or Admin role (check your role under Settings -> Team)\n- Your current API key, to know which one you're rotating\n\n## Steps\n\n1. Sign in to the Lumen dashboard at https://dashboard.lumen.dev and go to Settings -> API Keys.\n2. Click Generate new key. Lumen creates a new key with the same scopes as the one you're rotating and shows it once - copy it now.\n3. Update your application's environment variable (LUMEN_API_KEY) with the new key and redeploy.\n4. Verify the new key works by sending a test event to POST /v1/events with the new key in the Authorization header. A successful response returns 202 Accepted.\n5. Once confirmed working, return to Settings -> API Keys and click Revoke on the old key.\n\n## Troubleshooting\n\n- 401 Unauthorized after step 4: the key can take up to a minute to activate. Retry before assuming it's broken.\n- Revoke button is disabled: you can't revoke the key currently in use by an active session - sign in with a different key first.\n"
+    },
+    "expect": {
+      "contains": ["Starter eval cases", "```json"]
+    }
+  },
+  {
+    "id": "eval-cases-are-genuinely-distinct",
+    "input": {
+      "SECTION": "# How to Rotate a Lumen API Key\n\n**Audience:** Developers with an existing Lumen account who need to rotate a compromised or expiring API key. Requires an active Lumen account with Owner or Admin role.\n\n## Prerequisites\n\n- A Lumen account with the Owner or Admin role (check your role under Settings -> Team)\n- Your current API key, to know which one you're rotating\n\n## Steps\n\n1. Sign in to the Lumen dashboard at https://dashboard.lumen.dev and go to Settings -> API Keys.\n2. Click Generate new key. Lumen creates a new key with the same scopes as the one you're rotating and shows it once - copy it now.\n3. Update your application's environment variable (LUMEN_API_KEY) with the new key and redeploy.\n4. Verify the new key works by sending a test event to POST /v1/events with the new key in the Authorization header. A successful response returns 202 Accepted.\n5. Once confirmed working, return to Settings -> API Keys and click Revoke on the old key.\n\n## Troubleshooting\n\n- 401 Unauthorized after step 4: the key can take up to a minute to activate. Retry before assuming it's broken.\n- Revoke button is disabled: you can't revoke the key currently in use by an active session - sign in with a different key first.\n"
+    },
+    "expect": {
+      "judge_rubric": "The two starter eval cases exercise genuinely different scenarios (not the same scenario with only variable names changed), and each has an 'expect' field with a concrete, checkable string rather than a vague placeholder."
+    }
+  }
+]

@@ -1,0 +1,53 @@
+[
+  {
+    "id": "flags-third-person",
+    "input": {
+      "STYLE_GUIDE": "# Lumen Docs Style Guide\n\n- Write in second person (\"you\"), not third person (\"the user\").\n- Do not use Latin abbreviations (e.g., i.e., etc.). Use plain English instead (\"for example,\" \"that is,\" \"and so on\").\n- After the first mention in a page, refer to the product as \"Lumen,\" not \"the Lumen API.\"\n- Use \"API key,\" not \"token,\" when referring to the credential used to authenticate requests.\n",
+      "DRAFT": "# Getting Started\n\nThe Lumen API lets developers send real-time events. To get started, the user needs to generate a token from the dashboard.\n\nOnce the user has a token, they can call the Lumen API to send events, e.g. order.created or user.signed_up.\n\nThe Lumen API also supports webhooks, i.e. it can notify your server when something happens.\n"
+    },
+    "expect": {
+      "contains": ["the user"],
+      "regex": ["second person"]
+    }
+  },
+  {
+    "id": "flags-token-instead-of-api-key",
+    "input": {
+      "STYLE_GUIDE": "# Lumen Docs Style Guide\n\n- Write in second person (\"you\"), not third person (\"the user\").\n- Do not use Latin abbreviations (e.g., i.e., etc.). Use plain English instead (\"for example,\" \"that is,\" \"and so on\").\n- After the first mention in a page, refer to the product as \"Lumen,\" not \"the Lumen API.\"\n- Use \"API key,\" not \"token,\" when referring to the credential used to authenticate requests.\n",
+      "DRAFT": "# Getting Started\n\nThe Lumen API lets developers send real-time events. To get started, the user needs to generate a token from the dashboard.\n\nOnce the user has a token, they can call the Lumen API to send events, e.g. order.created or user.signed_up.\n\nThe Lumen API also supports webhooks, i.e. it can notify your server when something happens.\n"
+    },
+    "expect": {
+      "contains": ["token", "API key"]
+    }
+  },
+  {
+    "id": "flags-latin-abbreviations",
+    "input": {
+      "STYLE_GUIDE": "# Lumen Docs Style Guide\n\n- Write in second person (\"you\"), not third person (\"the user\").\n- Do not use Latin abbreviations (e.g., i.e., etc.). Use plain English instead (\"for example,\" \"that is,\" \"and so on\").\n- After the first mention in a page, refer to the product as \"Lumen,\" not \"the Lumen API.\"\n- Use \"API key,\" not \"token,\" when referring to the credential used to authenticate requests.\n",
+      "DRAFT": "# Getting Started\n\nThe Lumen API lets developers send real-time events. To get started, the user needs to generate a token from the dashboard.\n\nOnce the user has a token, they can call the Lumen API to send events, e.g. order.created or user.signed_up.\n\nThe Lumen API also supports webhooks, i.e. it can notify your server when something happens.\n"
+    },
+    "expect": {
+      "contains": ["e.g.", "i.e."]
+    }
+  },
+  {
+    "id": "clean-draft-no-violations",
+    "input": {
+      "STYLE_GUIDE": "# Lumen Docs Style Guide\n\n- Write in second person (\"you\"), not third person (\"the user\").\n- Do not use Latin abbreviations (e.g., i.e., etc.). Use plain English instead (\"for example,\" \"that is,\" \"and so on\").\n- After the first mention in a page, refer to the product as \"Lumen,\" not \"the Lumen API.\"\n- Use \"API key,\" not \"token,\" when referring to the credential used to authenticate requests.\n",
+      "DRAFT": "# Getting Started\n\nThe Lumen API lets you send real-time events. To get started, generate an API key from the dashboard.\n\nOnce you have an API key, you can call Lumen to send events, for example order.created or user.signed_up.\n\nLumen also supports webhooks, meaning it can notify your server when something happens.\n"
+    },
+    "expect": {
+      "contains": ["No style guide violations found."]
+    }
+  },
+  {
+    "id": "fixes-are-minimal-not-rewrites",
+    "input": {
+      "STYLE_GUIDE": "# Lumen Docs Style Guide\n\n- Write in second person (\"you\"), not third person (\"the user\").\n- Do not use Latin abbreviations (e.g., i.e., etc.). Use plain English instead (\"for example,\" \"that is,\" \"and so on\").\n- After the first mention in a page, refer to the product as \"Lumen,\" not \"the Lumen API.\"\n- Use \"API key,\" not \"token,\" when referring to the credential used to authenticate requests.\n",
+      "DRAFT": "# Getting Started\n\nThe Lumen API lets developers send real-time events. To get started, the user needs to generate a token from the dashboard.\n\nOnce the user has a token, they can call the Lumen API to send events, e.g. order.created or user.signed_up.\n\nThe Lumen API also supports webhooks, i.e. it can notify your server when something happens.\n"
+    },
+    "expect": {
+      "judge_rubric": "Every proposed fix is a minimal word- or phrase-level edit (like swapping 'token' for 'API key', or 'e.g.' for 'for example'), not a rewritten sentence or paragraph, and the output does not propose any change unrelated to the four rules in the style guide."
+    }
+  }
+]

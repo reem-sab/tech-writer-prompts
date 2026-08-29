@@ -1,0 +1,393 @@
+[
+  {
+    "slug": "agent-readiness",
+    "name": "Agent Readiness",
+    "version": "1.0.0",
+    "description": "Rates a documentation page for machine readers -- ambiguous pronouns, steps that depend on unstated context, missing structure, and claims an agent would execute wrongly -- with an overall score and specific fixes.",
+    "details": "Rates a page for how safely an autonomous agent could act on it directly — no human in the loop to catch a misreading. Flags ambiguous pronouns, steps that depend on context the page never states, prose that buries instructions instead of structuring them, underspecified actions with real blast radius, and genuinely non-deterministic steps. Outputs a score and a blast-radius-ordered fix list.",
+    "tags": [
+      "agents"
+    ],
+    "author": {
+      "name": "Reem Sabawi",
+      "url": "https://github.com/reem-sab"
+    },
+    "inputs": [
+      {
+        "placeholder": "{{PAGE}}",
+        "description": "The documentation page to rate for agent readiness."
+      }
+    ],
+    "example_output": "Agent Readiness: 4/10 — two dangerous underspecified actions dominate the score.\n\n[Dangerous underspecified claim] \"revoke the old key\" — an agent can't tell\nwhich key or how; it may revoke the wrong one.\n\nFixes\n1. Change \"revoke the old key\" to \"In Settings → API Keys, click Revoke next\n   to the key you replaced\" — resolves dangerous underspecified claim.",
+    "evals_passing": 0,
+    "evals_total": 5,
+    "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/agent-readiness/prompt.md",
+    "updated": "2026-08-29",
+    "featured_month": "2026-08",
+    "featured_note": "The prompt to reach for as agents start reading your docs and acting on them unsupervised. It catches the exact gap between \"a human would figure this out\" and \"an agent will guess wrong\" — underspecified deletes, ambiguous pronouns, steps that assume context the page never states."
+  },
+  {
+    "slug": "api-ref-skeleton",
+    "name": "API Reference Skeleton",
+    "version": "1.0.0",
+    "description": "Turns an OpenAPI spec into a reference page draft — per-endpoint descriptions, parameter tables, and request/response examples — with explicit TODO markers wherever the spec doesn't say enough to write from.",
+    "details": "Turns an OpenAPI spec into a reference page draft — one section per operation, with a description, a parameter table, request body notes, and a response table — and marks every place the spec doesn't say enough to write from with an explicit `> TODO:` line instead of inventing content.",
+    "tags": [
+      "api"
+    ],
+    "author": {
+      "name": "Reem Sabawi",
+      "url": "https://github.com/reem-sab"
+    },
+    "inputs": [
+      {
+        "placeholder": "{{SPEC}}",
+        "description": "An OpenAPI spec (JSON or YAML), complete or partial."
+      }
+    ],
+    "example_output": "## `POST /v1/events`\n\nSend an event for delivery to matching subscriptions.\n\n### Parameters\n| Name | In | Type | Required | Description |\n|---|---|---|---|---|\n| payload | body | object | yes | > TODO: no description in spec |\n\n> TODO: spec defines no error responses for this operation.",
+    "evals_passing": 0,
+    "evals_total": 5,
+    "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/api-ref-skeleton/prompt.md",
+    "updated": "2026-08-29"
+  },
+  {
+    "slug": "audit-page",
+    "name": "Audit Page",
+    "version": "1.0.0",
+    "description": "Reviews a documentation page against a 10-point rubric covering accuracy signals, completeness, scannability, and prerequisite gaps. Outputs a scored table plus a prioritized fix list.",
+    "details": "Reviews a single documentation page against a fixed 10-point rubric — prerequisite coverage, accuracy signals, completeness, scannability, verification checkpoints, terminology consistency, code sample validity, error coverage, audience fit, and actionability — and returns a scored table plus a prioritized fix list. Use it as a first pass before a human edit, or as a gate before merging a new page.",
+    "tags": [
+      "docs-review"
+    ],
+    "author": {
+      "name": "Reem Sabawi",
+      "url": "https://github.com/reem-sab"
+    },
+    "inputs": [
+      {
+        "placeholder": "{{PAGE}}",
+        "description": "The full text of the documentation page to audit, including headings and code samples."
+      }
+    ],
+    "example_output": "| # | Rubric Point | Score | Evidence |\n|---|---|---|---|\n| 1 | Prerequisite Coverage | 2 | Step 2 says \"add your key\" but the page never says where to obtain a Lumen API key. |\n| 5 | Verification Checkpoints | 2 | No step tells the reader how to confirm the event was received. |\n\nPrioritized fixes\n1. [Severity: Critical] State where to get an API key before Step 1 — Prerequisite Coverage\n2. [Severity: High] Add a verification step after \"Send an event\" — Verification Checkpoints",
+    "evals_passing": 0,
+    "evals_total": 5,
+    "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/audit-page/prompt.md",
+    "updated": "2026-08-29"
+  },
+  {
+    "slug": "diataxis-classify",
+    "name": "Diataxis Classify",
+    "version": "1.0.0",
+    "description": "Identifies whether a page is trying to be a tutorial, how-to guide, reference, or explanation (per the Diataxis framework), flags where it mixes modes, and proposes how to split it into one page per mode.",
+    "details": "Classifies a page against the four [Diataxis](https://diataxis.fr) modes — tutorial, how-to guide, reference, explanation — identifies passages that belong to a different mode than the page's primary one, and proposes a concrete split when the mixing is bad enough to matter.",
+    "tags": [
+      "ia",
+      "docs-review"
+    ],
+    "author": {
+      "name": "Reem Sabawi",
+      "url": "https://github.com/reem-sab"
+    },
+    "inputs": [
+      {
+        "placeholder": "{{PAGE}}",
+        "description": "The documentation page to classify."
+      }
+    ],
+    "example_output": "## Primary mode: How-to guide\nNumbered steps to accomplish one task (set up a webhook subscription).\n\n## Mixed-in passages\n\"Lumen uses at-least-once delivery semantics...\" — belongs in [Explanation].\n\n## Proposed split\n- Set Up a Webhook Subscription (how-to) — the numbered steps.\n- How Lumen Delivers Webhooks (explanation) — the delivery-semantics rationale.",
+    "evals_passing": 0,
+    "evals_total": 5,
+    "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/diataxis-classify/prompt.md",
+    "updated": "2026-08-29"
+  },
+  {
+    "slug": "doc-from-transcript",
+    "name": "Doc From Transcript",
+    "version": "1.0.0",
+    "description": "Drafts documentation updates from an engineering meeting transcript or Slack thread, with a \"verify against source\" checklist attached to every factual claim so nothing informal ships as fact unreviewed.",
+    "details": "Drafts a documentation update from an engineering meeting transcript or Slack thread, tagging every factual claim with a numbered marker tied to a \"verify against source\" checklist — so nothing said informally in a meeting ships as documented fact without someone confirming it first.",
+    "tags": [
+      "docs-review"
+    ],
+    "author": {
+      "name": "Reem Sabawi",
+      "url": "https://github.com/reem-sab"
+    },
+    "inputs": [
+      {
+        "placeholder": "{{TRANSCRIPT}}",
+        "description": "A meeting transcript or Slack thread discussing a change worth documenting."
+      }
+    ],
+    "example_output": "## Drafted doc update\nLumen retries a failed webhook delivery up to 3 times [1] with exponential backoff.\n\n## Verify against source\n| # | Claim | Said By | Why it needs verification |\n|---|---|---|---|\n| 1 | 3 retry attempts | Priya | Corrected from \"5\" mid-thread; correction still unverified. |",
+    "evals_passing": 0,
+    "evals_total": 5,
+    "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/doc-from-transcript/prompt.md",
+    "updated": "2026-08-29"
+  },
+  {
+    "slug": "error-catalog",
+    "name": "Error Catalog",
+    "version": "1.0.0",
+    "description": "Turns raw error codes and strings pulled from source into a troubleshooting table with cause, fix, and \"how you got here\" for each one, plus a JSON version meant for agents to consume directly.",
+    "details": "Converts a raw list of error codes and strings — the kind pulled straight from an enum or error-constants file — into a troubleshooting table with cause, fix, and \"how you got here\" for each one, plus a machine-readable JSON array of the same data for agents to consume.",
+    "tags": [
+      "api",
+      "agents"
+    ],
+    "author": {
+      "name": "Reem Sabawi",
+      "url": "https://github.com/reem-sab"
+    },
+    "inputs": [
+      {
+        "placeholder": "{{ERRORS}}",
+        "description": "Raw error codes, constants, or strings from source (an enum, an error class, log lines, or a list of code/message pairs). Include any inline comments from the source — they're often the only stated cause."
+      }
+    ],
+    "example_output": "| Error Code | Cause | Fix | How You Got Here |\n|---|---|---|---|\n| LUMEN_429_RATE_LIMITED | Over 100 req/min per key. | Wait for the window to reset, then retry with backoff. | Sent requests faster than the per-key limit. |\n| LUMEN_500_INTERNAL | Unclear from source — ask an engineer. | — | A server-side error with no documented trigger. |\n\nAgent-readable JSON:\n[\n  { \"code\": \"LUMEN_429_RATE_LIMITED\", \"cause\": \"...\", \"fix\": \"...\", \"trigger\": \"...\" }\n]",
+    "evals_passing": 0,
+    "evals_total": 5,
+    "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/error-catalog/prompt.md",
+    "updated": "2026-08-29"
+  },
+  {
+    "slug": "freshness-triage",
+    "name": "Freshness Triage",
+    "version": "1.0.0",
+    "description": "Cross-references a documentation page against its git log and the source files it documents to rank which claims are most likely stale, with a specific check for each.",
+    "details": "Cross-references a documentation page against its git log and the current source it documents to rank which specific claims are most likely stale — confirmed contradictions first, then claims whose underlying source changed after the page was last touched — each with a concrete check to confirm it.",
+    "tags": [
+      "docs-review"
+    ],
+    "author": {
+      "name": "Reem Sabawi",
+      "url": "https://github.com/reem-sab"
+    },
+    "inputs": [
+      {
+        "placeholder": "{{PAGE}}",
+        "description": "The documentation page to check for staleness."
+      },
+      {
+        "placeholder": "{{GIT_LOG}}",
+        "description": "Git log entries (commit date, message, changed files) for the page and/or the source it documents."
+      },
+      {
+        "placeholder": "{{SOURCE}}",
+        "description": "The current contents of the source file(s) the page documents (config, constants, code)."
+      }
+    ],
+    "example_output": "1. [Risk: Confirmed stale]\n   Claim: \"100 requests per minute per API key\"\n   Evidence: SOURCE sets RATE_LIMIT_PER_MINUTE = 150; a commit on 2026-08-15\n   raised it after the page's last edit.\n   What to check: Update the page to 150 and re-verify against the constant.",
+    "evals_passing": 0,
+    "evals_total": 5,
+    "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/freshness-triage/prompt.md",
+    "updated": "2026-08-29"
+  },
+  {
+    "slug": "glossary-extract",
+    "name": "Glossary Extract",
+    "version": "1.0.0",
+    "description": "Scans a set of pages for domain-specific terms that are used but never defined anywhere in them, ranks them by frequency, and drafts a definition for each from context, to review before publishing.",
+    "details": "Scans a set of pages for domain-specific terms that are used repeatedly but never actually defined, ranks them by frequency, and drafts a definition for each from context — so you get a prioritized list of what to add to the glossary instead of starting from a blank page.",
+    "tags": [
+      "docs-review"
+    ],
+    "author": {
+      "name": "Reem Sabawi",
+      "url": "https://github.com/reem-sab"
+    },
+    "inputs": [
+      {
+        "placeholder": "{{PAGES}}",
+        "description": "One or more documentation pages, concatenated. If from multiple files, separate them with a line like \"--- <filename> ---\" so the output can cite where each term first appears."
+      }
+    ],
+    "example_output": "| Term | Frequency | First Appears In | Drafted Definition (verify before publishing) |\n|---|---|---|---|\n| subscription | 6 | webhooks.md | A standing request to receive events matching a filter. |\n| delivery attempt | 5 | webhooks.md | A single try at POSTing an event to a subscription's URL. |",
+    "evals_passing": 0,
+    "evals_total": 5,
+    "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/glossary-extract/prompt.md",
+    "updated": "2026-08-29"
+  },
+  {
+    "slug": "ia-review",
+    "name": "IA Review",
+    "version": "1.0.0",
+    "description": "Reviews a sidebar/nav structure for orphaned pages, duplicate scopes, and missing landing pages, and proposes a reorganization with rationale for each change.",
+    "details": "Reviews a docs site's sidebar/nav outline for orphaned pages, duplicate topic scopes, and sections missing a landing page, then proposes a revised outline with a one-line rationale for each change.",
+    "tags": [
+      "ia"
+    ],
+    "author": {
+      "name": "Reem Sabawi",
+      "url": "https://github.com/reem-sab"
+    },
+    "inputs": [
+      {
+        "placeholder": "{{NAV}}",
+        "description": "The docs site's sidebar/nav structure as an indented outline (one page or section per line, indentation showing nesting)."
+      }
+    ],
+    "example_output": "## Orphaned pages\n\"Webhooks Troubleshooting\" is top-level but belongs under Guides → Webhooks.\n\n## Duplicate scopes\n\"Webhooks\" and \"Webhooks Troubleshooting\" cover overlapping ground.\n\n## Missing landing pages\n\"Guides\" has 2 children and no landing page.",
+    "evals_passing": 0,
+    "evals_total": 5,
+    "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/ia-review/prompt.md",
+    "updated": "2026-08-29"
+  },
+  {
+    "slug": "localization-prep",
+    "name": "Localization Prep",
+    "version": "1.0.0",
+    "description": "Flags idioms, cultural references, ambiguous antecedents, and merged sentences in a draft that will break or distort in translation, and suggests a neutral rewrite for each.",
+    "details": "Flags idioms, cultural references, ambiguous antecedents, and merged sentences that tend to break or distort in translation, and suggests a neutral, literal-translation-friendly rewrite for each — a pass to run before a page goes to a translation team or pipeline.",
+    "tags": [
+      "localization"
+    ],
+    "author": {
+      "name": "Reem Sabawi",
+      "url": "https://github.com/reem-sab"
+    },
+    "inputs": [
+      {
+        "placeholder": "{{DRAFT}}",
+        "description": "The draft text to prepare for translation."
+      }
+    ],
+    "example_output": "1. [Idiom] Original: \"it hits the ground running\"\n   Rewrite: \"it starts retrying immediately\"\n\n2. [Cultural reference] Original: \"like a Hail Mary pass\"\n   Rewrite: \"as a final attempt\"\n\n3. [Ambiguous antecedent] Original: \"you won't need to touch it again\"\n   Rewrite: \"you won't need to change the retry setting again\"",
+    "evals_passing": 0,
+    "evals_total": 5,
+    "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/localization-prep/prompt.md",
+    "updated": "2026-08-29"
+  },
+  {
+    "slug": "quickstart-hostile-user",
+    "name": "Quickstart Hostile User",
+    "version": "1.0.0",
+    "description": "Walks a quickstart as a first-time user on a clean machine, interpreting every instruction as literally and narrowly as possible. Flags every unstated prerequisite, ambiguous step, and missing verification checkpoint.",
+    "details": "Walks a quickstart the way a real first-time user does: with zero assumed context, on a clean machine, interpreting every instruction as narrowly as possible. Produces a step-by-step log of where a literal reading breaks, plus summary lists of unstated prerequisites, ambiguous steps, and missing verification checkpoints.",
+    "tags": [
+      "docs-review"
+    ],
+    "author": {
+      "name": "Reem Sabawi",
+      "url": "https://github.com/reem-sab"
+    },
+    "inputs": [
+      {
+        "placeholder": "{{QUICKSTART}}",
+        "description": "The full text of the quickstart or getting-started guide to walk through."
+      }
+    ],
+    "example_output": "Step 2: \"Just add your key to the header\"\n→ What I do: I can't proceed — the page never names the header, and the code\n  below passes the key as a constructor argument instead.\n→ Result: ⚠️ Ambiguous\n\nUnstated Prerequisites\n- A Lumen account and dashboard access (Step 1 assumes both; never stated).\n\nMissing Verification Checkpoints\n- No way to confirm the event was received (after Step 3).",
+    "evals_passing": 0,
+    "evals_total": 5,
+    "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/quickstart-hostile-user/prompt.md",
+    "updated": "2026-08-29"
+  },
+  {
+    "slug": "release-notes",
+    "name": "Release Notes",
+    "version": "1.0.0",
+    "description": "Turns a commit list or internal changelog into customer-facing release notes grouped by impact (breaking / new / fixed), with a one-line summary a support team could paste straight into a ticket.",
+    "details": "Turns a raw commit list or internal changelog into customer-facing release notes grouped into Breaking Changes, New, and Fixed — plus a one-line support-team summary you can paste straight into a ticket reply.",
+    "tags": [
+      "release"
+    ],
+    "author": {
+      "name": "Reem Sabawi",
+      "url": "https://github.com/reem-sab"
+    },
+    "inputs": [
+      {
+        "placeholder": "{{CHANGES}}",
+        "description": "A commit list, PR titles, or an internal changelog for the release."
+      }
+    ],
+    "example_output": "## Support summary\nThe `payload` field is now `data` — integrations must update before upgrading.\n\n## Breaking Changes\n- The event `payload` field is renamed to `data` across all endpoints.\n\n## New\n- Send up to 100 events in one call with POST /v1/events/batch.\n\n## Fixed\n- Webhook signature verification no longer rejects valid URL-encoded payloads.",
+    "evals_passing": 0,
+    "evals_total": 5,
+    "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/release-notes/prompt.md",
+    "updated": "2026-08-29"
+  },
+  {
+    "slug": "screenshot-to-steps",
+    "name": "Screenshot to Steps",
+    "version": "1.0.0",
+    "description": "Turns a screen recording description or a set of numbered screenshot descriptions into a written procedure phrased by what UI elements are named, not where they sit or what they look like -- so it survives a redesign.",
+    "details": "Turns a numbered sequence of screenshot or screen-recording frame descriptions into a written procedure phrased by what controls are *named*, not where they sit or what they look like — so the steps are still accurate after the next redesign moves the button.",
+    "tags": [
+      "docs-review"
+    ],
+    "author": {
+      "name": "Reem Sabawi",
+      "url": "https://github.com/reem-sab"
+    },
+    "inputs": [
+      {
+        "placeholder": "{{SCREENS}}",
+        "description": "Numbered descriptions of screenshots or recording frames, in order. Each should describe what's visible: labels, buttons, fields, and what changed from the previous frame."
+      }
+    ],
+    "example_output": "## Procedure\n1. Click **Create API Key**.\n2. Enter a name in the **Key name** field and click **Generate**.\n3. Click **Copy** to copy the generated key.\n\n## Fragile references\nStep 4 describes the account-settings control by function — no visible label\nin the source description.",
+    "evals_passing": 0,
+    "evals_total": 5,
+    "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/screenshot-to-steps/prompt.md",
+    "updated": "2026-08-29"
+  },
+  {
+    "slug": "skill-file-draft",
+    "name": "Skill File Draft",
+    "version": "1.0.0",
+    "description": "Turns a docs section describing a capability or workflow into a SKILL.md draft in the Agent Skills format, with two starter eval cases so the skill ships testable from day one.",
+    "details": "Turns a docs section describing a capability or workflow into a SKILL.md draft in the Agent Skills format — frontmatter `name` and a trigger-aware `description`, plus an instructions body operationalized from the source section — along with two starter eval cases so the skill isn't shipped untested.",
+    "tags": [
+      "agents"
+    ],
+    "author": {
+      "name": "Reem Sabawi",
+      "url": "https://github.com/reem-sab"
+    },
+    "inputs": [
+      {
+        "placeholder": "{{SECTION}}",
+        "description": "A docs section describing a capability, workflow, or tool a coding agent should be able to use."
+      }
+    ],
+    "example_output": "## Drafted SKILL.md\n---\nname: rotate-lumen-api-key\ndescription: Rotates a Lumen API key without downtime. Use when the user asks\n  to rotate, replace, or roll a Lumen key, or says a key may be compromised.\n---\n1. In the dashboard, go to Settings → API Keys and click Generate new key...\n\n## Starter eval cases\n[\n  { \"id\": \"happy-path\", \"input\": { \"REQUEST\": \"rotate my key\" },\n    \"expect\": { \"contains\": [\"Revoke\"] } }\n]",
+    "evals_passing": 0,
+    "evals_total": 5,
+    "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/skill-file-draft/prompt.md",
+    "updated": "2026-08-29"
+  },
+  {
+    "slug": "style-check",
+    "name": "Style Check",
+    "version": "1.0.0",
+    "description": "Applies a style guide to a draft without flattening the author's voice. Outputs a diff-style list of specific violations with minimal targeted fixes -- never a full rewrite.",
+    "details": "Checks a draft against a style guide and reports violations as a numbered, diff-style list — quoted span, rule violated, minimal fix — without rewriting the piece. Built to be run before a human edit, not instead of one: the output is something an author reviews and applies themselves, which keeps their voice intact.",
+    "tags": [
+      "style"
+    ],
+    "author": {
+      "name": "Reem Sabawi",
+      "url": "https://github.com/reem-sab"
+    },
+    "inputs": [
+      {
+        "placeholder": "{{DRAFT}}",
+        "description": "The draft text to check."
+      },
+      {
+        "placeholder": "{{STYLE_GUIDE}}",
+        "description": "The style guide rules to apply (prose, a list of rules, or both)."
+      }
+    ],
+    "example_output": "1. Found: \"the user needs to generate a token\"\n   Rule: Write in second person (\"you\"), not third person.\n   Fix: \"you generate an API key\"\n\n2. Found: \"e.g. order.created\"\n   Rule: Do not use Latin abbreviations.\n   Fix: \"for example, order.created\"",
+    "evals_passing": 0,
+    "evals_total": 5,
+    "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/style-check/prompt.md",
+    "updated": "2026-08-29"
+  }
+]

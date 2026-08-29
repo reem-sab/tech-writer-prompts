@@ -1,0 +1,47 @@
+[
+  {
+    "id": "flags-subscription-and-delivery-attempt",
+    "input": {
+      "PAGES": "--- webhooks.md ---\n# Working with Webhooks\n\nTo receive events, create a subscription pointing at your URL. Lumen tracks each delivery attempt separately, and retries a failed delivery attempt up to 5 times with exponential backoff.\n\nYour subscription can filter by event type, so you only receive the events you care about.\n\n--- retries.md ---\n# Retry Behavior\n\nIf a delivery attempt returns a non-2xx status, Lumen schedules another delivery attempt. After 5 failed delivery attempts, the subscription is marked as degraded and Lumen sends you an email.\n\nA degraded subscription is one that has failed its last 5 consecutive delivery attempts.\n"
+    },
+    "expect": {
+      "contains": ["subscription", "delivery attempt", "Frequency"]
+    }
+  },
+  {
+    "id": "citation-column-present",
+    "input": {
+      "PAGES": "--- webhooks.md ---\n# Working with Webhooks\n\nTo receive events, create a subscription pointing at your URL. Lumen tracks each delivery attempt separately, and retries a failed delivery attempt up to 5 times with exponential backoff.\n\nYour subscription can filter by event type, so you only receive the events you care about.\n\n--- retries.md ---\n# Retry Behavior\n\nIf a delivery attempt returns a non-2xx status, Lumen schedules another delivery attempt. After 5 failed delivery attempts, the subscription is marked as degraded and Lumen sends you an email.\n\nA degraded subscription is one that has failed its last 5 consecutive delivery attempts.\n"
+    },
+    "expect": {
+      "contains": ["First Appears In"]
+    }
+  },
+  {
+    "id": "does-not-flag-defined-term",
+    "input": {
+      "PAGES": "--- webhooks.md ---\n# Working with Webhooks\n\nTo receive events, create a subscription pointing at your URL. Lumen tracks each delivery attempt separately, and retries a failed delivery attempt up to 5 times with exponential backoff.\n\nYour subscription can filter by event type, so you only receive the events you care about.\n\n--- retries.md ---\n# Retry Behavior\n\nIf a delivery attempt returns a non-2xx status, Lumen schedules another delivery attempt. After 5 failed delivery attempts, the subscription is marked as degraded and Lumen sends you an email.\n\nA degraded subscription is one that has failed its last 5 consecutive delivery attempts.\n"
+    },
+    "expect": {
+      "judge_rubric": "The output does not list 'degraded' (or 'degraded subscription') as an undefined term, because retries.md explicitly defines it: 'A degraded subscription is one that has failed its last 5 consecutive delivery attempts.'"
+    }
+  },
+  {
+    "id": "ranked-by-frequency",
+    "input": {
+      "PAGES": "--- webhooks.md ---\n# Working with Webhooks\n\nTo receive events, create a subscription pointing at your URL. Lumen tracks each delivery attempt separately, and retries a failed delivery attempt up to 5 times with exponential backoff.\n\nYour subscription can filter by event type, so you only receive the events you care about.\n\n--- retries.md ---\n# Retry Behavior\n\nIf a delivery attempt returns a non-2xx status, Lumen schedules another delivery attempt. After 5 failed delivery attempts, the subscription is marked as degraded and Lumen sends you an email.\n\nA degraded subscription is one that has failed its last 5 consecutive delivery attempts.\n"
+    },
+    "expect": {
+      "judge_rubric": "The table is ranked by frequency descending, with 'subscription' (the most frequently used undefined term) appearing at or near the top, ahead of the far less frequent 'event type'."
+    }
+  },
+  {
+    "id": "all-terms-defined-no-output",
+    "input": {
+      "PAGES": "--- concepts.md ---\n# Lumen Core Concepts\n\nA subscription is a standing request to receive events matching a filter. Lumen represents each attempt to deliver an event to your subscription's URL as a delivery attempt. Every event you send has an event type, which is a string like `order.created` that tells Lumen (and your webhook handler) what kind of event it is.\n"
+    },
+    "expect": {
+      "contains": ["No undefined terms found."]
+    }
+  }
+]

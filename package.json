@@ -1,0 +1,41 @@
+{
+  "name": "tech-writer-prompts",
+  "version": "1.0.0",
+  "description": "An open-source, tested prompt library for technical writers.",
+  "license": "MIT",
+  "type": "module",
+  "private": false,
+  "author": {
+    "name": "Reem Sabawi",
+    "url": "https://github.com/reem-sab"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reem-sab/tech-writer-prompts"
+  },
+  "bin": {
+    "twp": "runner/dist/cli.js"
+  },
+  "files": [
+    "runner/dist",
+    "prompts"
+  ],
+  "scripts": {
+    "build": "tsc -p runner/tsconfig.json",
+    "twp": "npm run build --silent && node runner/dist/cli.js",
+    "site:build": "node site/build-data.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "commander": "^12.1.0",
+    "gray-matter": "^4.0.3",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

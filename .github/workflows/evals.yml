@@ -1,0 +1,53 @@
+name: Evals
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  evals:
+    runs-on: ubuntu-latest
+    # Skip the run this workflow's own results-commit triggers, so it
+    # doesn't call the Anthropic API a second time for every push. Using
+    # `[skip ci]` in the commit message instead would also block
+    # deploy.yml from firing on that commit, which we don't want.
+    if: github.actor != 'github-actions[bot]'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Run evals for every prompt (including judge_rubric cases)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node runner/dist/cli.js eval --all --judge
+
+      - name: Generate per-prompt SKILL.md files
+        run: node runner/dist/cli.js gen-skills
+
+      - name: Build dashboard data
+        run: node site/build-data.mjs
+
+      - name: Commit updated eval results, skills, and dashboard data
+        if: github.event_name == 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add evals/results.json prompts/*/badge.json prompts/*/SKILL.md site/prompts.json
+          git diff --cached --quiet || git commit -m "chore: update eval results, skills, and dashboard data"
+          git push

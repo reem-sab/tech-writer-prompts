@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Libre+Franklin:ital,wght@0,300..700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: oklch(0.972 0.009 85); -webkit-font-smoothing: antialiased; }
+  a { color: oklch(0.45 0.12 158); text-decoration: none; }
+  a:hover { color: oklch(0.35 0.1 158); text-decoration: underline; text-underline-offset: 3px; }
+  ::selection { background: oklch(0.88 0.07 158); }
+  input, button, select, textarea { font: inherit; color: inherit; }
+  input::placeholder { color: oklch(0.62 0.01 85); }
+  @keyframes twp-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @keyframes twp-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes twp-pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.85; } }
+  @keyframes twp-pop { 0% { opacity: 0; transform: scale(0.4); } 60% { transform: scale(1.15); } 100% { opacity: 1; transform: scale(1); } }
+</style>
+</helmet>
+<div style="min-height: 100vh; background: oklch(0.972 0.009 85); color: oklch(0.21 0.014 85); font-family: 'Libre Franklin', Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.5; display: flex; flex-direction: column;">
+
+  <header style="position: sticky; top: 0; z-index: 40; background: oklch(0.972 0.009 85 / 0.93); backdrop-filter: blur(12px); border-bottom: 1px solid oklch(0.88 0.012 85);">
+    <div style="max-width: 1260px; margin: 0 auto; padding: 13px 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px;">
+      <div style="display: flex; align-items: baseline; gap: 10px; margin-right: auto;">
+        <span style="font-family: Newsreader, Georgia, serif; font-size: 23px; font-weight: 500; letter-spacing: -0.015em;">Tech Writer Prompt Library</span>
+        <span style="width: 5px; height: 5px; border-radius: 999px; background: oklch(0.55 0.14 158); display: inline-block; transform: translateY(-4px);"></span>
+      </div>
+
+      <div style="position: relative; flex: 1 1 240px; max-width: 340px;">
+        <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: oklch(0.62 0.01 85); pointer-events: none;">/</span>
+        <input type="text" placeholder="Search the library" value="{{ query }}" onChange="{{ onQuery }}" style="width: 100%; padding: 8px 12px 8px 27px; border: 1px solid oklch(0.86 0.012 85); border-radius: 2px; background: oklch(0.995 0.004 85); font-size: 14px; outline: none;" style-focus="border-color: oklch(0.5 0.13 158); box-shadow: 0 0 0 3px oklch(0.5 0.13 158 / 0.13);" />
+      </div>
+
+      <a href="https://github.com/reem-sab/tech-writer-prompts" target="_blank" rel="noreferrer" style="display: inline-flex; align-items: center; gap: 9px; padding: 7px 13px; border: 1px solid oklch(0.86 0.012 85); border-radius: 2px; background: oklch(0.995 0.004 85); color: oklch(0.21 0.014 85); font-size: 13px; font-weight: 500; text-decoration: none; white-space: nowrap;" style-hover="border-color: oklch(0.5 0.13 158); color: oklch(0.21 0.014 85); text-decoration: none;">
+        <span>GitHub</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: oklch(0.48 0.01 85); border-left: 1px solid oklch(0.89 0.012 85); padding-left: 9px;">&#9733; {{ starLabel }}</span>
+      </a>
+    </div>
+  </header>
+
+  <section style="background: oklch(0.235 0.028 165); color: oklch(0.94 0.012 100);">
+    <div style="max-width: 1260px; margin: 0 auto; padding: 60px 28px 0;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: oklch(0.7 0.09 158);">Open source &middot; MIT &middot; maintained by Reem Sabawi</div>
+      <h1 style="font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 46px; line-height: 1.1; letter-spacing: -0.028em; margin: 18px 0 0; max-width: 24ch;">A lending library for technical writers. <span style="color: oklch(0.66 0.02 100);">Every volume tested before it goes on the shelf.</span></h1>
+      <p style="font-size: 16.5px; line-height: 1.6; color: oklch(0.78 0.015 100); max-width: 56ch; margin: 18px 0 0; text-wrap: pretty;">Each one has a stated contract, named inputs, and eval cases that run in CI. Browse, open, copy.</p>
+      <div style="margin-top: 38px; display: flex; align-items: flex-end; gap: 3px; height: 96px;">
+        <sc-for list="{{ miniShelf }}" as="b" hint-placeholder-count="12">
+          <div style="width: {{ b.w }}; height: {{ b.h }}; background: {{ b.bg }}; border-radius: {{ b.radius }}; box-shadow: inset -4px 0 7px oklch(0.1 0.02 60 / 0.45), inset 2px 0 3px oklch(1 0.02 85 / 0.07), inset 0 3px 5px oklch(0.1 0.02 60 / 0.3); transform: rotate({{ b.rot }}); transform-origin: bottom center; display: flex; flex-direction: column; align-items: center; padding-top: 12px; gap: 3px;">
+            <div style="width: 58%; height: 1px; background: {{ b.band }};"></div>
+            <div style="width: 58%; height: 2px; background: {{ b.band }};"></div>
+          </div>
+        </sc-for>
+        <div style="flex: 1;"></div>
+      </div>
+      <div style="border-top: 2px solid oklch(0.5 0.035 168); height: 3px; border-bottom: 1px solid oklch(0.34 0.025 165);"></div>
+      <div style="display: flex; flex-wrap: wrap; gap: 0;">
+        <div style="flex: 1 1 200px; padding: {{ statPadA }}; border-right: 1px solid {{ divRight }}; border-bottom: 1px solid {{ divBottom }};">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.62 0.02 100);">Prompts</div>
+          <div style="font-family: Newsreader, Georgia, serif; font-size: 30px; font-weight: 400; letter-spacing: -0.02em; margin-top: 5px;">{{ statTotal }}</div>
+        </div>
+        <div style="flex: 1 1 240px; padding: {{ statPadB }}; border-right: 1px solid {{ divRight }}; border-bottom: 1px solid {{ divBottom }};">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.62 0.02 100);">Evals across the library</div>
+          <div style="font-family: Newsreader, Georgia, serif; font-size: 30px; font-weight: 400; letter-spacing: -0.02em; margin-top: 5px; color: oklch(0.82 0.14 158);">{{ statEvals }}</div>
+        </div>
+        <div style="flex: 1 1 200px; padding: {{ statPadC }};">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.62 0.02 100);">Last updated</div>
+          <div style="font-family: Newsreader, Georgia, serif; font-size: 30px; font-weight: 400; letter-spacing: -0.02em; margin-top: 5px;">{{ statUpdated }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ hasFeatured }}">
+    <section style="background: oklch(0.235 0.028 165);">
+      <div style="max-width: 1260px; margin: 0 auto; padding: 0 28px 56px;">
+        <div onClick="{{ featured.open }}" style="background: oklch(0.965 0.022 75); border: 1px solid oklch(0.86 0.05 70); border-radius: 3px; padding: 30px 32px; cursor: pointer; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 26px 44px; align-items: start; transition: box-shadow 140ms, transform 140ms;" style-hover="transform: translateY(-2px); box-shadow: 0 14px 40px oklch(0.2 0.02 165 / 0.3);">
+          <div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: oklch(0.52 0.14 48);">Prompt of the month &middot; {{ featured.monthLabel }}</div>
+            <div style="font-family: Newsreader, Georgia, serif; font-size: 33px; font-weight: 400; letter-spacing: -0.025em; line-height: 1.15; margin-top: 12px; color: oklch(0.21 0.014 85);">{{ featured.name }}</div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 14px;">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: oklch(0.45 0.02 60);">v{{ featured.version }}</span>
+              <span style="display: inline-flex; align-items: center; gap: 5px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 3px 9px; border-radius: 999px; background: {{ featured.badgeBg }}; color: {{ featured.badgeFg }};">
+                <span style="width: 5px; height: 5px; border-radius: 999px; background: {{ featured.badgeDot }};"></span>{{ featured.badgeText }}</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: oklch(0.45 0.02 60);">{{ featured.authorName }}</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="font-family: Newsreader, Georgia, serif; font-size: 17.5px; line-height: 1.6; color: oklch(0.3 0.02 70); text-wrap: pretty;">{{ featured.featured_note }}</div>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: oklch(0.45 0.14 48);">Open prompt &rarr;</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <main style="max-width: 1260px; margin: 0 auto; width: 100%; padding: 40px 28px 8px; flex: 1;">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 14px 24px; padding-bottom: 20px; border-bottom: 1px solid oklch(0.88 0.012 85);">
+      <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-right: auto; align-items: center;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.55 0.01 85); margin-right: 6px;">Sections</span>
+        <sc-for list="{{ pills }}" as="pill" hint-placeholder-count="7">
+          <button onClick="{{ pill.toggle }}" style="padding: 4px 11px; border-radius: 999px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; cursor: pointer; transition: background 120ms, color 120ms; background: {{ pill.bg }}; color: {{ pill.fg }}; border: 1px solid {{ pill.border }};">{{ pill.label }}</button>
+        </sc-for>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.55 0.01 85);">View</span>
+        <div style="display: flex; border: 1px solid oklch(0.87 0.012 85); border-radius: 2px; overflow: hidden; background: oklch(0.995 0.004 85);">
+          <sc-for list="{{ views }}" as="v" hint-placeholder-count="2">
+            <button onClick="{{ v.pick }}" style="padding: 5px 11px; border: 0; border-left: 1px solid oklch(0.91 0.012 85); cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; background: {{ v.bg }}; color: {{ v.fg }};">{{ v.label }}</button>
+          </sc-for>
+        </div>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.55 0.01 85); margin-left: 10px;">Sort</span>
+        <div style="display: flex; border: 1px solid oklch(0.87 0.012 85); border-radius: 2px; overflow: hidden; background: oklch(0.995 0.004 85);">
+          <sc-for list="{{ sorts }}" as="opt" hint-placeholder-count="3">
+            <button onClick="{{ opt.pick }}" style="padding: 5px 11px; border: 0; border-left: 1px solid oklch(0.91 0.012 85); cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; background: {{ opt.bg }}; color: {{ opt.fg }};">{{ opt.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: oklch(0.55 0.01 85); min-width: 74px; text-align: right;">{{ countLabel }}</div>
+    </div>
+
+    <div style="padding-top: 24px;">
+      <sc-if value="{{ loading }}" hint-placeholder-val="{{ true }}">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(305px, 1fr)); gap: 1px; background: oklch(0.88 0.012 85); border: 1px solid oklch(0.88 0.012 85);">
+          <sc-for list="{{ skeletons }}" as="s" hint-placeholder-count="6">
+            <div style="background: oklch(0.995 0.004 85); padding: 22px; height: 196px; animation: twp-pulse 1.6s ease-in-out infinite;">
+              <div style="height: 14px; width: 58%; background: oklch(0.92 0.012 85); border-radius: 2px;"></div>
+              <div style="height: 9px; width: 92%; background: oklch(0.95 0.008 85); border-radius: 2px; margin-top: 18px;"></div>
+              <div style="height: 9px; width: 72%; background: oklch(0.95 0.008 85); border-radius: 2px; margin-top: 8px;"></div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ loadError }}">
+        <div style="border: 1px solid oklch(0.87 0.012 85); background: oklch(0.995 0.004 85); padding: 44px; text-align: center;">
+          <div style="font-family: Newsreader, Georgia, serif; font-size: 22px;">Couldn&rsquo;t load the library</div>
+          <div style="color: oklch(0.5 0.012 85); margin-top: 8px;">prompts.json didn&rsquo;t load. Everything is still browsable on GitHub.</div>
+          <a href="https://github.com/reem-sab/tech-writer-prompts/tree/main/prompts" target="_blank" rel="noreferrer" style="display: inline-block; margin-top: 16px; font-family: 'IBM Plex Mono', monospace; font-size: 13px;">View on GitHub &rarr;</a>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isEmpty }}">
+        <div style="border: 1px dashed oklch(0.84 0.012 85); padding: 64px 24px; text-align: center;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: oklch(0.58 0.01 85);">Nothing on this shelf</div>
+          <div style="font-family: Newsreader, Georgia, serif; font-size: 26px; letter-spacing: -0.02em; margin-top: 12px;">Nothing here for {{ emptyQuery }}</div>
+          <div style="color: oklch(0.5 0.012 85); margin-top: 8px; max-width: 44ch; margin-left: auto; margin-right: auto; text-wrap: pretty;">Try a broader term, drop a section, or request the prompt you need &mdash; the request desk is at the bottom of this page.</div>
+          <button onClick="{{ clearAll }}" style="margin-top: 20px; padding: 7px 15px; border: 1px solid oklch(0.83 0.012 85); border-radius: 2px; background: oklch(0.995 0.004 85); cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 12px;" style-hover="border-color: oklch(0.5 0.13 158);">Clear filters</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showShelf }}">
+        <div style="padding: 18px 0 44px;">
+          <div style="display: flex; align-items: flex-end; gap: 3px; overflow-x: auto; padding: 60px 2px 0;">
+            <sc-for list="{{ cards }}" as="card" hint-placeholder-count="0">
+              <div onClick="{{ card.open }}" title="{{ card.name }}" style="flex: 0 0 auto; width: {{ card.spineW }}; height: {{ card.spineH }}; background: {{ card.spineBg }}; color: {{ card.spineFg }}; border-radius: 2px 4px 4px 2px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 13px 0 11px; transition: transform 180ms cubic-bezier(0.22, 0.8, 0.3, 1), box-shadow 180ms; box-shadow: inset -5px 0 9px oklch(0.1 0.02 60 / 0.42), inset 2px 0 3px oklch(1 0.02 85 / 0.08), inset 0 4px 6px oklch(0.1 0.02 60 / 0.28); animation: twp-in 300ms cubic-bezier(0.22, 0.8, 0.3, 1) both; animation-delay: {{ card.delay }};" style-hover="transform: translateY(-16px); box-shadow: inset -5px 0 9px oklch(0.1 0.02 60 / 0.42), inset 2px 0 3px oklch(1 0.02 85 / 0.08), inset 0 4px 6px oklch(0.1 0.02 60 / 0.28), 0 16px 26px oklch(0.18 0.02 60 / 0.32);">
+                <div style="width: 62%; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; height: 4px; opacity: 0.45; flex-shrink: 0;"></div>
+                <div style="writing-mode: vertical-rl; transform: rotate(180deg); font-family: Newsreader, Georgia, serif; font-size: 15px; letter-spacing: 0.01em; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-height: 100%; padding: 6px 0;">{{ card.name }}</div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0;">
+                  <div style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.06em; opacity: 0.72;">{{ card.spineCode }}</div>
+                  <div style="width: 62%; border-top: 1px solid currentColor; opacity: 0.45;"></div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="height: 11px; background: repeating-linear-gradient(90deg, oklch(0.42 0.04 62 / 0.55) 0 2px, transparent 2px 9px), linear-gradient(oklch(0.5 0.05 66), oklch(0.4 0.04 62)); border-top: 2px solid oklch(0.58 0.055 70); border-radius: 0 0 2px 2px; box-shadow: 0 8px 16px oklch(0.2 0.02 85 / 0.16);"></div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.58 0.01 85); margin-top: 12px;">Spine width tracks eval count &middot; colour tracks section &middot; pull one out to read it</div>
+        </div>
+      </sc-if>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(305px, 1fr)); gap: 16px;">
+        <sc-for list="{{ showCards }}" as="card" hint-placeholder-count="0">
+          <div onClick="{{ card.open }}" style="border: 1px solid oklch(0.88 0.012 85); background: oklch(0.995 0.004 85); padding: 0; cursor: pointer; display: flex; flex-direction: row; transition: border-color 130ms, transform 130ms, box-shadow 130ms; animation: twp-in 300ms cubic-bezier(0.22, 0.8, 0.3, 1) both; animation-delay: {{ card.delay }};" style-hover="border-color: oklch(0.5 0.13 158 / 0.5); transform: translateY(-3px); box-shadow: 0 10px 28px oklch(0.21 0.014 85 / 0.07);">
+            <div style="width: 4px; flex-shrink: 0; background: {{ card.hue }};"></div>
+            <div style="padding: 17px 22px 18px; display: flex; flex-direction: column; gap: 11px; flex: 1; min-width: 0;">
+              <div style="display: flex; align-items: baseline; gap: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: oklch(0.6 0.01 85);">
+                <span style="flex: 1;">{{ card.callNumber }}</span>
+                <span style="white-space: nowrap; letter-spacing: 0.04em;">v{{ card.version }}</span>
+              </div>
+              <div style="font-family: Newsreader, Georgia, serif; font-size: 21px; font-weight: 400; letter-spacing: -0.022em; line-height: 1.2;">{{ card.name }}</div>
+              <div style="color: oklch(0.4 0.014 85); font-size: 14px; line-height: 1.55; text-wrap: pretty; flex: 1;">{{ card.description }}</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 5px;">
+                <sc-for list="{{ card.tagList }}" as="tag" hint-placeholder-count="2">
+                  <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; border-radius: 999px; padding: 2px 9px; background: {{ tag.bg }}; color: {{ tag.fg }};">{{ tag.label }}</span>
+                </sc-for>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px solid oklch(0.93 0.012 85); padding-top: 12px; margin-top: 2px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: oklch(0.53 0.01 85); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ card.authorName }}</span>
+                <span style="display: inline-flex; align-items: center; gap: 5px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 3px 9px; border-radius: 999px; white-space: nowrap; background: {{ card.badgeBg }}; color: {{ card.badgeFg }};">
+                  <span style="width: 5px; height: 5px; border-radius: 999px; background: {{ card.badgeDot }};"></span>{{ card.badgeText }}</span>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </main>
+
+  <section style="max-width: 1260px; margin: 0 auto; width: 100%; padding: 64px 28px 0;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: oklch(0.55 0.01 85); border-top: 1px solid oklch(0.88 0.012 85); padding-top: 18px;">How testing works</div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 34px; margin-top: 24px;">
+      <div style="display: flex; gap: 16px;">
+        <div style="font-family: Newsreader, Georgia, serif; font-size: 34px; line-height: 1; color: oklch(0.62 0.11 158);">1</div>
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;">Prompt</div>
+          <div style="font-size: 15px; color: oklch(0.36 0.014 85); text-wrap: pretty;">A single Markdown file with a stated contract: named inputs, and what the output must always and never do.</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 16px;">
+        <div style="font-family: Newsreader, Georgia, serif; font-size: 34px; line-height: 1; color: oklch(0.62 0.11 158);">2</div>
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;">Eval cases</div>
+          <div style="font-size: 15px; color: oklch(0.36 0.014 85); text-wrap: pretty;">Cases that assert against that contract, including missing, contradictory, and adversarial input.</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 16px;">
+        <div style="font-family: Newsreader, Georgia, serif; font-size: 34px; line-height: 1; color: oklch(0.62 0.11 158);">3</div>
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;">Badge</div>
+          <div style="font-size: 15px; color: oklch(0.36 0.014 85); text-wrap: pretty;">CI runs the cases on every pull request. The badge on each card is that run, not a claim.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top: 72px; background: oklch(0.235 0.028 165); color: oklch(0.94 0.012 100);">
+    <div style="max-width: 1260px; margin: 0 auto; padding: 0 28px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 0;">
+        <div style="padding: {{ notifyPad }}; border-right: 1px solid {{ divRight }}; border-bottom: 1px solid {{ divBottom }};">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: oklch(0.7 0.09 158);">Notifications</div>
+          <div style="font-family: Newsreader, Georgia, serif; font-size: 30px; font-weight: 400; letter-spacing: -0.025em; line-height: 1.2; margin-top: 12px; max-width: 22ch;">An email when something new is shelved.</div>
+          <div style="color: oklch(0.76 0.015 100); font-size: 15px; line-height: 1.6; margin-top: 12px; max-width: 44ch; text-wrap: pretty;">One short note per acquisition: what it does, what it was tested against. No digests, no roundups.</div>
+          <sc-if value="{{ notifyIdle }}" hint-placeholder-val="{{ true }}">
+            <form onSubmit="{{ onSubscribe }}" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; max-width: 440px;">
+              <input type="email" required="{{ true }}" placeholder="you@company.com" value="{{ email }}" onChange="{{ onEmail }}" style="flex: 1 1 200px; padding: 10px 13px; border: 1px solid oklch(0.4 0.025 165); border-radius: 2px; background: oklch(0.29 0.026 165); color: oklch(0.95 0.01 100); font-size: 14.5px; outline: none;" style-focus="border-color: oklch(0.68 0.13 158);" />
+              <button type="submit" style="padding: 10px 20px; border: 0; border-radius: 2px; background: oklch(0.68 0.13 158); color: oklch(0.2 0.03 165); font-size: 14.5px; font-weight: 600; cursor: pointer;" style-hover="background: oklch(0.76 0.14 158);">Notify me</button>
+            </form>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: oklch(0.6 0.02 100); margin-top: 11px;">Delivered through <a href="https://reemthewriter.substack.com" target="_blank" rel="noreferrer" style="color: oklch(0.75 0.1 158);">reemthewriter.substack.com</a>. Unsubscribe any time.</div>
+          </sc-if>
+          <sc-if value="{{ notifyDone }}">
+            <div style="margin-top: 22px; padding: 16px 18px; border: 1px solid oklch(0.5 0.09 158); border-radius: 2px; background: oklch(0.29 0.04 165); max-width: 440px;">
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: oklch(0.78 0.13 158);">Confirm in your inbox</div>
+              <div style="font-size: 14.5px; color: oklch(0.88 0.015 100); margin-top: 7px;">Sent a confirmation to {{ email }}. Click the link and you&rsquo;re on the list.</div>
+            </div>
+          </sc-if>
+        </div>
+
+        <div style="padding: {{ contribPad }}; display: flex; flex-direction: column;">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: oklch(0.7 0.09 158);">Requests &amp; donations</div>
+          <div style="font-family: Newsreader, Georgia, serif; font-size: 30px; font-weight: 400; letter-spacing: -0.025em; line-height: 1.2; margin-top: 12px; max-width: 24ch;">Every prompt here passes tests before it ships. Add yours.</div>
+          <div style="display: flex; flex-direction: column; margin-top: 24px; border-top: 1px solid oklch(0.34 0.025 165);">
+            <a href="https://github.com/reem-sab/tech-writer-prompts/issues/new?labels=prompt-request&amp;template=prompt-request.md" target="_blank" rel="noreferrer" style="display: flex; align-items: baseline; gap: 14px; padding: 15px 0; border-bottom: 1px solid oklch(0.34 0.025 165); color: oklch(0.94 0.012 100); text-decoration: none;" style-hover="color: oklch(0.82 0.14 158); text-decoration: none;">
+              <span style="font-size: 16px; font-weight: 500; flex: 1;">Request a prompt</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: oklch(0.65 0.02 100);">issue &rarr;</span>
+            </a>
+            <a href="https://github.com/reem-sab/tech-writer-prompts/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer" style="display: flex; align-items: baseline; gap: 14px; padding: 15px 0; border-bottom: 1px solid oklch(0.34 0.025 165); color: oklch(0.94 0.012 100); text-decoration: none;" style-hover="color: oklch(0.82 0.14 158); text-decoration: none;">
+              <span style="font-size: 16px; font-weight: 500; flex: 1;">Donate one</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: oklch(0.65 0.02 100);">CONTRIBUTING.md &rarr;</span>
+            </a>
+            <a href="https://github.com/reem-sab/tech-writer-prompts/discussions" target="_blank" rel="noreferrer" style="display: flex; align-items: baseline; gap: 14px; padding: 15px 0; color: oklch(0.94 0.012 100); text-decoration: none;" style-hover="color: oklch(0.82 0.14 158); text-decoration: none;">
+              <span style="font-size: 16px; font-weight: 500; flex: 1;">Argue with a prompt</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: oklch(0.65 0.02 100);">discussions &rarr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid oklch(0.34 0.025 165); padding: 26px 0 44px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px;">
+        <div style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 5px;">
+          <div style="font-family: Newsreader, Georgia, serif; font-size: 22px; font-weight: 400; letter-spacing: -0.02em;">If a prompt here saved you an hour, star the repo.</div>
+          <div style="font-size: 14px; color: oklch(0.72 0.015 100); max-width: 58ch; text-wrap: pretty;">Stars are the only signal that decides what gets tested next. {{ starSentence }}</div>
+        </div>
+        <a href="https://github.com/reem-sab/tech-writer-prompts" target="_blank" rel="noreferrer" style="display: inline-flex; align-items: center; gap: 10px; padding: 11px 20px; border-radius: 2px; background: oklch(0.68 0.13 158); color: oklch(0.2 0.03 165); font-size: 14.5px; font-weight: 600; text-decoration: none; white-space: nowrap;" style-hover="background: oklch(0.78 0.14 158); text-decoration: none; color: oklch(0.2 0.03 165);">
+          <span>&#9733; Star on GitHub</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; border-left: 1px solid oklch(0.2 0.03 165 / 0.28); padding-left: 10px;">{{ starLabel }}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid oklch(0.88 0.012 85); background: oklch(0.972 0.009 85);">
+    <div style="max-width: 1260px; margin: 0 auto; padding: 28px 28px 40px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 28px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: oklch(0.55 0.01 85); margin-right: auto;">&copy; 2026 Reem Sabawi &middot; MIT licensed</div>
+      <a href="https://reemthewriter.substack.com" target="_blank" rel="noreferrer" style="font-size: 14px;">Substack</a>
+      <a href="https://github.com/reem-sab" target="_blank" rel="noreferrer" style="font-size: 14px;">GitHub</a>
+      <a href="https://www.linkedin.com/in/reem-sabawi" target="_blank" rel="noreferrer" style="font-size: 14px;">LinkedIn</a>
+    </div>
+  </footer>
+
+  <sc-if value="{{ hasSelection }}">
+    <div onClick="{{ close }}" style="position: fixed; inset: 0; z-index: 90; background: oklch(0.22 0.025 165 / 0.42); backdrop-filter: blur(3px); display: flex; align-items: {{ sheetAlign }}; justify-content: center; padding: {{ sheetPad }}; animation: twp-fade 160ms ease both; overflow-y: auto;">
+      <div onClick="{{ stop }}" style="background: oklch(0.995 0.004 85); border: 1px solid oklch(0.86 0.012 85); border-radius: {{ sheetRadius }}; width: 100%; max-width: {{ sheetMaxW }}; min-height: {{ sheetMinH }}; animation: twp-in 220ms ease both; display: flex; flex-direction: column;">
+        <div style="height: 3px; background: {{ sel.hue }};"></div>
+        <div style="position: sticky; top: 0; background: oklch(0.995 0.004 85); border-bottom: 1px solid oklch(0.92 0.012 85); padding: 22px 28px 16px; display: flex; align-items: flex-start; gap: 16px; z-index: 2;">
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 9px;">
+            <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 11px;">
+              <span style="font-family: Newsreader, Georgia, serif; font-size: 28px; font-weight: 400; letter-spacing: -0.028em; line-height: 1.12;">{{ sel.name }}</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: oklch(0.56 0.01 85);">v{{ sel.version }}</span>
+              <span style="display: inline-flex; align-items: center; gap: 5px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 3px 9px; border-radius: 999px; background: {{ sel.badgeBg }}; color: {{ sel.badgeFg }};">
+                <span style="width: 5px; height: 5px; border-radius: 999px; background: {{ sel.badgeDot }};"></span>{{ sel.badgeText }}</span>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: oklch(0.53 0.01 85);">
+              <span style="letter-spacing: 0.12em; font-size: 10px;">{{ sel.callNumber }}</span>
+              <span>{{ sel.slug }}</span>
+              <span style="border: 1px solid oklch(0.84 0.012 85); border-radius: 2px; padding: 2px 7px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: oklch(0.48 0.012 85);">Last revised {{ sel.updatedLabel }}</span>
+            </div>
+          </div>
+          <button onClick="{{ close }}" style="border: 1px solid oklch(0.89 0.012 85); background: oklch(0.995 0.004 85); border-radius: 2px; width: 30px; height: 30px; cursor: pointer; font-size: 15px; line-height: 1; color: oklch(0.45 0.01 85); flex-shrink: 0;" style-hover="border-color: oklch(0.5 0.13 158); color: oklch(0.21 0.014 85);">&times;</button>
+        </div>
+
+        <div style="padding: 24px 28px 28px; display: flex; flex-direction: column; gap: 28px;">
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button onClick="{{ copyPrompt }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 2px; border: 1px solid {{ copyBorder }}; background: {{ copyBg }}; color: {{ copyFg }}; cursor: pointer; font-size: 14px; font-weight: 500; transition: background 160ms, border-color 160ms;"><sc-if value="{{ copyDone }}"><span style="display: inline-block; animation: twp-pop 280ms cubic-bezier(0.3, 1.4, 0.5, 1) both; font-size: 13px;">&#10003;</span></sc-if>{{ copyLabel }}</button>
+            <a href="{{ sel.folderUrl }}" target="_blank" rel="noreferrer" style="display: inline-flex; align-items: center; padding: 10px 18px; border-radius: 2px; border: 1px solid oklch(0.87 0.012 85); color: oklch(0.28 0.014 85); font-size: 14px;" style-hover="border-color: oklch(0.5 0.13 158); text-decoration: none; color: oklch(0.21 0.014 85);">Prompt folder on GitHub &rarr;</a>
+          </div>
+          <sc-if value="{{ copyFailed }}">
+            <div style="margin-top: -16px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: oklch(0.5 0.15 40);">Fetch blocked. <a href="{{ sel.raw_url }}" target="_blank" rel="noreferrer">View the raw prompt on GitHub &rarr;</a></div>
+          </sc-if>
+
+          <div style="font-family: Newsreader, Georgia, serif; font-size: 18.5px; line-height: 1.62; color: oklch(0.27 0.016 85); text-wrap: pretty; max-width: 66ch;">{{ sel.details }}</div>
+
+          <div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: oklch(0.55 0.01 85); border-bottom: 1px solid oklch(0.91 0.012 85); padding-bottom: 8px;">Inputs</div>
+            <sc-for list="{{ sel.inputs }}" as="row" hint-placeholder-count="3">
+              <div style="display: grid; grid-template-columns: minmax(140px, 200px) 1fr; gap: 8px 20px; padding: 12px 0; border-bottom: 1px solid oklch(0.95 0.008 85);">
+                <code style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: oklch(0.44 0.12 158);">{{ row.placeholder }}</code>
+                <div style="font-size: 14px; color: oklch(0.35 0.014 85); text-wrap: pretty;">{{ row.description }}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: oklch(0.55 0.01 85); border-bottom: 1px solid oklch(0.91 0.012 85); padding-bottom: 8px; margin-bottom: 14px;">Example output</div>
+            <pre style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; line-height: 1.7; color: oklch(0.3 0.014 85); background: oklch(0.968 0.008 85); border: 1px solid oklch(0.92 0.012 85); border-radius: 2px; padding: 16px 18px; overflow-x: auto; white-space: pre-wrap;">{{ sel.example_output }}</pre>
+          </div>
+
+          <div>
+            <div style="display: flex; gap: 0; border-bottom: 1px solid oklch(0.91 0.012 85);">
+              <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="2">
+                <button onClick="{{ tab.pick }}" style="padding: 9px 15px; border: 0; background: none; cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: {{ tab.fg }}; border-bottom: 2px solid {{ tab.line }}; margin-bottom: -1px;">{{ tab.label }}</button>
+              </sc-for>
+            </div>
+            <div style="padding-top: 14px; display: flex; flex-direction: column; gap: 11px;">
+              <div style="font-size: 14px; color: oklch(0.42 0.014 85);">{{ tabNote }}</div>
+              <div style="position: relative;">
+                <pre style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; line-height: 1.75; color: oklch(0.93 0.015 158); background: oklch(0.25 0.028 165); border-radius: 2px; padding: 16px 96px 16px 18px; overflow-x: auto; white-space: pre-wrap;">{{ tabCode }}</pre>
+                <button onClick="{{ copyCode }}" style="position: absolute; top: 10px; right: 10px; padding: 5px 11px; border: 1px solid oklch(0.42 0.03 165); border-radius: 2px; background: oklch(0.31 0.026 165); color: oklch(0.88 0.02 158); cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 11px;" style-hover="border-color: oklch(0.65 0.11 158);">{{ codeCopyLabel }}</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="border-top: 1px solid oklch(0.92 0.012 85); padding-top: 16px; display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.55 0.01 85);">Author</span>
+            <a href="{{ sel.authorUrl }}" target="_blank" rel="noreferrer" style="font-size: 14.5px;">{{ sel.authorName }}</a>
+            <span style="font-size: 14px; color: oklch(0.53 0.01 85);">&mdash; {{ sel.evalLine }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320,&quot;height&quot;:900},&quot;showFeatured&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;defaultSort&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;newest&quot;,&quot;name&quot;,&quot;evals&quot;],&quot;default&quot;:&quot;newest&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+const REPO = "reem-sab/tech-writer-prompts";
+const TAGS = ["docs-review", "api", "agents", "release", "localization", "style", "ia"];
+const CODES = { "docs-review": "DOC", api: "API", agents: "AGT", release: "REL", localization: "LOC", style: "STY", ia: "IA" };
+const HUES = { "docs-review": 158, api: 250, agents: 300, release: 55, localization: 205, style: 340, ia: 120 };
+const SORTS = [{ id: "newest", label: "newest" }, { id: "name", label: "name" }, { id: "evals", label: "most evals" }];
+const ACC = "oklch(0.45 0.12 158)";
+const INK = "oklch(0.21 0.014 85)";
+const MUT = "oklch(0.48 0.012 85)";
+
+class Component extends DCLogic {
+  state = {
+    prompts: null, loading: true, loadError: false,
+    query: "", tags: [], sort: null,
+    slug: null, tab: "claude", view: "cards",
+    stars: null, copy: "idle", codeCopy: "idle",
+    email: "", subscribed: false,
+    narrow: typeof window !== "undefined" ? window.innerWidth < 760 : false
+  };
+
+  componentDidMount() {
+    fetch("prompts.json")
+      .then(r => { if (!r.ok) throw new Error("http " + r.status); return r.json(); })
+      .then(d => this.setState({ prompts: Array.isArray(d) ? d : [], loading: false }))
+      .catch(() => this.setState({ loading: false, loadError: true }));
+
+    fetch("https://api.github.com/repos/" + REPO)
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => { if (d && typeof d.stargazers_count === "number") this.tickStars(d.stargazers_count); })
+      .catch(() => {});
+
+    this._resize = () => {
+      const n = window.innerWidth < 760;
+      if (n !== this.state.narrow) this.setState({ narrow: n });
+    };
+    this._key = e => { if (e.key === "Escape" && this.state.slug) this.setState({ slug: null }); };
+    window.addEventListener("resize", this._resize);
+    window.addEventListener("keydown", this._key);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this._resize);
+    window.removeEventListener("keydown", this._key);
+    if (this._raf) cancelAnimationFrame(this._raf);
+  }
+
+  tickStars(target) {
+    const dur = 700, t0 = performance.now();
+    this.setState({ stars: target, starsShown: 0 });
+    const step = now => {
+      const t = Math.min(1, (now - t0) / dur);
+      const eased = 1 - Math.pow(1 - t, 3);
+      this._raf = null;
+      this.setState({ starsShown: Math.round(target * eased) });
+      if (t < 1) this._raf = requestAnimationFrame(step);
+    };
+    this._raf = requestAnimationFrame(step);
+  }
+
+  fmtDate(s) {
+    const d = new Date(s + "T00:00:00");
+    if (isNaN(d)) return s;
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  }
+
+  fmtMonth(s) {
+    const d = new Date(s + "-01T00:00:00");
+    if (isNaN(d)) return s;
+    return d.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+  }
+
+  tagChip(t) {
+    const h = HUES[t] != null ? HUES[t] : 85;
+    return { label: t, bg: "oklch(0.955 0.032 " + h + ")", fg: "oklch(0.44 0.1 " + h + ")" };
+  }
+
+  cloth(L, C, H) {
+    return "repeating-linear-gradient(92deg, oklch(1 0.02 85 / 0.05) 0 1px, oklch(0.1 0.02 60 / 0.04) 1px 2px, transparent 2px 4px), " +
+      "repeating-linear-gradient(0deg, oklch(0.1 0.02 60 / 0.05) 0 1px, transparent 1px 5px), " +
+      "linear-gradient(100deg, oklch(" + (L - 0.03).toFixed(3) + " " + C + " " + H + "), oklch(" + L.toFixed(3) + " " + C + " " + H + ") 40%, oklch(" + (L - 0.05).toFixed(3) + " " + (C * 0.85).toFixed(3) + " " + (H - 6) + "))";
+  }
+
+  callNumber(p) {
+    const t = (p.tags && p.tags[0]) || "";
+    const code = CODES[t] || "GEN";
+    const i = (this.state.prompts || []).indexOf(p) + 1;
+    return "TWP · " + code + " · " + String(i).padStart(3, "0");
+  }
+
+  decorate(p) {
+    const full = p.evals_passing >= p.evals_total && p.evals_total > 0;
+    const t0 = (p.tags && p.tags[0]) || "";
+    const h = HUES[t0] != null ? HUES[t0] : 85;
+    return {
+      hue: "oklch(0.62 0.13 " + h + ")",
+      callNumber: this.callNumber(p),
+      spineW: 48 + (p.evals_total || 4) * 5 + "px",
+      spineH: Math.max(210, Math.min(344, Math.round((p.name || "").length * 8.6) + 74)) + "px",
+      spineBg: this.cloth(0.415 + ((p.slug || "").length % 3) * 0.022, 0.058, h),
+      spineFg: "oklch(0.88 0.045 88)",
+      spineCode: (CODES[t0] || "GEN"),
+      tagList: (p.tags || []).map(t => this.tagChip(t)),
+      authorName: (p.author && p.author.name) || "Unattributed",
+      badgeText: p.evals_passing + "/" + p.evals_total + " passing",
+      badgeBg: full ? "oklch(0.95 0.04 158)" : "oklch(0.95 0.05 75)",
+      badgeFg: full ? "oklch(0.4 0.11 158)" : "oklch(0.44 0.11 60)",
+      badgeDot: full ? "oklch(0.58 0.15 158)" : "oklch(0.68 0.15 70)"
+    };
+  }
+
+  async writeClip(text) {
+    try {
+      if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(text); return true; }
+    } catch (e) {}
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      const ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      return ok;
+    } catch (e) { return false; }
+  }
+
+  installCode(p) {
+    const url = "https://raw.githubusercontent.com/" + REPO + "/main/prompts/" + p.slug + "/SKILL.md";
+    if (this.state.tab === "claude") {
+      return "mkdir -p .claude/skills/" + p.slug + " && \\\n  curl -sL " + url + " \\\n  -o .claude/skills/" + p.slug + "/SKILL.md";
+    }
+    return "mkdir -p .cursor/rules && \\\n  curl -sL " + url + " \\\n  -o .cursor/rules/" + p.slug + ".mdc";
+  }
+
+  renderVals() {
+    const s = this.state;
+    const all = s.prompts || [];
+    const q = s.query.trim().toLowerCase();
+    const sort = s.sort || this.props.defaultSort || "newest";
+
+    let list = all.filter(p => {
+      if (s.tags.length && !s.tags.every(t => p.tags.indexOf(t) > -1)) return false;
+      if (!q) return true;
+      const hay = [p.name, p.description, p.slug, p.author && p.author.name, (p.tags || []).join(" ")].join(" ").toLowerCase();
+      return hay.indexOf(q) > -1;
+    });
+    if (sort === "name") list = list.slice().sort((a, b) => a.name.localeCompare(b.name));
+    else if (sort === "evals") list = list.slice().sort((a, b) => b.evals_total - a.evals_total || a.name.localeCompare(b.name));
+    else list = list.slice().sort((a, b) => (a.updated < b.updated ? 1 : a.updated > b.updated ? -1 : 0));
+
+    const openFn = p => () => this.setState({ slug: p.slug, tab: "claude", copy: "idle", codeCopy: "idle" });
+    const cards = list.map((p, i) => Object.assign({}, p, this.decorate(p), {
+      open: openFn(p),
+      delay: Math.min(i, 14) * 22 + "ms"
+    }));
+
+    const pass = all.reduce((n, p) => n + (p.evals_passing || 0), 0);
+    const tot = all.reduce((n, p) => n + (p.evals_total || 0), 0);
+    const latest = all.reduce((m, p) => (p.updated > m ? p.updated : m), "");
+
+    const showFeatured = this.props.showFeatured !== false;
+    const feats = all.filter(p => p.featured_month).sort((a, b) => (a.featured_month < b.featured_month ? 1 : -1));
+    const f = showFeatured ? feats[0] : null;
+    const featured = f ? Object.assign({}, f, this.decorate(f), { monthLabel: this.fmtMonth(f.featured_month), open: openFn(f) }) : {};
+
+    const p = all.filter(x => x.slug === s.slug)[0];
+    let sel = null, tabCode = "", tabNote = "";
+    if (p) {
+      sel = Object.assign({}, p, this.decorate(p), {
+        authorUrl: (p.author && p.author.url) || ("https://github.com/" + REPO),
+        updatedLabel: this.fmtDate(p.updated),
+        folderUrl: "https://github.com/" + REPO + "/tree/main/prompts/" + p.slug,
+        evalLine: p.evals_passing + " of " + p.evals_total + " eval cases passing on main"
+      });
+      tabCode = this.installCode(p);
+      tabNote = s.tab === "claude"
+        ? "Installs the prompt as a skill Claude Code picks up automatically in this repo."
+        : "Drops the prompt into Cursor rules so you can invoke it from the composer.";
+    }
+
+    const copyMap = {
+      idle: ["Copy prompt", ACC, "oklch(0.99 0.004 85)", "oklch(0.38 0.11 158)"],
+      loading: ["Fetching\u2026", "oklch(0.62 0.05 158)", "oklch(0.99 0.004 85)", "oklch(0.62 0.05 158)"],
+      done: ["Copied to clipboard", "oklch(0.38 0.11 158)", "oklch(0.99 0.004 85)", "oklch(0.32 0.1 158)"],
+      error: ["Copy failed", "oklch(0.995 0.004 85)", "oklch(0.45 0.15 40)", "oklch(0.7 0.12 40)"]
+    };
+    const c = copyMap[s.copy] || copyMap.idle;
+
+    return {
+      loading: s.loading,
+      loadError: s.loadError,
+      isEmpty: !s.loading && !s.loadError && all.length > 0 && list.length === 0,
+      emptyQuery: q ? "\u201c" + s.query.trim() + "\u201d" : "these filters",
+      skeletons: [1, 2, 3, 4, 5, 6],
+      cards,
+      showShelf: !s.loading && !s.loadError && s.view === "shelf" && cards.length > 0,
+      showCards: s.view === "shelf" ? [] : cards,
+      views: [{ id: "cards", label: "cards" }, { id: "shelf", label: "shelf" }].map(v => ({
+        label: v.label,
+        bg: s.view === v.id ? "oklch(0.95 0.03 158)" : "oklch(0.995 0.004 85)",
+        fg: s.view === v.id ? "oklch(0.37 0.11 158)" : MUT,
+        pick: () => this.setState({ view: v.id })
+      })),
+      countLabel: all.length ? list.length + " on the shelf" : "",
+      query: s.query,
+      onQuery: e => this.setState({ query: e.target.value }),
+      clearAll: () => this.setState({ query: "", tags: [] }),
+      starLabel: s.stars === null ? "\u2014" : String(s.starsShown != null ? s.starsShown : s.stars),
+      copyDone: s.copy === "done",
+      starSentence: s.stars === null
+        ? "Star counts are read live from the GitHub API."
+        : s.stars + " people have starred it so far.",
+
+      miniShelf: all.map((x, i) => {
+        const h = HUES[(x.tags && x.tags[0]) || ""] != null ? HUES[x.tags[0]] : 85;
+        return {
+          w: 13 + ((x.evals_total || 4) - 3) * 4 + "px",
+          h: 52 + ((x.name || "").length % 7) * 6 + "px",
+          bg: this.cloth(0.42 + (i % 4) * 0.026, 0.055, h),
+          band: "oklch(0.78 0.07 86 / " + (i % 2 ? 0.5 : 0.68) + ")",
+          radius: i % 3 === 0 ? "1px 4px 0 0" : i % 3 === 1 ? "2px 2px 0 0" : "1px 3px 0 0",
+          rot: (i % 5 === 2 ? "-0.8deg" : i % 5 === 4 ? "0.9deg" : "0deg")
+        };
+      }),
+
+      hasFeatured: !!f,
+      featured,
+
+      pills: TAGS.map(t => {
+        const on = s.tags.indexOf(t) > -1;
+        const h = HUES[t];
+        return {
+          label: t,
+          bg: on ? "oklch(0.45 0.11 " + h + ")" : "oklch(0.995 0.004 85)",
+          fg: on ? "oklch(0.98 0.01 " + h + ")" : MUT,
+          border: on ? "oklch(0.45 0.11 " + h + ")" : "oklch(0.87 0.012 85)",
+          toggle: () => this.setState(st => ({ tags: on ? st.tags.filter(x => x !== t) : st.tags.concat([t]) }))
+        };
+      }),
+      sorts: SORTS.map(o => ({
+        label: o.label,
+        bg: sort === o.id ? "oklch(0.95 0.03 158)" : "oklch(0.995 0.004 85)",
+        fg: sort === o.id ? "oklch(0.37 0.11 158)" : MUT,
+        pick: () => this.setState({ sort: o.id })
+      })),
+
+      statTotal: all.length ? String(all.length) : "\u2014",
+      statEvals: tot ? pass + "/" + tot + " passing" : "\u2014",
+      statUpdated: latest ? this.fmtDate(latest) : "\u2014",
+
+      email: s.email,
+      onEmail: e => this.setState({ email: e.target.value }),
+      notifyIdle: !s.subscribed,
+      notifyDone: s.subscribed,
+      onSubscribe: e => { e.preventDefault(); if (s.email.indexOf("@") > 0) this.setState({ subscribed: true }); },
+
+      divRight: s.narrow ? "transparent" : "oklch(0.34 0.025 165)",
+      divBottom: s.narrow ? "oklch(0.34 0.025 165)" : "transparent",
+      statPadA: s.narrow ? "16px 0 17px" : "20px 28px 22px 0",
+      statPadB: s.narrow ? "16px 0 17px" : "20px 28px 22px",
+      statPadC: s.narrow ? "16px 0 4px" : "20px 0 22px 28px",
+      notifyPad: s.narrow ? "40px 0" : "52px 48px 52px 0",
+      contribPad: s.narrow ? "40px 0" : "52px 0 52px 48px",
+
+      hasSelection: !!sel,
+      sel: sel || {},
+      close: () => this.setState({ slug: null }),
+      stop: e => e.stopPropagation(),
+      sheetAlign: s.narrow ? "stretch" : "flex-start",
+      sheetPad: s.narrow ? "0" : "48px 24px",
+      sheetRadius: s.narrow ? "0px" : "3px",
+      sheetMaxW: s.narrow ? "100%" : "780px",
+      sheetMinH: s.narrow ? "100vh" : "0",
+
+      tabs: [{ id: "claude", label: "Claude Code" }, { id: "cursor", label: "Cursor" }].map(t => ({
+        label: t.label,
+        fg: s.tab === t.id ? INK : MUT,
+        line: s.tab === t.id ? ACC : "transparent",
+        pick: () => this.setState({ tab: t.id, codeCopy: "idle" })
+      })),
+      tabCode, tabNote,
+      codeCopyLabel: s.codeCopy === "done" ? "copied" : "copy",
+      copyCode: async () => {
+        const ok = await this.writeClip(tabCode);
+        this.setState({ codeCopy: ok ? "done" : "idle" });
+        setTimeout(() => this.setState({ codeCopy: "idle" }), 2000);
+      },
+
+      copyLabel: c[0], copyBg: c[1], copyFg: c[2], copyBorder: c[3],
+      copyFailed: s.copy === "error",
+      copyPrompt: async () => {
+        if (!p) return;
+        this.setState({ copy: "loading" });
+        try {
+          const r = await fetch(p.raw_url);
+          if (!r.ok) throw new Error("http " + r.status);
+          const text = await r.text();
+          const ok = await this.writeClip(text);
+          if (!ok) throw new Error("clipboard");
+          this.setState({ copy: "done" });
+          setTimeout(() => { if (this.state.copy === "done") this.setState({ copy: "idle" }); }, 2200);
+        } catch (e) {
+          this.setState({ copy: "error" });
+        }
+      }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

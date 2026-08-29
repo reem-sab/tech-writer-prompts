@@ -1,0 +1,48 @@
+[
+  {
+    "id": "structure-has-procedure-and-fragile-section",
+    "input": {
+      "SCREENS": "Frame 1: The Lumen dashboard home page. Sidebar on the left has links: Overview, Events, Subscriptions, Settings. A blue button in the top right corner is labeled \"Create API Key\".\n\nFrame 2: A modal titled \"Create API Key\" is open, with a text field labeled \"Key name\" and a button labeled \"Generate\".\n\nFrame 3: The modal now shows a generated key string and a button labeled \"Copy\". A small gear icon appears in the sidebar next to \"Settings\", no visible text label.\n\nFrame 4: The dashboard now lists the new key under a table titled \"Your API Keys\" with columns Name, Created, and Last Used.\n"
+    },
+    "expect": {
+      "contains": ["Procedure", "Fragile references"]
+    }
+  },
+  {
+    "id": "flags-unlabeled-gear-icon-as-fragile",
+    "input": {
+      "SCREENS": "Frame 1: The Lumen dashboard home page. Sidebar on the left has links: Overview, Events, Subscriptions, Settings. A blue button in the top right corner is labeled \"Create API Key\".\n\nFrame 2: A modal titled \"Create API Key\" is open, with a text field labeled \"Key name\" and a button labeled \"Generate\".\n\nFrame 3: The modal now shows a generated key string and a button labeled \"Copy\". A small gear icon appears in the sidebar next to \"Settings\", no visible text label.\n\nFrame 4: The dashboard now lists the new key under a table titled \"Your API Keys\" with columns Name, Created, and Last Used.\n"
+    },
+    "expect": {
+      "contains": ["Fragile references"],
+      "regex": ["icon"]
+    }
+  },
+  {
+    "id": "phrases-by-label-for-create-api-key-button",
+    "input": {
+      "SCREENS": "Frame 1: The Lumen dashboard home page. Sidebar on the left has links: Overview, Events, Subscriptions, Settings. A blue button in the top right corner is labeled \"Create API Key\".\n\nFrame 2: A modal titled \"Create API Key\" is open, with a text field labeled \"Key name\" and a button labeled \"Generate\".\n\nFrame 3: The modal now shows a generated key string and a button labeled \"Copy\". A small gear icon appears in the sidebar next to \"Settings\", no visible text label.\n\nFrame 4: The dashboard now lists the new key under a table titled \"Your API Keys\" with columns Name, Created, and Last Used.\n"
+    },
+    "expect": {
+      "contains": ["Create API Key"]
+    }
+  },
+  {
+    "id": "no-color-or-position-language-anywhere",
+    "input": {
+      "SCREENS": "Frame 1: The Lumen dashboard home page. Sidebar on the left has links: Overview, Events, Subscriptions, Settings. A blue button in the top right corner is labeled \"Create API Key\".\n\nFrame 2: A modal titled \"Create API Key\" is open, with a text field labeled \"Key name\" and a button labeled \"Generate\".\n\nFrame 3: The modal now shows a generated key string and a button labeled \"Copy\". A small gear icon appears in the sidebar next to \"Settings\", no visible text label.\n\nFrame 4: The dashboard now lists the new key under a table titled \"Your API Keys\" with columns Name, Created, and Last Used.\n"
+    },
+    "expect": {
+      "judge_rubric": "The Procedure section never describes a control by color or screen position -- no phrases like 'blue button', 'top right', or 'small icon in the corner' -- describing every control by its visible label or, absent a label, its function instead."
+    }
+  },
+  {
+    "id": "merges-click-and-resulting-state-into-one-step",
+    "input": {
+      "SCREENS": "Frame 1: The Lumen dashboard home page. Sidebar on the left has links: Overview, Events, Subscriptions, Settings. A blue button in the top right corner is labeled \"Create API Key\".\n\nFrame 2: A modal titled \"Create API Key\" is open, with a text field labeled \"Key name\" and a button labeled \"Generate\".\n\nFrame 3: The modal now shows a generated key string and a button labeled \"Copy\". A small gear icon appears in the sidebar next to \"Settings\", no visible text label.\n\nFrame 4: The dashboard now lists the new key under a table titled \"Your API Keys\" with columns Name, Created, and Last Used.\n"
+    },
+    "expect": {
+      "judge_rubric": "Clicking 'Generate' and the resulting frame showing the generated key are treated as one step, not two -- the procedure does not create a separate numbered step purely for the key appearing after Generate is clicked."
+    }
+  }
+]
