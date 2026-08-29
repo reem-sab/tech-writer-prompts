@@ -148,7 +148,7 @@
       }
     ],
     "example_output": "| Error Code | Cause | Fix | How You Got Here |\n|---|---|---|---|\n| LUMEN_429_RATE_LIMITED | Over 100 req/min per key. | Wait for the window to reset, then retry with backoff. | Sent requests faster than the per-key limit. |\n| LUMEN_500_INTERNAL | Unclear from source — ask an engineer. | — | A server-side error with no documented trigger. |\n\nAgent-readable JSON:\n[\n  { \"code\": \"LUMEN_429_RATE_LIMITED\", \"cause\": \"...\", \"fix\": \"...\", \"trigger\": \"...\" }\n]",
-    "evals_passing": 4,
+    "evals_passing": 5,
     "evals_total": 5,
     "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/error-catalog/prompt.md",
     "updated": "2026-08-29"
@@ -206,7 +206,7 @@
       }
     ],
     "example_output": "| Term | Frequency | First Appears In | Drafted Definition (verify before publishing) |\n|---|---|---|---|\n| subscription | 6 | webhooks.md | A standing request to receive events matching a filter. |\n| delivery attempt | 5 | webhooks.md | A single try at POSTing an event to a subscription's URL. |",
-    "evals_passing": 4,
+    "evals_passing": 5,
     "evals_total": 5,
     "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/glossary-extract/prompt.md",
     "updated": "2026-08-29"
@@ -231,7 +231,7 @@
       }
     ],
     "example_output": "## Orphaned pages\n\"Webhooks Troubleshooting\" is top-level but belongs under Guides → Webhooks.\n\n## Duplicate scopes\n\"Webhooks\" and \"Webhooks Troubleshooting\" cover overlapping ground.\n\n## Missing landing pages\n\"Guides\" has 2 children and no landing page.",
-    "evals_passing": 2,
+    "evals_passing": 5,
     "evals_total": 5,
     "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/ia-review/prompt.md",
     "updated": "2026-08-29"
@@ -356,7 +356,7 @@
       }
     ],
     "example_output": "## Drafted SKILL.md\n---\nname: rotate-lumen-api-key\ndescription: Rotates a Lumen API key without downtime. Use when the user asks\n  to rotate, replace, or roll a Lumen key, or says a key may be compromised.\n---\n1. In the dashboard, go to Settings → API Keys and click Generate new key...\n\n## Starter eval cases\n[\n  { \"id\": \"happy-path\", \"input\": { \"REQUEST\": \"rotate my key\" },\n    \"expect\": { \"contains\": [\"Revoke\"] } }\n]",
-    "evals_passing": 4,
+    "evals_passing": 5,
     "evals_total": 5,
     "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/skill-file-draft/prompt.md",
     "updated": "2026-08-29"

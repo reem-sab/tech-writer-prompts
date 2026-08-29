@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-29T23:03:33.726Z",
+  "generated_at": "2026-08-29T23:46:19.042Z",
   "model": "claude-sonnet-5",
   "prompts": {
     "agent-readiness": {
@@ -80,7 +80,7 @@
           "id": "strong-page-scores-high",
           "status": "fail",
           "failures": [
-            "judge: Most scores are 3s rather than mostly 4s and 5s, and the fix list includes a Critical-severity item, violating both conditions of the rubric."
+            "judge: The rubric requires Prerequisite Coverage and Verification Checkpoints to each score 4 or 5, but the writing scores both at 3."
           ]
         },
         {
@@ -165,7 +165,7 @@
       ]
     },
     "error-catalog": {
-      "passing": 4,
+      "passing": 5,
       "total": 5,
       "skipped": 0,
       "cases": [
@@ -191,10 +191,8 @@
         },
         {
           "id": "json-and-table-agree",
-          "status": "fail",
-          "failures": [
-            "judge: The last entry's cause and fix fields contain \"Unclear from source — ask an engineer.\" which are placeholder non-substantive strings, failing the requirement for genuinely populated, meaningful content."
-          ]
+          "status": "pass",
+          "failures": []
         }
       ]
     },
@@ -231,7 +229,7 @@
       ]
     },
     "glossary-extract": {
-      "passing": 4,
+      "passing": 5,
       "total": 5,
       "skipped": 0,
       "cases": [
@@ -252,10 +250,8 @@
         },
         {
           "id": "ranked-by-frequency",
-          "status": "fail",
-          "failures": [
-            "judge: The table is ranked in descending order correctly (5 before 4), but this alone isn't sufficient to confirm compliance since the reasoning must also verify both terms have plausible counts—however, the table only contains these two terms and does not clearly establish \"delivery attempt\" as more frequent through independent verification, so while it technically passes the ranking and inclusion criteria, the response should be labeled PASS as both conditions are met."
-          ]
+          "status": "pass",
+          "failures": []
         },
         {
           "id": "all-terms-defined-no-output",
@@ -265,7 +261,7 @@
       ]
     },
     "ia-review": {
-      "passing": 2,
+      "passing": 5,
       "total": 5,
       "skipped": 0,
       "cases": [
@@ -276,18 +272,13 @@
         },
         {
           "id": "flags-duplicate-webhooks-scope",
-          "status": "fail",
-          "failures": [
-            "missing substring: \"Duplicate scopes\"",
-            "no match for regex: \"webhooks\""
-          ]
+          "status": "pass",
+          "failures": []
         },
         {
           "id": "flags-missing-landing-pages",
-          "status": "fail",
-          "failures": [
-            "missing substring: \"API Reference\""
-          ]
+          "status": "pass",
+          "failures": []
         },
         {
           "id": "proposes-reorganization-outline",
@@ -296,10 +287,8 @@
         },
         {
           "id": "clean-nav-no-false-positives",
-          "status": "fail",
-          "failures": [
-            "judge: The output reports an orphaned page (\"Errors\") and a duplicate scope, and also proposes moving \"Errors\" between sections, violating the rubric's requirements."
-          ]
+          "status": "pass",
+          "failures": []
         }
       ]
     },
@@ -364,7 +353,7 @@
           "id": "thorough-quickstart-near-empty-summary",
           "status": "fail",
           "failures": [
-            "judge: The writing repeatedly flags the API-key environment variable step (naming it in code) and the verification/troubleshooting details as ambiguous or blocking gaps, when the rubric requires these not be treated as missing prerequisites."
+            "judge: Step 3 is marked \"❌ Blocked\" and the Unstated Prerequisites list claims the API key's environment-variable setup and module configuration are never explained, which directly violates the rubric's requirements."
           ]
         }
       ]
@@ -415,7 +404,7 @@
           "id": "flags-unlabeled-gear-icon-as-fragile",
           "status": "fail",
           "failures": [
-            "no match for regex: \"(icon|gear|settings|account|function)\""
+            "judge: The Fragile references section is empty (\"No fragile references\") and does not flag any icon-only control described by function instead of label."
           ]
         },
         {
@@ -436,7 +425,7 @@
       ]
     },
     "skill-file-draft": {
-      "passing": 4,
+      "passing": 5,
       "total": 5,
       "skipped": 0,
       "cases": [
@@ -462,10 +451,8 @@
         },
         {
           "id": "eval-cases-are-genuinely-distinct",
-          "status": "fail",
-          "failures": [
-            "judge: The two cases do exercise different scenarios (compromised key vs. insufficient role), but the \"expect\" field uses a \"contains\" array of strings rather than a single concrete \"expect\" string as specified, and the second case's array is arguably too vague/minimal to be a fully checkable concrete string per the rubric's wording."
-          ]
+          "status": "pass",
+          "failures": []
         }
       ]
     },
