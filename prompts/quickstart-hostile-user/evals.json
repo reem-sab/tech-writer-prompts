@@ -5,7 +5,12 @@
       "QUICKSTART": "# Quickstart: Authenticate with the Lumen API\n\nThe Lumen API lets you send real-time event notifications to your users. This guide gets you sending your first event in a few minutes.\n\n## Step 1: Install the SDK\n\nRun the following in your project:\n\n```\nnpm install lumen-sdk\n```\n\n## Step 2: Add your key\n\nJust add your key to the header and you're good to go.\n\n```\nconst lumen = new Lumen({ key: \"YOUR_KEY\" });\n```\n\n## Step 3: Send an event\n\n```js\nlumen.events.send({\n  type: \"order.created\",\n  payload: { orderId: \"123\" }\n});\n```\n\nThat's it! You've sent your first event.\n"
     },
     "expect": {
-      "contains": ["Unstated Prerequisites", "Ambiguous Steps", "Missing Verification Checkpoints", "Step 1"]
+      "contains": [
+        "Unstated Prerequisites",
+        "Ambiguous Steps",
+        "Missing Verification Checkpoints",
+        "Step 1"
+      ]
     }
   },
   {
@@ -14,7 +19,10 @@
       "QUICKSTART": "# Quickstart: Deploy Your First Lumen Function\n\n## Step 1: Deploy\n\nRun:\n\n```\nlumen deploy ./function.js\n```\n\n## Step 2: Confirm\n\nYour function is now live.\n"
     },
     "expect": {
-      "contains": ["Unstated Prerequisites", "lumen deploy"]
+      "contains": [
+        "Unstated Prerequisites",
+        "lumen deploy"
+      ]
     }
   },
   {
@@ -23,7 +31,10 @@
       "QUICKSTART": "# Quickstart: Enable Webhook Signing\n\n## Step 1: Turn on signing\n\nSet the environment variable and restart the service.\n\n## Step 2: Verify signatures\n\nYour webhook handler should now validate signatures automatically.\n"
     },
     "expect": {
-      "contains": ["Ambiguous Steps", "Step 1"]
+      "contains": [
+        "Ambiguous Steps",
+        "Step 1"
+      ]
     }
   },
   {
@@ -32,13 +43,16 @@
       "QUICKSTART": "# Quickstart: Rotate Your Webhook Secret\n\n## Step 1: Generate a new secret\n\nIn the dashboard, go to **Settings -> Webhooks** and click **Rotate secret**.\n\n## Step 2: Update your handler\n\nUpdate the signing secret in your webhook handler code to match.\n\n## Step 3: Done\n\nYour webhooks are now signed with the new secret.\n"
     },
     "expect": {
-      "contains": ["Missing Verification Checkpoints", "Step 2"]
+      "contains": [
+        "Missing Verification Checkpoints",
+        "Step 2"
+      ]
     }
   },
   {
     "id": "thorough-quickstart-near-empty-summary",
     "input": {
-      "QUICKSTART": "# Quickstart: Send Your First Lumen Event\n\n## Prerequisites\n\n- A Lumen account. Sign up at https://dashboard.lumen.dev/signup (free, no credit card required).\n- Node.js 18 or later installed.\n\n## Step 1: Get an API key\n\nIn the Lumen dashboard, go to **Settings -> API Keys** and click **Create key**. Copy the key shown - it's only displayed once.\n\n## Step 2: Install the SDK\n\n```bash\nnpm install lumen-sdk\n```\n\n## Step 3: Send an event\n\n```js\nimport { Lumen } from \"lumen-sdk\";\n\nconst lumen = new Lumen({ apiKey: process.env.LUMEN_API_KEY });\n\nconst result = await lumen.events.send({\n  type: \"order.created\",\n  payload: { orderId: \"123\" }\n});\n\nconsole.log(result.status); // \"accepted\"\n```\n\n## Step 4: Verify it worked\n\nRun the script above. If it worked, it prints `accepted` to your console, and the event appears under **Events** in the Lumen dashboard within a few seconds. If you see a `401` error instead, double check you copied the full API key from Step 1.\n"
+      "QUICKSTART": "# Quickstart: Send Your First Lumen Event\n\n## Prerequisites\n\n- A Lumen account. Sign up at https://dashboard.lumen.dev/signup (free, no credit card required).\n- Node.js 18 or later installed.\n\n## Step 1: Get an API key\n\nIn the Lumen dashboard, go to **Settings -> API Keys** and click **Create key**. Copy the key shown - it's only displayed once.\n\n## Step 2: Install the SDK\n\n```bash\nnpm install lumen-sdk\n```\n\n## Step 3: Set your API key\n\nSet the `LUMEN_API_KEY` environment variable to the key you copied in Step 1:\n\n```bash\nexport LUMEN_API_KEY=the-key-you-copied\n```\n\n## Step 4: Send an event\n\n```js\nimport { Lumen } from \"lumen-sdk\";\n\nconst lumen = new Lumen({ apiKey: process.env.LUMEN_API_KEY });\n\nconst result = await lumen.events.send({\n  type: \"order.created\",\n  payload: { orderId: \"123\" }\n});\n\nconsole.log(result.status); // \"accepted\"\n```\n\n## Step 5: Verify it worked\n\nRun the script above. If it worked, it prints `accepted` to your console, and the event appears under **Events** in the Lumen dashboard within a few seconds. If you see a `401` error instead, double check you copied the full API key from Step 1.\n"
     },
     "expect": {
       "judge_rubric": "No step is marked with the blocked result (the red x or the word Blocked), because the page provides everything needed to proceed. The Unstated Prerequisites list does not claim the Lumen account or the API key is missing, because the page gives a signup URL and names the API key in code. Raising a step as merely ambiguous is acceptable and does not fail this rubric."

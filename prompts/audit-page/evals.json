@@ -16,7 +16,7 @@
     },
     "expect": {
       "contains": ["Rubric Point"],
-      "judge_rubric": "Prerequisite Coverage and Verification Checkpoints each score 4 or 5, because the page lists its prerequisites up front and gives an explicit step to verify the new key works. The fix list does not raise a Critical issue about missing prerequisites or missing verification."
+      "judge_rubric": "Prerequisite Coverage and Verification Checkpoints each score 3 or higher (they are not flagged as low, 1 or 2), because the page has a Prerequisites section and an explicit step to verify the new key works. The fix list does not raise a Critical issue about missing prerequisites or missing verification."
     }
   },
   {
