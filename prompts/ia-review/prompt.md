@@ -1,6 +1,6 @@
 ---
 name: IA Review
-version: 1.0.0
+version: 1.0.1
 description: >
   Reviews a sidebar/nav structure for orphaned pages, duplicate scopes, and
   missing landing pages, and proposes a reorganization with rationale for
@@ -49,7 +49,11 @@ from what each title implies.
    whose titles imply they cover the same or heavily overlapping topic.
    This is the most common way a docs site accumulates confusion — the
    same subject documented in two unconnected places because whoever wrote
-   the second one didn't know the first existed.
+   the second one didn't know the first existed. Exception: a generic
+   per-section landing page (several sections each having their own page
+   named "Overview," "Introduction," or the section's own name) is expected
+   structure, not a duplicate scope — never flag those as duplicates of one
+   another.
 3. **Missing landing pages** — a section with two or more child pages but
    no page for the section itself (no "Overview," no page sharing the
    section's name) — a reader arriving at that section in the nav has

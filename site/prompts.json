@@ -156,7 +156,7 @@
   {
     "slug": "freshness-triage",
     "name": "Freshness Triage",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Cross-references a documentation page against its git log and the source files it documents to rank which claims are most likely stale, with a specific check for each.",
     "details": "Cross-references a documentation page against its git log and the current source it documents to rank which specific claims are most likely stale — confirmed contradictions first, then claims whose underlying source changed after the page was last touched — each with a concrete check to confirm it.",
     "tags": [
@@ -214,7 +214,7 @@
   {
     "slug": "ia-review",
     "name": "IA Review",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Reviews a sidebar/nav structure for orphaned pages, duplicate scopes, and missing landing pages, and proposes a reorganization with rationale for each change.",
     "details": "Reviews a docs site's sidebar/nav outline for orphaned pages, duplicate topic scopes, and sections missing a landing page, then proposes a revised outline with a one-line rationale for each change.",
     "tags": [

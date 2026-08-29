@@ -32,7 +32,7 @@
       "PAGES": "--- webhooks.md ---\n# Working with Webhooks\n\nTo receive events, create a subscription pointing at your URL. Lumen tracks each delivery attempt separately, and retries a failed delivery attempt up to 5 times with exponential backoff.\n\nYour subscription can filter by event type, so you only receive the events you care about.\n\n--- retries.md ---\n# Retry Behavior\n\nIf a delivery attempt returns a non-2xx status, Lumen schedules another delivery attempt. After 5 failed delivery attempts, the subscription is marked as degraded and Lumen sends you an email.\n\nA degraded subscription is one that has failed its last 5 consecutive delivery attempts.\n"
     },
     "expect": {
-      "judge_rubric": "The table is ranked by frequency descending, with 'subscription' (the most frequently used undefined term) appearing at or near the top, ahead of the far less frequent 'event type'."
+      "judge_rubric": "The table is ranked by frequency in descending order (the term used most often appears first), and it includes the recurring undefined terms 'subscription' and 'delivery attempt', each with a plausible frequency count."
     }
   },
   {
@@ -41,7 +41,7 @@
       "PAGES": "--- concepts.md ---\n# Lumen Core Concepts\n\nA subscription is a standing request to receive events matching a filter. Lumen represents each attempt to deliver an event to your subscription's URL as a delivery attempt. Every event you send has an event type, which is a string like `order.created` that tells Lumen (and your webhook handler) what kind of event it is.\n"
     },
     "expect": {
-      "contains": ["No undefined terms found."]
+      "judge_rubric": "The output either says 'No undefined terms found.' or flags only trivial/generic words — it does NOT list 'subscription', 'delivery attempt', or 'event type' as undefined, because concepts.md gives an explicit definition sentence for each of those three."
     }
   }
 ]

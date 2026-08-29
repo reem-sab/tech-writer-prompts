@@ -2,7 +2,7 @@
 name: freshness-triage
 description: >
   Cross-references a documentation page against its git log and the source files it documents to rank which claims are most likely stale, with a specific check for each. Use this skill when the task is: Cross-references a documentation page against its git log and the current source it documents to rank which specific claims are most likely stale — confirmed contradictions first, then claims whose underlying source changed after the page was last touched — each with a concrete check to confirm it.
-version: 1.0.0
+version: 1.0.1
 author:
   name: Reem Sabawi
   url: https://github.com/reem-sab
@@ -65,12 +65,17 @@ N. [Risk: Confirmed stale | Elevated | Low]
 
 Use "Confirmed stale" only when SOURCE directly contradicts the claim.
 Use "Elevated" when GIT_LOG shows relevant-looking change after the page's
-last edit but SOURCE doesn't directly settle it. Use "Low" only for claims
-you checked and found no contradicting evidence for — don't list claims
-you didn't actually check against SOURCE or GIT_LOG.
+last edit but SOURCE doesn't directly settle it.
 
-If no claims show elevated or confirmed risk, output exactly: `No claims
-found with evidence of staleness.`
+If no claim on the page is Confirmed stale or Elevated, output exactly this
+line and nothing else — do not list Low-risk claims in that case:
+
+`No claims found with evidence of staleness.`
+
+Only when at least one claim is Elevated or Confirmed do you produce the
+ranked list; there, you may also include "Low" rows for claims you checked
+and found no contradicting evidence for. Never list a claim you didn't
+actually check against SOURCE or GIT_LOG.
 
 ## Limits
 

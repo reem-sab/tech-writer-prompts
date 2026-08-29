@@ -33,6 +33,11 @@ jobs:
       - run: npm run build
 
       - name: Run evals for every prompt (including judge_rubric cases)
+        id: evals
+        # Don't stop the job on a failing case -- we still want to regenerate
+        # and commit the real results so the dashboard reflects reality. The
+        # job is failed explicitly at the end if any case failed.
+        continue-on-error: true
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           # Only needed for identity-linked API keys; harmless when empty.
@@ -46,10 +51,16 @@ jobs:
         run: node site/build-data.mjs
 
       - name: Commit updated eval results, skills, and dashboard data
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add evals/results.json prompts/*/badge.json prompts/*/SKILL.md site/prompts.json
           git diff --cached --quiet || git commit -m "chore: update eval results, skills, and dashboard data"
           git push
+
+      - name: Fail the job if any eval case failed
+        if: steps.evals.outcome == 'failure'
+        run: |
+          echo "One or more eval cases failed — see the eval step output above."
+          exit 1

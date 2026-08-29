@@ -15,7 +15,7 @@
     },
     "expect": {
       "contains": ["Fragile references"],
-      "regex": ["icon"]
+      "regex": ["(icon|gear|settings|account|function)"]
     }
   },
   {

@@ -16,7 +16,7 @@
     },
     "expect": {
       "contains": ["Rubric Point"],
-      "regex": ["no (further |additional )?fixes"]
+      "judge_rubric": "The page is scored highly overall (mostly 4s and 5s across the rubric) and the prioritized fix list contains no Critical-severity items — consistent with a strong, complete reference page that states its prerequisites, gives a verification step, and covers troubleshooting."
     }
   },
   {
