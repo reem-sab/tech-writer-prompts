@@ -1,0 +1,505 @@
+{
+  "generated_at": "2026-08-29T23:03:33.726Z",
+  "model": "claude-sonnet-5",
+  "prompts": {
+    "agent-readiness": {
+      "passing": 5,
+      "total": 5,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "flags-underspecified-revoke",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "flags-unnamed-service",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "flags-missing-structure",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "score-line-present",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "fixes-ordered-by-blast-radius",
+          "status": "pass",
+          "failures": []
+        }
+      ]
+    },
+    "api-ref-skeleton": {
+      "passing": 5,
+      "total": 5,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "events-endpoint-flags-missing-param-description",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "events-endpoint-flags-missing-error-responses",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "subscriptions-get-flags-missing-summary",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "missing-info-title-fallback",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "no-fabricated-content-on-thin-spec",
+          "status": "pass",
+          "failures": []
+        }
+      ]
+    },
+    "audit-page": {
+      "passing": 4,
+      "total": 5,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "weak-quickstart-missing-prerequisite",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "strong-page-scores-high",
+          "status": "fail",
+          "failures": [
+            "judge: Most scores are 3s rather than mostly 4s and 5s, and the fix list includes a Critical-severity item, violating both conditions of the rubric."
+          ]
+        },
+        {
+          "id": "unlabeled-code-fence-and-no-verification",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "audience-mismatch-beginner-label",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "fix-list-prioritized-by-real-impact",
+          "status": "pass",
+          "failures": []
+        }
+      ]
+    },
+    "diataxis-classify": {
+      "passing": 5,
+      "total": 5,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "classifies-mixed-page-as-how-to",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "flags-explanation-mixed-in",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "proposes-two-page-split",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "pure-reference-page-classified-correctly",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "pure-reference-page-no-split-needed",
+          "status": "pass",
+          "failures": []
+        }
+      ]
+    },
+    "doc-from-transcript": {
+      "passing": 5,
+      "total": 5,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "draft-uses-corrected-retry-count",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "checklist-structure-present",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "flags-401-disagreement-as-unresolved",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "excludes-non-documentation-chatter",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "numbered-markers-link-draft-to-checklist",
+          "status": "pass",
+          "failures": []
+        }
+      ]
+    },
+    "error-catalog": {
+      "passing": 4,
+      "total": 5,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "full-catalog-invalid-key-row",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "full-catalog-rate-limit-actionable-fix",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "full-catalog-flags-unclear-cause",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "bare-token-no-context",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "json-and-table-agree",
+          "status": "fail",
+          "failures": [
+            "judge: The last entry's cause and fix fields contain \"Unclear from source — ask an engineer.\" which are placeholder non-substantive strings, failing the requirement for genuinely populated, meaningful content."
+          ]
+        }
+      ]
+    },
+    "freshness-triage": {
+      "passing": 5,
+      "total": 5,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "flags-rate-limit-as-confirmed-stale",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "cites-current-source-value",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "subscriptions-claim-not-flagged-high-risk",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "what-to-check-is-actionable",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "no-staleness-evidence-clean-case",
+          "status": "pass",
+          "failures": []
+        }
+      ]
+    },
+    "glossary-extract": {
+      "passing": 4,
+      "total": 5,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "flags-subscription-and-delivery-attempt",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "citation-column-present",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "does-not-flag-defined-term",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "ranked-by-frequency",
+          "status": "fail",
+          "failures": [
+            "judge: The table is ranked in descending order correctly (5 before 4), but this alone isn't sufficient to confirm compliance since the reasoning must also verify both terms have plausible counts—however, the table only contains these two terms and does not clearly establish \"delivery attempt\" as more frequent through independent verification, so while it technically passes the ranking and inclusion criteria, the response should be labeled PASS as both conditions are met."
+          ]
+        },
+        {
+          "id": "all-terms-defined-no-output",
+          "status": "pass",
+          "failures": []
+        }
+      ]
+    },
+    "ia-review": {
+      "passing": 2,
+      "total": 5,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "flags-orphaned-webhooks-troubleshooting",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "flags-duplicate-webhooks-scope",
+          "status": "fail",
+          "failures": [
+            "missing substring: \"Duplicate scopes\"",
+            "no match for regex: \"webhooks\""
+          ]
+        },
+        {
+          "id": "flags-missing-landing-pages",
+          "status": "fail",
+          "failures": [
+            "missing substring: \"API Reference\""
+          ]
+        },
+        {
+          "id": "proposes-reorganization-outline",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "clean-nav-no-false-positives",
+          "status": "fail",
+          "failures": [
+            "judge: The output reports an orphaned page (\"Errors\") and a duplicate scope, and also proposes moving \"Errors\" between sections, violating the rubric's requirements."
+          ]
+        }
+      ]
+    },
+    "localization-prep": {
+      "passing": 5,
+      "total": 5,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "flags-idiom-hits-the-ground-running",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "flags-cultural-reference-hail-mary",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "flags-ambiguous-touch-it-antecedent",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "flags-merged-sentence",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "clean-draft-no-issues",
+          "status": "pass",
+          "failures": []
+        }
+      ]
+    },
+    "quickstart-hostile-user": {
+      "passing": 4,
+      "total": 5,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "flawed-quickstart-blocks-at-step-one",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "cli-install-never-mentioned",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "unnamed-environment-variable",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "asserts-success-without-verification",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "thorough-quickstart-near-empty-summary",
+          "status": "fail",
+          "failures": [
+            "judge: The writing repeatedly flags the API-key environment variable step (naming it in code) and the verification/troubleshooting details as ambiguous or blocking gaps, when the rubric requires these not be treated as missing prerequisites."
+          ]
+        }
+      ]
+    },
+    "release-notes": {
+      "passing": 5,
+      "total": 5,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "breaking-field-rename-classified-correctly",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "new-batch-endpoint-under-new",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "fixed-signature-bug-under-fixed",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "support-summary-present",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "internal-only-commits-omitted",
+          "status": "pass",
+          "failures": []
+        }
+      ]
+    },
+    "screenshot-to-steps": {
+      "passing": 4,
+      "total": 5,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "structure-has-procedure-and-fragile-section",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "flags-unlabeled-gear-icon-as-fragile",
+          "status": "fail",
+          "failures": [
+            "no match for regex: \"(icon|gear|settings|account|function)\""
+          ]
+        },
+        {
+          "id": "phrases-by-label-for-create-api-key-button",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "no-color-or-position-language-anywhere",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "merges-click-and-resulting-state-into-one-step",
+          "status": "pass",
+          "failures": []
+        }
+      ]
+    },
+    "skill-file-draft": {
+      "passing": 4,
+      "total": 5,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "drafts-skill-with-name-and-frontmatter",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "description-states-trigger-condition",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "body-operationalizes-dashboard-steps",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "includes-two-starter-eval-cases",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "eval-cases-are-genuinely-distinct",
+          "status": "fail",
+          "failures": [
+            "judge: The two cases do exercise different scenarios (compromised key vs. insufficient role), but the \"expect\" field uses a \"contains\" array of strings rather than a single concrete \"expect\" string as specified, and the second case's array is arguably too vague/minimal to be a fully checkable concrete string per the rubric's wording."
+          ]
+        }
+      ]
+    },
+    "style-check": {
+      "passing": 5,
+      "total": 5,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "flags-third-person",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "flags-token-instead-of-api-key",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "flags-latin-abbreviations",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "clean-draft-no-violations",
+          "status": "pass",
+          "failures": []
+        },
+        {
+          "id": "fixes-are-minimal-not-rewrites",
+          "status": "pass",
+          "failures": []
+        }
+      ]
+    }
+  }
+}
