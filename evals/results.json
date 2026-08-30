@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-29T23:46:19.042Z",
+  "generated_at": "2026-08-30T00:05:43.467Z",
   "model": "claude-sonnet-5",
   "prompts": {
     "agent-readiness": {
@@ -67,7 +67,7 @@
       ]
     },
     "audit-page": {
-      "passing": 4,
+      "passing": 5,
       "total": 5,
       "skipped": 0,
       "cases": [
@@ -78,10 +78,8 @@
         },
         {
           "id": "strong-page-scores-high",
-          "status": "fail",
-          "failures": [
-            "judge: The rubric requires Prerequisite Coverage and Verification Checkpoints to each score 4 or 5, but the writing scores both at 3."
-          ]
+          "status": "pass",
+          "failures": []
         },
         {
           "id": "unlabeled-code-fence-and-no-verification",
@@ -353,7 +351,7 @@
           "id": "thorough-quickstart-near-empty-summary",
           "status": "fail",
           "failures": [
-            "judge: Step 3 is marked \"❌ Blocked\" and the Unstated Prerequisites list claims the API key's environment-variable setup and module configuration are never explained, which directly violates the rubric's requirements."
+            "judge: Step 4 is marked with the Blocked result (❌ Blocked), which violates the rubric's requirement that no step be marked as blocked."
           ]
         }
       ]
@@ -391,7 +389,7 @@
       ]
     },
     "screenshot-to-steps": {
-      "passing": 4,
+      "passing": 5,
       "total": 5,
       "skipped": 0,
       "cases": [
@@ -402,10 +400,8 @@
         },
         {
           "id": "flags-unlabeled-gear-icon-as-fragile",
-          "status": "fail",
-          "failures": [
-            "judge: The Fragile references section is empty (\"No fragile references\") and does not flag any icon-only control described by function instead of label."
-          ]
+          "status": "pass",
+          "failures": []
         },
         {
           "id": "phrases-by-label-for-create-api-key-button",

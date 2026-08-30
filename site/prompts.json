@@ -71,7 +71,7 @@
       }
     ],
     "example_output": "| # | Rubric Point | Score | Evidence |\n|---|---|---|---|\n| 1 | Prerequisite Coverage | 2 | Step 2 says \"add your key\" but the page never says where to obtain a Lumen API key. |\n| 5 | Verification Checkpoints | 2 | No step tells the reader how to confirm the event was received. |\n\nPrioritized fixes\n1. [Severity: Critical] State where to get an API key before Step 1 — Prerequisite Coverage\n2. [Severity: High] Add a verification step after \"Send an event\" — Verification Checkpoints",
-    "evals_passing": 4,
+    "evals_passing": 5,
     "evals_total": 5,
     "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/audit-page/prompt.md",
     "updated": "2026-08-29"
@@ -331,7 +331,7 @@
       }
     ],
     "example_output": "## Procedure\n1. Click **Create API Key**.\n2. Enter a name in the **Key name** field and click **Generate**.\n3. Click **Copy** to copy the generated key.\n\n## Fragile references\nStep 4 describes the account-settings control by function — no visible label\nin the source description.",
-    "evals_passing": 4,
+    "evals_passing": 5,
     "evals_total": 5,
     "raw_url": "https://raw.githubusercontent.com/reem-sab/tech-writer-prompts/main/prompts/screenshot-to-steps/prompt.md",
     "updated": "2026-08-29"
